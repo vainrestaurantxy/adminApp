@@ -3,6 +3,12 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  file_saver
+  file_selector_windows
+  firebase_core
+  qr_bar_code
+  smart_auth
+  smart_text_search
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
