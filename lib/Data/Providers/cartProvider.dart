@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 class CartProvider with ChangeNotifier {
   Map<String, int> cart = {};
   List<RestaurantMenu> menuCart = [];
+  Map<String,List<RestaurantMenu>> categoryDividedMenu={};
+
   addOnTap(String code, RestaurantMenu menu) {
     cart[code] = (cart[code] ?? 0) + 1;
     if (!menuCart.contains(menu)) {

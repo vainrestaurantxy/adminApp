@@ -13,6 +13,7 @@ import 'package:admin_app/View/Home/OrderPage/orderPage.dart';
 import 'package:admin_app/View/Home/ProfilePage/profilePage.dart';
 import 'package:admin_app/View/Home/QrPage/qrPage.dart';
 import 'package:admin_app/ViewModel/HomeViewModel/homeViewModel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,6 +23,7 @@ import 'package:provider/provider.dart';
 
 import '../../Data/Providers/restaurantProvider.dart';
 import '../../ViewModel/HomeViewModel/AddPageViewModel.dart';
+import 'MenuPage/menuPage.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -30,7 +32,7 @@ class HomePage extends StatelessWidget {
     OrderPage(),
     QRPage(),
     AddPage(),
-    Text("Menu"),
+    MenuPage(id: FirebaseAuth.instance.currentUser!.uid),
     ProfilePage()
   ];
   @override

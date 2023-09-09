@@ -64,6 +64,59 @@ class AddViewModel {
         merge: true);
   }
 
+  updateDish(
+      {required String name,
+      required String category,
+      required String desc,
+      required String image,
+      required String discount,
+      required String tax,
+      required String itemType,
+      required String orgName,
+      required String price,
+      List<String>? recommendedWith,
+      required String genre,
+      String? tag}) async {
+    List<String> tags = tag == null ? [genre] : [genre, tag];
+    if(dish == null){
+      dish = RestaurantMenu(
+        image: image,
+      name: name,
+      category: category,
+      description: desc,
+      discount: int.parse(discount),
+      itemType: itemType,
+      price: int.parse(price),
+      recommendedWith: recommendedWith ?? [],
+      tags: tags,
+      tax: int.parse(tax),
+    );
+    }else{
+    dish = dish!.copyWith(
+      name: name,
+      category: category,
+      description: desc,
+      discount: int.parse(discount),
+      itemType: itemType,
+      price: int.parse(price),
+      recommendedWith: recommendedWith ?? [],
+      tags: tags,
+      tax: int.parse(tax),
+    );}
+    log(dish.toString());
+    Map<String, dynamic>? json = await _db.get("Restaurants", _auth.getUserId!);
+    List<dynamic> data = json?["menu"] ?? [];
+    dynamic dataToBeDeleted =
+        data.where((element) => element["name"] == orgName).first;
+    data.remove(dataToBeDeleted);
+    data.add(dish!.toJson());
+    _db.set(
+        collection: "Restaurants",
+        docId: _auth.getUserId!,
+        data: {"menu": data},
+        merge: true);
+  }
+
   uploadImage(context) async {
     await _db.uploadImage(
         image: _dishImage!,
