@@ -14,7 +14,7 @@ class MenuPageViewModel {
     final restaurant =
         Provider.of<RestaurantData>(context, listen: false).restaurant;
     Map<String, List<RestaurantMenu>> categoryDividedMenu = {};
-    for (var item in restaurant!.menu!) {
+    for (var item in restaurant?.menu ?? []) {
       if (categoryDividedMenu[item.category!] == null) {
         categoryDividedMenu[item.category!] = [];
       }

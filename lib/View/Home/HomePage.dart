@@ -52,24 +52,52 @@ class HomePage extends StatelessWidget {
                 ref.notifyListeners();
               },
               showUnselectedLabels: true,
+              unselectedIconTheme: IconThemeData(
+                color: AppColor.blackText,
+              ),
+              unselectedItemColor: AppColor.blackText,
               selectedLabelStyle:
                   AppTypography.smallText.copyWith(color: AppColor.purpleColor),
               unselectedLabelStyle:
                   AppTypography.smallText.copyWith(color: AppColor.purpleColor),
               items: [
                 BottomNavigationBarItem(
-                    icon: SvgPicture.asset('assets/data_usage.svg'),
+                    icon: Icon(Icons.data_usage),
+                    activeIcon: Icon(
+                      Icons.data_usage,
+                      color: AppColor.purpleColor,
+                    ),
                     label: "Orders"),
                 BottomNavigationBarItem(
-                    icon: SvgPicture.asset('assets/qr_code.svg'),
+                    icon: Icon(Icons.qr_code),
+                    activeIcon: Icon(
+                      Icons.qr_code,
+                      color: AppColor.purpleColor,
+                    ),
+                    // icon: SvgPicture.asset('assets/qr_code.svg'),
                     label: "QR Code"),
                 BottomNavigationBarItem(
-                    icon: SvgPicture.asset('assets/add.svg'), label: "Add"),
+                    icon: Icon(Icons.add),
+                    activeIcon: Icon(
+                      Icons.add,
+                      color: AppColor.purpleColor,
+                    ),
+                    label: "Add"),
                 BottomNavigationBarItem(
-                    icon: SvgPicture.asset('assets/fastfood.svg'),
+                    icon: Icon(Icons.fastfood),
+                    activeIcon: Icon(
+                      Icons.fastfood,
+                      color: AppColor.purpleColor,
+                    ),
+                    // icon: SvgPicture.asset('assets/fastfood.svg'),
                     label: "Menu"),
                 BottomNavigationBarItem(
-                    icon: SvgPicture.asset('assets/restaurant.svg'),
+                    icon: Icon(Icons.restaurant),
+                    activeIcon: Icon(
+                      Icons.restaurant,
+                      color: AppColor.purpleColor,
+                    ),
+                    // icon: SvgPicture.asset('assets/restaurant.svg'),
                     label: "Profile")
               ]));
     });

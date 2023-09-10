@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Providers/restaurantProvider.dart';
@@ -40,13 +41,22 @@ class SetupViewModel {
     return false;
   }
 
-  addRestaurant(Restaurant restaurant) {
+  addRestaurant(Restaurant restaurant, context) {
     Map<String, dynamic> json = (restaurant.toJson());
+    Provider.of<RestaurantData>(context, listen: false).restaurant = restaurant;
     _db.set(
         collection: "Restaurants",
         docId: _auth.getUserId!,
         data: json,
         merge: false);
+  }
+
+  setColor(Color color) {
+    _db.set(
+        collection: "Restaurants",
+        docId: _auth.getUserId!,
+        data: {"color": color.value.toString()},
+        merge: true);
   }
 
   Future<XFile?> getImagefromDevice() async {
@@ -62,6 +72,7 @@ class SetupViewModel {
   }
 
   setlogo(String url) {
+    log(url);
     _db.set(
         collection: "Restaurants",
         docId: _auth.getUserId!,
@@ -88,6 +99,7 @@ class SetupViewModel {
     PaletteGenerator palette =
         await PaletteGenerator.fromImageProvider(MemoryImage(bytes));
     colors = palette.paletteColors;
+    colors.insert(0, PaletteColor(Color(0xFFFFD79C), 0));
     ref.update();
   }
 }

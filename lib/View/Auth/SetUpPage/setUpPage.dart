@@ -7,9 +7,11 @@ import 'package:admin_app/Model/Restaurant/restaurant.dart';
 import 'package:admin_app/View/Auth/widgets.dart';
 import 'package:admin_app/ViewModel/AuthViewModel/SetupViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:random_string_generator/random_string_generator.dart';
 
 import '../../../Data/Providers/restaurantProvider.dart';
 
@@ -27,7 +29,7 @@ class SetUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = GetIt.instance<SetupViewModel>();
-    final data = Provider.of<RestaurantData>(context,listen: false);
+    final data = Provider.of<RestaurantData>(context, listen: false);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -95,12 +97,19 @@ class SetUpPage extends StatelessWidget {
                               phoneno: phoneno.text,
                               context: context)) {
                             try {
+                              var generator = RandomStringGenerator(
+                                  fixedLength: 8,
+                                  hasSymbols: true,
+                                  hasDigits: true,
+                                  mustHaveAtLeastOneOfEach: true);
+
                               Restaurant restaurant = Restaurant(
                                   name: restaurantName.text,
+                                  staffKey: generator.generate(),
                                   city: restaurantCity.text,
                                   state: restaurantState.text,
                                   phone: phoneno.text);
-                              viewModel.addRestaurant(restaurant);
+                              viewModel.addRestaurant(restaurant, context);
                             } catch (e) {
                               log(e.toString());
                             }
@@ -113,6 +122,9 @@ class SetUpPage extends StatelessWidget {
                   );
                 },
               ),
+            ),
+            SizedBox(
+              height: 43.h,
             )
           ],
         ),

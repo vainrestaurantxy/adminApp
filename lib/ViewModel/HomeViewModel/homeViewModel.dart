@@ -22,7 +22,7 @@ class HomeViewModel extends ChangeNotifier {
   getCategory(context) async {
     final ref = Provider.of<RestaurantData>(context, listen: false);
     Map<String, dynamic>? data = await _db.get("Category", _auth.getUserId!);
-    ref.category = data!["categories"];
+    ref.category = data?["categories"] ?? [];
     ref.notifyListeners();
   }
 }

@@ -35,7 +35,7 @@ class LogoUploadPage extends StatelessWidget {
                     height: 28,
                   ),
                   Text(
-                    "Upload a transparent restaurant Logo",
+                    "Uploading restaurant Logo",
                     style: AppTypography.smallText,
                   ),
                   const SizedBox(
@@ -69,6 +69,9 @@ class LogoUploadPage extends StatelessWidget {
                   }),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 43.h,
             )
           ],
         ),

@@ -80,12 +80,7 @@ class OrderPage extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 }
-                if (snapshot.data!.size == 0) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                
+
                 return Column(
                   children: List.generate(
                       snapshot.data!.docs.length,
@@ -100,7 +95,7 @@ class OrderPage extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8.0),
                                       child: OrderItem(
-                                        index:i,
+                                        index: i,
                                         order: snapshot.data!.docs[index]
                                             .data()["order"][i],
                                       ),

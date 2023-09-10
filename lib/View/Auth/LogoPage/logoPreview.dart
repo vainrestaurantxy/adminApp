@@ -148,6 +148,19 @@ class LogoPreview extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
+                              height: 8,
+                            ),
+                            SizedBox(
+                              width: 396.w,
+                              child: Text(
+                                'Select theme',
+                                style: AppTypography.smallText,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            SizedBox(
                               height: 40,
                               width: double.infinity,
                               child: ListView.builder(
@@ -161,28 +174,43 @@ class LogoPreview extends StatelessWidget {
                                     ref.update();
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                        width: 20,
-                                        height: 20,
-                                        color: viewModel.colors[index].color),
-                                  ),
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        width: 48,
+                                        height: 48,
+                                        decoration: ShapeDecoration(
+                                          color: viewModel.colors[index].color,
+                                          shape: RoundedRectangleBorder(
+                                            side: BorderSide(
+                                                width: 0.50,
+                                                color: Color(0xFF9997A1)),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                      )),
                                 ),
                               ),
                             )
                           ],
                         );
                       }),
-                      SizedBox(height: 8,),
+                      SizedBox(
+                        height: 8,
+                      ),
                       GestureDetector(
-                        onTap: (){
-                          context.go('/home');
-                        },
-                        child: PrimaryButton(text: "Finish Setup"))
+                          onTap: () {
+                            viewModel.setColor(gradientColor);
+                            context.go('/home');
+                          },
+                          child: PrimaryButton(text: "Finish Setup"))
                     ],
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 43.h,
             )
           ],
         ),

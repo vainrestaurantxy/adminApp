@@ -182,24 +182,26 @@ class AddPage extends StatelessWidget {
                           children: [
                             Expanded(
                               child: RadioListTile.adaptive(
-                                title: Text("Inclusive of Taxes"),
+                                title: Text("Inclusive of VAT"),
                                 value: 'Inclusive',
                                 groupValue: radioValue,
                                 activeColor: AppColor.purpleColor,
                                 onChanged: (value) {
+                                  tax.text = "0";
                                   radioValue = value!;
-                                  tax.clear();
+
                                   ref.update();
                                 },
                               ),
                             ),
                             Expanded(
                               child: RadioListTile.adaptive(
-                                title: Text("Exclusive of Taxes"),
+                                title: Text("Exclusive of VAT"),
                                 value: 'Exclusive',
                                 activeColor: AppColor.purpleColor,
                                 groupValue: radioValue,
                                 onChanged: (value) {
+                                  tax.text = "5";
                                   radioValue = value!;
                                   ref.update();
                                 },
@@ -217,12 +219,12 @@ class AddPage extends StatelessWidget {
                           ref.update();
                         },
                         suffix: Text(
-                            "Price With Tax: ${viewModel.calculateTax(tax.text, price.text)} AED"),
+                            "Price With VAT: ${viewModel.calculateTax(tax.text, price.text)} AED"),
                         errorText: error.tax,
-                        readOnly: radioValue == "Inclusive",
-                        hintText: 'Enter Tax',
+                        readOnly: true,
+                        hintText: 'Enter VAT',
                         keyboardType: TextInputType.number,
-                        label: Text("Tax(%)"),
+                        label: Text("VAT(%)"),
                       ),
                       SizedBox(
                         height: 8,

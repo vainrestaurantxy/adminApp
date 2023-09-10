@@ -70,7 +70,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 16,
                     ),
                     CustomTextField(
                       hintText: "Email",
@@ -79,7 +79,7 @@ class ProfilePage extends StatelessWidget {
                       initialValue: viewModel.getEmail,
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 16,
                     ),
                     SizedBox(
                       width: 396.w,
@@ -90,9 +90,10 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 16,
                     ),
                     CustomTextField(
+                      readOnly: true,
                       controller: staffKey,
                       hintText: "Staff Key",
                       label: Text("Staff Account Key"),
@@ -106,7 +107,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 16,
                     ),
                     SizedBox(
                       width: 396.w,
@@ -121,27 +122,47 @@ class ProfilePage extends StatelessWidget {
                         await addViewModel.getImagefromDevice();
                         addViewModel.upload(context);
                       },
-                      child: Container(
-                        width: 148.w,
-                        height: 148.w,
-                        decoration: ShapeDecoration(
-                          image: DecorationImage(
-                            image: (ref.restaurant?.logo == null)
-                                ? NetworkImage(
-                                    "https://via.placeholder.com/148x148")
-                                : NetworkImage(ref.restaurant!.logo!),
-                            fit: BoxFit.fill,
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: 148.w,
+                            height: 148.w,
+                            decoration: ShapeDecoration(
+                              image: DecorationImage(
+                                image: (ref.restaurant?.logo == null)
+                                    ? NetworkImage(
+                                        "https://via.placeholder.com/148x148")
+                                    : NetworkImage(ref.restaurant!.logo!),
+                                fit: BoxFit.fill,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    width: 1, color: Color(0xFF9997A1)),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
                           ),
-                          shape: RoundedRectangleBorder(
-                            side:
-                                BorderSide(width: 1, color: Color(0xFF9997A1)),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
+                          Positioned(
+                            bottom: 16,
+                            right: 16,
+                            child: Container(
+                              width: 36.w,
+                              height: 36.h,
+                              child: Icon(
+                                Icons.edit,
+                                color: AppColor.white,
+                              ),
+                              decoration: ShapeDecoration(
+                                color: AppColor.purpleColor,
+                                shape: OvalBorder(),
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 16,
                     ),
                     CustomTextField(
                       hintText: "Enter Name",
@@ -150,7 +171,7 @@ class ProfilePage extends StatelessWidget {
                       controller: name,
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 16,
                     ),
                     CustomTextField(
                       hintText: "Enter City",
@@ -159,7 +180,7 @@ class ProfilePage extends StatelessWidget {
                       controller: city,
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 16,
                     ),
                     CustomTextField(
                       hintText: "Enter State",
@@ -168,16 +189,20 @@ class ProfilePage extends StatelessWidget {
                       controller: state,
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 16,
                     ),
                     CustomTextField(
                       hintText: "Enter Phone No.",
+                      prefix: Text(
+                        "+971 ",
+                        style: AppTypography.mediumText,
+                      ),
                       errorText: error.phoneNo,
                       label: Text("Restaurant Phone no."),
                       controller: phone,
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 16,
                     ),
                     GestureDetector(
                       onTap: () {

@@ -47,6 +47,8 @@ class LoginPage extends StatelessWidget {
                         controller: password,
                         errorText: ref.registerkey,
                         hintText: "Enter Key",
+                        obscureText: true,
+
                       ),
                       SizedBox(
                         height: 16,
@@ -126,6 +128,9 @@ class LoginPage extends StatelessWidget {
                           text: "Create New Account",
                         ),
                       ),
+                  SizedBox(
+                    height: 43.h,
+                  )
                     ],
                   );
                 },

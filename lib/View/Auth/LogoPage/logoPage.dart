@@ -51,48 +51,48 @@ class LogoPage extends StatelessWidget {
                         }
                       },
                       child: SecondaryButton(text: "Upload Image")),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  SizedBox(
-                    width: 396.w,
-                    height: 21.h,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 173.w,
-                          height: 2,
-                          decoration: const BoxDecoration(color: AppColor.grey),
-                        ),
-                        const SizedBox(width: 1),
-                        SizedBox(
-                          width: 48.w,
-                          child: Text(
-                            'or',
-                            textAlign: TextAlign.center,
-                            style: AppTypography.smallText
-                                .copyWith(fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                        const SizedBox(width: 1),
-                        Container(
-                          width: 173.w,
-                          height: 2,
-                          decoration: const BoxDecoration(color: AppColor.grey),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  CustomTextField(
-                    controller: controller,
-                    hintText: "Extract Image from URL",
-                  ),
+                  // const SizedBox(
+                  //   height: 16,
+                  // ),
+                  // SizedBox(
+                  //   width: 396.w,
+                  //   height: 21.h,
+                  //   child: Row(
+                  //     mainAxisSize: MainAxisSize.min,
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     crossAxisAlignment: CrossAxisAlignment.center,
+                  //     children: [
+                  //       Container(
+                  //         width: 173.w,
+                  //         height: 2,
+                  //         decoration: const BoxDecoration(color: AppColor.grey),
+                  //       ),
+                  //       const SizedBox(width: 1),
+                  //       SizedBox(
+                  //         width: 48.w,
+                  //         child: Text(
+                  //           'or',
+                  //           textAlign: TextAlign.center,
+                  //           style: AppTypography.smallText
+                  //               .copyWith(fontWeight: FontWeight.w600),
+                  //         ),
+                  //       ),
+                  //       const SizedBox(width: 1),
+                  //       Container(
+                  //         width: 173.w,
+                  //         height: 2,
+                  //         decoration: const BoxDecoration(color: AppColor.grey),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // const SizedBox(
+                  //   height: 16,
+                  // ),
+                  // CustomTextField(
+                  //   controller: controller,
+                  //   hintText: "Extract Image from URL",
+                  // ),
                   const SizedBox(
                     height: 16,
                   ),
@@ -107,6 +107,10 @@ class LogoPage extends StatelessWidget {
                       text: "Proceed",
                       // disabled: true,
                     ),
+                  ),
+
+                  SizedBox(
+                    height: 43.h,
                   )
                 ],
               ),

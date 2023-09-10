@@ -1,11 +1,11 @@
+
+
 import 'package:admin_app/Constants/Colors/colors.dart';
 import 'package:admin_app/Constants/Typography/typography.dart';
 import 'package:admin_app/Constants/Widgets/SecondaryButton.dart';
 import 'package:admin_app/Data/Providers/restaurantProvider.dart';
 import 'package:admin_app/View/Auth/widgets.dart';
 import 'package:admin_app/ViewModel/AuthViewModel/AuthViewModel.dart';
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
@@ -71,8 +71,8 @@ class LandingPage extends StatelessWidget {
                           heading: "Club",
                           subtitle: "I am a club/pub owner, admin or staff",
                           color: AppColor.darkPink)),
-                  const SizedBox(
-                    height: 16,
+                  SizedBox(
+                    height: 16.h,
                   ),
                   SizedBox(
                     width: double.infinity,
@@ -106,10 +106,13 @@ class LandingPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 16,
+                  SizedBox(
+                    height: 16.h,
                   ),
-                  SecondaryButton(text: "Visit Our Website")
+                  SecondaryButton(text: "Visit Our Website"),
+                  SizedBox(
+                    height: 43.h,
+                  )
                 ],
               ),
             )

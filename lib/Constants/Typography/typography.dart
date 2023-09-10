@@ -13,6 +13,11 @@ class AppTypography {
     fontWeight: FontWeight.w400,
   );
 
+  static TextStyle mediumText = GoogleFonts.poppins(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w400,
+  );
+
   static TextStyle largeText = GoogleFonts.poppins(
     fontSize: 20.sp,
     fontWeight: FontWeight.w400,
