@@ -27,6 +27,7 @@ class Item extends StatelessWidget {
       children: [
         Container(
           height: 43.h,
+          width: double.infinity,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,17 +83,18 @@ class Item extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              child: quantity[name] == 0
-                                  ? SizedBox()
-                                  : Text(
-                                      'Qty: ${quantity[name]} ',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
+                              child:
+                                  quantity[name] == null || quantity[name] == 0
+                                      ? SizedBox()
+                                      : Text(
+                                          'Qty: ${quantity[name]} ',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 12,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
                             ),
                           ],
                         ),

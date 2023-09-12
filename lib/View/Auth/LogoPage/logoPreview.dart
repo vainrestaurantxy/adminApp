@@ -161,7 +161,7 @@ class LogoPreview extends StatelessWidget {
                               height: 8,
                             ),
                             SizedBox(
-                              height: 40,
+                              height: 56.w,
                               width: double.infinity,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
@@ -176,8 +176,8 @@ class LogoPreview extends StatelessWidget {
                                   child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
-                                        width: 48,
-                                        height: 48,
+                                        width: 48.w,
+                                        height: 48.w,
                                         decoration: ShapeDecoration(
                                           color: viewModel.colors[index].color,
                                           shape: RoundedRectangleBorder(

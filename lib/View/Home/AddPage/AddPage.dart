@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:web_toast/web_toast.dart';
 
 import '../../../Constants/Colors/colors.dart';
 import '../../../Constants/Typography/typography.dart';
@@ -14,6 +16,7 @@ import '../../../Constants/Widgets/TextField.dart';
 import '../../../Constants/Widgets/selectable.dart';
 import '../../../Data/Providers/errorProvider.dart';
 import '../../../Data/Providers/homeProvider.dart';
+import '../../../Data/Providers/imageUpload.dart';
 import '../../../Data/Providers/restaurantProvider.dart';
 import '../../../ViewModel/HomeViewModel/AddPageViewModel.dart';
 
@@ -25,10 +28,10 @@ class AddPage extends StatelessWidget {
   TextEditingController price = TextEditingController();
   TextEditingController tax = TextEditingController();
   TextEditingController discount = TextEditingController();
-  String genre = '';
+  String genre = 'first';
   String itemType = 'Dish';
   String radioValue = 'Exclusive';
-  String category = "";
+  String category = "first";
   final List<String> tags = [
     "Egg",
     "Chicken",
@@ -43,19 +46,20 @@ class AddPage extends StatelessWidget {
   ];
   int indexTags = -1;
   List<String> bestwith = [];
+  String imageError = 'first';
 
   @override
   Widget build(BuildContext context) {
     final viewModel = GetIt.instance<AddViewModel>();
-    final data = Provider.of<RestaurantData>(context);
+    final data = Provider.of<RestaurantData>(context, listen: false);
     if (data.isClub) {
       itemType = "Drink";
     }
     if (data.category.isNotEmpty) {
       category = data.category[0];
     }
+    tax.text = "5";
     return Scaffold(
-      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -66,7 +70,7 @@ class AddPage extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      SizedBox(
                         width: 396.w,
                         height: 51.h,
                         child: Column(
@@ -98,34 +102,37 @@ class AddPage extends StatelessWidget {
                       Container(
                         height: 50,
                         width: double.infinity,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: RadioListTile.adaptive(
-                                title: Text("Dish"),
-                                value: 'Dish',
-                                groupValue: itemType,
-                                activeColor: AppColor.purpleColor,
-                                onChanged: (value) {
-                                  itemType = value!;
-                                  ref.update();
-                                },
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width / 4,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: RadioListTile(
+                                  title: Text("Dish"),
+                                  value: 'Dish',
+                                  groupValue: itemType,
+                                  activeColor: AppColor.purpleColor,
+                                  onChanged: (value) {
+                                    itemType = value!;
+                                    ref.update();
+                                  },
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: RadioListTile.adaptive(
-                                title: Text("Drink"),
-                                value: 'Drink',
-                                activeColor: AppColor.purpleColor,
-                                groupValue: itemType,
-                                onChanged: (value) {
-                                  itemType = value!;
-                                  ref.update();
-                                },
+                              Expanded(
+                                child: RadioListTile(
+                                  title: Text("Drink"),
+                                  value: 'Drink',
+                                  activeColor: AppColor.purpleColor,
+                                  groupValue: itemType,
+                                  onChanged: (value) {
+                                    itemType = value!;
+                                    ref.update();
+                                  },
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -135,15 +142,75 @@ class AddPage extends StatelessWidget {
                           onTap: () async {
                             await viewModel.getImagefromDevice();
                             viewModel.uploadImage(context);
+                            imageError = 'first';
+                            ref.notifyListeners();
                           },
-                          child:
-                              SecondaryButton(text: "Upload Item Thumbnail")),
+                          child: SecondaryButton(
+                              text: viewModel.dish?.image == null
+                                  ? "Upload Item Thumbnail"
+                                  : "Uploaded Item Thumbnail")),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        (viewModel.dish?.image == null && imageError != 'first')
+                            ? "Upload Dish Image"
+                            : "",
+                        style:
+                            AppTypography.smallText.copyWith(color: Colors.red),
+                      ),
                       SizedBox(
                         height: 8,
                       ),
+                      Consumer<ImageUpload>(
+                        builder: (context, ref, _) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text((ref.uploadTotalBytes == ref.uploadedBytes)
+                                  ? (ref.uploadedBytes == 0)
+                                      ? ""
+                                      : "Uploaded ${viewModel.dishImage?.name}"
+                                  : "Uploading ${viewModel.dishImage?.name}"),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              SizedBox(
+                                child:
+                                    (ref.uploadTotalBytes == ref.uploadedBytes)
+                                        ? SizedBox()
+                                        : Column(
+                                            children: [
+                                              LinearProgressIndicator(
+                                                backgroundColor: AppColor.grey,
+                                                color: AppColor.purpleColor,
+                                                value: ref.uploadedBytes /
+                                                    (ref.uploadTotalBytes == 0
+                                                        ? 1
+                                                        : ref.uploadTotalBytes),
+                                              ),
+                                              SizedBox(
+                                                height: 16,
+                                              ),
+                                              // GestureDetector(
+                                              //   onTap: () {
+                                              //     context.go('/register/setup/logo/upload/preview');
+                                              //   },
+                                              //   child: PrimaryButton(
+                                              //     text: "Proceed",
+                                              //     disabled: ref.uploadedBytes != ref.uploadTotalBytes,
+                                              //   ),
+                                              // )
+                                            ],
+                                          ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                       CustomTextField(
                         controller: name,
-                        errorText: error.restaurantCity,
+                        errorText: error.restaurantName,
                         hintText: "Enter Name",
                         label: Text("Name"),
                         maxLength: 100,
@@ -189,7 +256,6 @@ class AddPage extends StatelessWidget {
                                 onChanged: (value) {
                                   tax.text = "0";
                                   radioValue = value!;
-
                                   ref.update();
                                 },
                               ),
@@ -213,18 +279,22 @@ class AddPage extends StatelessWidget {
                       SizedBox(
                         height: 8,
                       ),
-                      CustomTextField(
-                        controller: tax,
-                        onChanged: (value) {
-                          ref.update();
-                        },
-                        suffix: Text(
-                            "Price With VAT: ${viewModel.calculateTax(tax.text, price.text)} AED"),
-                        errorText: error.tax,
-                        readOnly: true,
-                        hintText: 'Enter VAT',
-                        keyboardType: TextInputType.number,
-                        label: Text("VAT(%)"),
+                      SizedBox(
+                        child: (radioValue == 'Inclusive')
+                            ? SizedBox()
+                            : CustomTextField(
+                                controller: tax,
+                                onChanged: (value) {
+                                  ref.update();
+                                },
+                                suffix: Text(
+                                    "Price With VAT: ${viewModel.calculateTax(tax.text, price.text)} AED"),
+                                errorText: error.tax,
+                                readOnly: true,
+                                hintText: 'Enter VAT',
+                                keyboardType: TextInputType.number,
+                                label: Text("VAT(%)"),
+                              ),
                       ),
                       SizedBox(
                         height: 8,
@@ -265,6 +335,13 @@ class AddPage extends StatelessWidget {
                                         )),
                               ),
                       ),
+                      Text(
+                        (category == "")
+                            ? "Category can't be empty. Create a Category"
+                            : "",
+                        style:
+                            AppTypography.smallText.copyWith(color: Colors.red),
+                      ),
                       InkWell(
                         onTap: () {
                           context.go("/home/category");
@@ -297,7 +374,7 @@ class AddPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Expanded(
-                              child: RadioListTile.adaptive(
+                              child: RadioListTile(
                                 title: Text(
                                     (itemType == 'Dish') ? "Veg" : "Alcoholic"),
                                 value:
@@ -328,6 +405,11 @@ class AddPage extends StatelessWidget {
                             ),
                           ],
                         ),
+                      ),
+                      Text(
+                        (genre == "") ? "This Field can't be empty" : "",
+                        style:
+                            AppTypography.smallText.copyWith(color: Colors.red),
                       ),
                       SizedBox(
                         width: 396,
@@ -422,7 +504,7 @@ class AddPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Wrap(
@@ -450,11 +532,27 @@ class AddPage extends StatelessWidget {
                                       )),
                                 )),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       GestureDetector(
                         onTap: () {
+                          if (imageError == 'first') {
+                            imageError = '';
+                            ref.notifyListeners();
+                            return;
+                          }
+                          log(category);
+                          if (category == 'first') {
+                            category = '';
+                            ref.notifyListeners();
+                            return;
+                          }
+                          if (genre == 'first') {
+                            genre = '';
+                            ref.notifyListeners();
+                            return;
+                          }
                           if (viewModel.validate(name.text, desc.text,
                               price.text, tax.text, discount.text, context)) {
                             String tag = "";
@@ -481,9 +579,19 @@ class AddPage extends StatelessWidget {
                             tax.clear();
                             discount.clear();
                             itemType = "Dish";
-                            genre = "";
+                            genre = "first";
+
+                            imageError = 'first';
                             bestwith.clear();
                             tag = "";
+                            // ToastContext().init(context);
+                            // Toast.show("Dish Added",
+                            //     duration: Toast.lengthShort,
+                            //     gravity: Toast.bottom);
+                            Toast.success(
+                                title: 'Dish Added',
+                                text: 'Your dish has been added',
+                                duration: const Duration(seconds: 3));
                           }
                         },
                         child: PrimaryButton(

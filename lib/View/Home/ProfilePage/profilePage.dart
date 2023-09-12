@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+import 'package:web_toast/web_toast.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
@@ -206,13 +207,20 @@ class ProfilePage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
+                        if (staffKey.text == ref.restaurant!.staffKey &&
+                            name.text == ref.restaurant!.name &&
+                            city.text == ref.restaurant!.city &&
+                            state.text == ref.restaurant!.state &&
+                            phone.text == ref.restaurant!.phone) {
+                          Toast.info(text: "Nothing to Update");
+                          return;
+                        }
                         if (addViewModel.validate(
                             restaurantName: name.text,
                             restaurantCity: city.text,
                             restaurantState: state.text,
                             phoneno: phone.text,
                             context: context)) {
-                          log("here");
                           if (ref.restaurant == null) {
                             ref.restaurant = Restaurant(
                                 name: name.text,
@@ -229,6 +237,7 @@ class ProfilePage extends StatelessWidget {
                                 phone: phone.text);
                           }
                           viewModel.setRestaurant(ref.restaurant!);
+                          Toast.success(text: "Profile Updated");
                         }
                       },
                       child: PrimaryButton(

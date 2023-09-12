@@ -17,16 +17,16 @@ class AddViewModel {
   AddViewModel(this._db, this._auth);
   final IDatabaseService _db;
   final IFirebaseService _auth;
-  XFile? _dishImage;
+  XFile? dishImage;
   RestaurantMenu? dish;
 
   Future<XFile?> getImagefromDevice() async {
     XFile? imageFile = (await ImagePicker.platform
         .getImageFromSource(source: ImageSource.gallery));
 
-    _dishImage = imageFile;
+    dishImage = imageFile;
 
-    return _dishImage;
+    return dishImage;
   }
 
   uploadDish(
@@ -119,8 +119,8 @@ class AddViewModel {
 
   uploadImage(context) async {
     await _db.uploadImage(
-        image: _dishImage!,
-        id: "dishes/${_auth.getUserId}/${_dishImage!.name}",
+        image: dishImage!,
+        id: "dishes/${_auth.getUserId}/${dishImage!.name}",
         context: context,
         where: "dish");
   }

@@ -20,7 +20,6 @@ class ProfileViewModel {
     restaurant = restaurant.copyWith(menu: null);
     Map<String, dynamic> json = (restaurant.toJson());
     json["menu"] = menuJson;
-
     _db.set(
         collection: "Restaurants",
         docId: _auth.getUserId!,

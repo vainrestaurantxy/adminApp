@@ -45,6 +45,7 @@ class HomePage extends StatelessWidget {
       return Scaffold(
           body: screen[index],
           bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
               fixedColor: AppColor.purpleColor,
               currentIndex: index,
               onTap: (index) {
@@ -53,7 +54,12 @@ class HomePage extends StatelessWidget {
               },
               showUnselectedLabels: true,
               unselectedIconTheme: IconThemeData(
+                size: 18,
                 color: AppColor.blackText,
+              ),
+              selectedIconTheme: IconThemeData(
+                size: 18,
+                color: AppColor.purpleColor,
               ),
               unselectedItemColor: AppColor.blackText,
               selectedLabelStyle:

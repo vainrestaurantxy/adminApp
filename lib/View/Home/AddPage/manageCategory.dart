@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+import 'package:web_toast/web_toast.dart';
 
 class ManageCategory extends StatelessWidget {
   ManageCategory({super.key});
@@ -109,6 +110,10 @@ class ManageCategory extends StatelessWidget {
                                     name.clear();
                                     selectedindex = -1;
                                     ref.notifyListeners();
+                                    Toast.error(
+                                        title: 'Category Deleted',
+                                        text: 'Your Category has been Deleted',
+                                        duration: const Duration(seconds: 3));
                                   }
                                 },
                                 child: SecondaryButton(

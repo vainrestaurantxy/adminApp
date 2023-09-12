@@ -40,7 +40,7 @@ class OrderItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 66.h,
+            height: 85.h,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -280,14 +280,14 @@ class OrderItem extends StatelessWidget {
                 ),
                 SizedBox(height: 8.h),
                 Container(
-                  height: 20.h,
+                  height: 40.h,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: 203.w,
+                        width: 150.w,
                         child: Text.rich(
                           TextSpan(
                             children: [
@@ -370,6 +370,7 @@ class OrderItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
+                          // width: double.infinity,
                           child: Column(
                         children:
                             List.generate(order["items"]?.length ?? 0, (index) {
@@ -377,13 +378,16 @@ class OrderItem extends StatelessWidget {
                               RestaurantMenu.fromJson(order["items"]?[index]);
                           return Padding(
                             padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Item(
-                              quantity: order['quanntity'],
-                              itemButton: false,
-                              name: order["items"]?[index]['name'],
-                              image: order["items"]?[index]['image'],
-                              menu: menu,
-                              price: order["items"]![index]['price'],
+                            child: SizedBox(
+                              width: 396.w,
+                              child: Item(
+                                quantity: order['quanntity'],
+                                itemButton: false,
+                                name: order["items"]?[index]['name'],
+                                image: order["items"]?[index]['image'],
+                                menu: menu,
+                                price: order["items"]![index]['price'],
+                              ),
                             ),
                           );
                         }),

@@ -33,7 +33,11 @@ class ErrorProvider extends ChangeNotifier {
   }
 
   validateprice(String number) {
-    this.price = validateNumberOnly(number);
+    if (number.isEmpty) {
+      price = "This Field can't be Empty";
+    } else {
+      this.price = validateNumberOnly(number);
+    }
     notifyListeners();
   }
 

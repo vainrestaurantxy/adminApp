@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:web_toast/web_toast.dart';
 
 import '../../../Constants/Colors/colors.dart';
 import '../../../Constants/Typography/typography.dart';
@@ -451,6 +452,7 @@ class EditPage extends StatelessWidget {
                                         } else {
                                           bestwith.remove(tags[index]);
                                         }
+
                                         ref.update();
                                       },
                                       child: Selectable(
@@ -492,7 +494,15 @@ class EditPage extends StatelessWidget {
                                 recommendedWith: bestwith);
                             final viewModel2 = GetIt.instance<HomeViewModel>();
                             viewModel2.getRestaurant(context);
+
                             Navigator.pop(context);
+
+                            Toast.success(
+                                title: 'Dish Updated',
+                                text: 'Your dish has been updated',
+                                duration: const Duration(seconds: 3));
+                            Future.delayed(Duration(seconds: 2));
+                            data.notifyListeners();
                           }
                         },
                         child: PrimaryButton(

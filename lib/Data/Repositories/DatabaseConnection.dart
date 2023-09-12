@@ -90,6 +90,7 @@ class DatabaseService implements IDatabaseService {
     final imagedata = Provider.of<ImageUpload>(context, listen: false);
     uploadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
       imagedata.setUploadByte(snapshot.bytesTransferred, snapshot.totalBytes);
+      log(snapshot.bytesTransferred.toString());
     });
     await uploadTask.whenComplete(() async {
       final String downloadURL = await storageReference.getDownloadURL();

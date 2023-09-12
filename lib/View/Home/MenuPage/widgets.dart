@@ -162,7 +162,7 @@ class _ItemState extends State<Item> {
                       SizedBox(
                         width: (MediaQuery.of(context).size.width / 428) * 252 -
                             60,
-                        child: Text("INR ${widget.price}",
+                        child: Text("AED ${widget.price}",
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,

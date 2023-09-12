@@ -99,10 +99,9 @@ class SetUpPage extends StatelessWidget {
                             try {
                               var generator = RandomStringGenerator(
                                   fixedLength: 8,
-                                  hasSymbols: true,
+                                  hasSymbols: false,
                                   hasDigits: true,
                                   mustHaveAtLeastOneOfEach: true);
-
                               Restaurant restaurant = Restaurant(
                                   name: restaurantName.text,
                                   staffKey: generator.generate(),

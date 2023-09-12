@@ -1,7 +1,4 @@
 import 'package:admin_app/Constants/Widgets/PrimaryButton.dart';
-import 'package:admin_app/Constants/Widgets/SecondaryButton.dart';
-import 'package:admin_app/Constants/Widgets/TextField.dart';
-import 'package:admin_app/Data/Providers/restaurantProvider.dart';
 import 'package:admin_app/ViewModel/AuthViewModel/SetupViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
