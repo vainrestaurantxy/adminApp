@@ -17,6 +17,7 @@ class Restaurant with _$Restaurant {
       required String? state,
       required String? phone,
       String? color,
+      @Default(100) int? noTable,
       String? tags,
       List<RestaurantMenu>? menu}) = _Restaurant;
 

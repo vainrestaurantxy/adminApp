@@ -157,10 +157,16 @@ class OrderItem extends StatelessWidget {
                                               .doc(
                                                   '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
                                               .get();
+
                                       Map<String, dynamic>? json = data.data();
+                                      if (order["id"] !=
+                                          (json?[order][index]["id"] ??
+                                              "NULL")) {
+                                        return;
+                                      }
                                       json!["order"][index]["orderStatus"] =
                                           "Order Delivered";
-                                      print(json);
+
                                       await FirebaseFirestore.instance
                                           .collection("Restaurants")
                                           .doc(FirebaseAuth

@@ -16,6 +16,7 @@ _$_Restaurant _$$_RestaurantFromJson(Map<String, dynamic> json) =>
       state: json['state'] as String?,
       phone: json['phone'] as String?,
       color: json['color'] as String?,
+      noTable: json['noTable'] as int? ?? 100,
       tags: json['tags'] as String?,
       menu: (json['menu'] as List<dynamic>?)
           ?.map((e) => RestaurantMenu.fromJson(e as Map<String, dynamic>))
@@ -32,6 +33,7 @@ Map<String, dynamic> _$$_RestaurantToJson(_$_Restaurant instance) =>
       'state': instance.state,
       'phone': instance.phone,
       'color': instance.color,
+      'noTable': instance.noTable,
       'tags': instance.tags,
       'menu': instance.menu,
     };

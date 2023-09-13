@@ -28,6 +28,7 @@ mixin _$Restaurant {
   String? get state => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get color => throw _privateConstructorUsedError;
+  int? get noTable => throw _privateConstructorUsedError;
   String? get tags => throw _privateConstructorUsedError;
   List<RestaurantMenu>? get menu => throw _privateConstructorUsedError;
 
@@ -52,6 +53,7 @@ abstract class $RestaurantCopyWith<$Res> {
       String? state,
       String? phone,
       String? color,
+      int? noTable,
       String? tags,
       List<RestaurantMenu>? menu});
 }
@@ -77,6 +79,7 @@ class _$RestaurantCopyWithImpl<$Res, $Val extends Restaurant>
     Object? state = freezed,
     Object? phone = freezed,
     Object? color = freezed,
+    Object? noTable = freezed,
     Object? tags = freezed,
     Object? menu = freezed,
   }) {
@@ -113,6 +116,10 @@ class _$RestaurantCopyWithImpl<$Res, $Val extends Restaurant>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as String?,
+      noTable: freezed == noTable
+          ? _value.noTable
+          : noTable // ignore: cast_nullable_to_non_nullable
+              as int?,
       tags: freezed == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -142,6 +149,7 @@ abstract class _$$_RestaurantCopyWith<$Res>
       String? state,
       String? phone,
       String? color,
+      int? noTable,
       String? tags,
       List<RestaurantMenu>? menu});
 }
@@ -165,6 +173,7 @@ class __$$_RestaurantCopyWithImpl<$Res>
     Object? state = freezed,
     Object? phone = freezed,
     Object? color = freezed,
+    Object? noTable = freezed,
     Object? tags = freezed,
     Object? menu = freezed,
   }) {
@@ -201,6 +210,10 @@ class __$$_RestaurantCopyWithImpl<$Res>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as String?,
+      noTable: freezed == noTable
+          ? _value.noTable
+          : noTable // ignore: cast_nullable_to_non_nullable
+              as int?,
       tags: freezed == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
@@ -225,6 +238,7 @@ class _$_Restaurant implements _Restaurant {
       required this.state,
       required this.phone,
       this.color,
+      this.noTable = 100,
       this.tags,
       final List<RestaurantMenu>? menu})
       : _menu = menu;
@@ -249,6 +263,9 @@ class _$_Restaurant implements _Restaurant {
   @override
   final String? color;
   @override
+  @JsonKey()
+  final int? noTable;
+  @override
   final String? tags;
   final List<RestaurantMenu>? _menu;
   @override
@@ -262,7 +279,7 @@ class _$_Restaurant implements _Restaurant {
 
   @override
   String toString() {
-    return 'Restaurant(logo: $logo, staffKey: $staffKey, isRestaurant: $isRestaurant, name: $name, city: $city, state: $state, phone: $phone, color: $color, tags: $tags, menu: $menu)';
+    return 'Restaurant(logo: $logo, staffKey: $staffKey, isRestaurant: $isRestaurant, name: $name, city: $city, state: $state, phone: $phone, color: $color, noTable: $noTable, tags: $tags, menu: $menu)';
   }
 
   @override
@@ -280,6 +297,7 @@ class _$_Restaurant implements _Restaurant {
             (identical(other.state, state) || other.state == state) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.color, color) || other.color == color) &&
+            (identical(other.noTable, noTable) || other.noTable == noTable) &&
             (identical(other.tags, tags) || other.tags == tags) &&
             const DeepCollectionEquality().equals(other._menu, _menu));
   }
@@ -296,6 +314,7 @@ class _$_Restaurant implements _Restaurant {
       state,
       phone,
       color,
+      noTable,
       tags,
       const DeepCollectionEquality().hash(_menu));
 
@@ -323,6 +342,7 @@ abstract class _Restaurant implements Restaurant {
       required final String? state,
       required final String? phone,
       final String? color,
+      final int? noTable,
       final String? tags,
       final List<RestaurantMenu>? menu}) = _$_Restaurant;
 
@@ -345,6 +365,8 @@ abstract class _Restaurant implements Restaurant {
   String? get phone;
   @override
   String? get color;
+  @override
+  int? get noTable;
   @override
   String? get tags;
   @override

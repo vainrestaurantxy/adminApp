@@ -1,4 +1,7 @@
+import 'package:admin_app/Constants/Colors/colors.dart';
+import 'package:admin_app/Constants/Typography/typography.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../Model/Restaurant/restaurant.dart';
@@ -10,21 +13,66 @@ Widget createCustomSliverAppBar({
 }) {
   Widget customSliverAppBar = SliverAppBar(
     floating: false,
-    expandedHeight: 350,
+    expandedHeight: 400,
     elevation: 0,
     pinned: true,
-    collapsedHeight: 100,
+    collapsedHeight: 150,
     flexibleSpace: FlexibleSpaceBar(
       expandedTitleScale: 1,
       titlePadding: EdgeInsets.all(0),
       title: Container(
         color: Colors.white,
         width: double.infinity,
-        height: 115,
+        height: 160.h,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           child: Column(
             children: [
+              SizedBox(
+                height: 50.h,
+              ),
+              Container(
+                width: 396.w,
+                height: 60.h,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                clipBehavior: Clip.antiAlias,
+                decoration: ShapeDecoration(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(
+                      width: 1,
+                      strokeAlign: BorderSide.strokeAlignCenter,
+                      color: AppColor.white,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  shadows: const [
+                    BoxShadow(
+                      color: AppColor.blackText,
+                      blurRadius: 16,
+                      offset: Offset(0, 8),
+                      spreadRadius: 0,
+                    )
+                  ],
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 352.w,
+                      child: Text(
+                        'Preview: Your restaurant’s menu will look like this to the customers :P',
+                        textAlign: TextAlign.center,
+                        style: AppTypography.smallText
+                            .copyWith(color: AppColor.blackText),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               // SizedBox(
               //     width: double.infinity,
               // child: TextFormField(
@@ -50,11 +98,9 @@ Widget createCustomSliverAppBar({
               //     fillColor: Color(0xFFF4F4FF),
               //   ),
               // )),
-              const SizedBox(
-                height: 50,
-              ),
+
               SizedBox(
-                height: 32,
+                height: 32.h,
                 width: double.infinity,
                 child: Center(
                   child: ListView.builder(
@@ -83,19 +129,15 @@ Widget createCustomSliverAppBar({
                               Column(children: [
                                 SvgPicture.asset(
                                   "assets/fastfood.svg",
-                                  width: 20,
-                                  height: 20,
+                                  width: 20.w,
+                                  height: 20.w,
                                 ),
                               ]),
-                              const SizedBox(
-                                width: 10,
+                              SizedBox(
+                                width: 10.w,
                               ),
                               Text(restaurant.tags![index],
-                                  style: const TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                  ))
+                                  style: AppTypography.smallText)
                             ],
                           ),
                         ),
