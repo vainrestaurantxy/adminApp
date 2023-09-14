@@ -408,7 +408,7 @@ class AddItemOrder extends StatelessWidget {
                                                   orderStatus:
                                                       "Order Confirmed",
                                                   tableNo: table);
-                                              viewModel.saveOrder(order);
+                                              viewModel.saveOrder(order,context);
                                               Navigator.pop(context);
                                               Navigator.pop(context);
                                             },

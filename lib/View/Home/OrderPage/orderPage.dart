@@ -76,7 +76,7 @@ class OrderPage extends StatelessWidget {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.data == null) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }

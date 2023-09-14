@@ -1,3 +1,4 @@
+import 'package:admin_app/Data/Providers/cartProvider.dart';
 import 'package:admin_app/Data/Providers/homeProvider.dart';
 import 'package:admin_app/Data/Repositories/DatabaseConnection.dart';
 import 'package:admin_app/Model/Restaurant/restaurant.dart';
@@ -11,7 +12,7 @@ import 'package:provider/provider.dart';
 class OrderViewModel {
   OrderViewModel(this._db);
   final IDatabaseService _db;
-  saveOrder(model.Order order) async {
+  saveOrder(model.Order order,context) async {
     Map<String, dynamic>? data = await _db.getSubcollection(
         "Restaurants",
         "Orders",
@@ -31,6 +32,9 @@ class OrderViewModel {
         '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}',
         {"order": list},
         true);
+    Provider.of<CartProvider>(context).cart={};
+    
+    Provider.of<CartProvider>(context).menuCart=[];
   }
 
   updateOrder(model.Order order, orderNo) async {

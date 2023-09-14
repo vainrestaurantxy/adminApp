@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin_app/Constants/Colors/colors.dart';
 import 'package:admin_app/Data/Providers/cartProvider.dart';
 import 'package:admin_app/Model/RestaurantMenu/restaurantMenu.dart';
@@ -16,6 +18,7 @@ class OrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(order);
     return Container(
       width: 396.w,
       padding: const EdgeInsets.all(16),
@@ -125,8 +128,8 @@ class OrderItem extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                    width: 18.h,
-                                    height: 18.h,
+                                    width: 18.w,
+                                    height: 18.w,
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(
                                       color: AppColor.purpleColor,
@@ -159,11 +162,7 @@ class OrderItem extends StatelessWidget {
                                               .get();
 
                                       Map<String, dynamic>? json = data.data();
-                                      if (order["id"] !=
-                                          (json?[order][index]["id"] ??
-                                              "NULL")) {
-                                        return;
-                                      }
+
                                       json!["order"][index]["orderStatus"] =
                                           "Order Delivered";
 
@@ -196,8 +195,8 @@ class OrderItem extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Container(
-                                      width: 18.h,
-                                      height: 18.h,
+                                      width: 18.w,
+                                      height: 18.w,
                                       clipBehavior: Clip.antiAlias,
                                       decoration: BoxDecoration(),
                                       child: Icon(
