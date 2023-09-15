@@ -3,11 +3,14 @@ import 'package:admin_app/Data/Providers/restaurantProvider.dart';
 import 'package:admin_app/Model/Restaurant/restaurant.dart';
 import 'package:admin_app/Model/RestaurantMenu/restaurantMenu.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:provider/provider.dart';
 
 import '../../View/Home/MenuPage/widgets.dart';
 
+@lazySingleton
 class MenuPageViewModel {
+  List<Widget> items = [];
   static List<GlobalKey> keys = [];
   reArrangeCategory({required BuildContext context}) {
     final cart = Provider.of<CartProvider>(context, listen: false);
@@ -31,8 +34,7 @@ class MenuPageViewModel {
     return map;
   }
 
-  List<Widget> createMenu(
-      Map<String, List<RestaurantMenu>> categoryDividedMenu) {
+  createMenu(Map<String, List<RestaurantMenu>> categoryDividedMenu) {
     List<Widget> items = [];
 
     for (var i in categoryDividedMenu.entries) {
@@ -65,7 +67,7 @@ class MenuPageViewModel {
         ),
       );
     }
-    return items;
+    this.items = items;
   }
 
   // List<int> getItemsAndAmount(context){

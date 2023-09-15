@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
   int index = 0;
   List<Widget> screen = [
-    OrderPage(),
+    const OrderPage(),
     QRPage(),
     AddPage(),
     MenuPage(id: FirebaseAuth.instance.currentUser!.uid),

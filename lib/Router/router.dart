@@ -1,3 +1,4 @@
+
 import 'package:admin_app/View/Auth/LandingPage/landingPage.dart';
 import 'package:admin_app/View/Auth/LoginPage/loginPage.dart';
 import 'package:admin_app/View/Auth/LogoPage/logoPage.dart';
@@ -12,6 +13,7 @@ import 'package:go_router/go_router.dart';
 
 import '../View/Auth/RegisterPage/registerPage.dart';
 import '../View/Home/HomePage.dart';
+
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
@@ -30,7 +32,7 @@ final GoRouter router = GoRouter(
                 GoRoute(
                   path: 'category',
                   builder: (context, state) => ManageCategory(),
-                )
+                ),
               ]),
           GoRoute(
               path: 'login',
