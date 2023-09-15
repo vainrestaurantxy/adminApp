@@ -18,7 +18,7 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return LandingPage();
+          return const LandingPage();
         },
         routes: [
           GoRoute(

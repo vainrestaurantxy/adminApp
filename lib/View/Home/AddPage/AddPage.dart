@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -99,7 +101,7 @@ class AddPage extends StatelessWidget {
                         "Item Type",
                         style: AppTypography.smallText,
                       ),
-                      Container(
+                      SizedBox(
                         height: 50,
                         width: double.infinity,
                         child: SizedBox(
@@ -109,7 +111,7 @@ class AddPage extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: RadioListTile(
-                                  title: Text("Dish"),
+                                  title: const Text("Dish"),
                                   value: 'Dish',
                                   groupValue: itemType,
                                   activeColor: AppColor.purpleColor,
@@ -121,7 +123,7 @@ class AddPage extends StatelessWidget {
                               ),
                               Expanded(
                                 child: RadioListTile(
-                                  title: Text("Drink"),
+                                  title: const Text("Drink"),
                                   value: 'Drink',
                                   activeColor: AppColor.purpleColor,
                                   groupValue: itemType,
@@ -135,8 +137,8 @@ class AddPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 8,
+                      const SizedBox(
+                        height: 16,
                       ),
                       GestureDetector(
                           onTap: () async {
@@ -150,7 +152,7 @@ class AddPage extends StatelessWidget {
                                   ? "Upload Item Thumbnail"
                                   : "Uploaded Item Thumbnail")),
                       const SizedBox(
-                        height: 8,
+                        height: 16,
                       ),
                       Text(
                         (viewModel.dish?.image == null && imageError != 'first')
@@ -159,7 +161,7 @@ class AddPage extends StatelessWidget {
                         style:
                             AppTypography.smallText.copyWith(color: Colors.red),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Consumer<ImageUpload>(
@@ -172,13 +174,13 @@ class AddPage extends StatelessWidget {
                                       ? ""
                                       : "Uploaded ${viewModel.dishImage?.name}"
                                   : "Uploading ${viewModel.dishImage?.name}"),
-                              SizedBox(
-                                height: 8,
+                              const SizedBox(
+                                height: 16,
                               ),
                               SizedBox(
                                 child:
                                     (ref.uploadTotalBytes == ref.uploadedBytes)
-                                        ? SizedBox()
+                                        ? const SizedBox()
                                         : Column(
                                             children: [
                                               LinearProgressIndicator(
@@ -189,7 +191,7 @@ class AddPage extends StatelessWidget {
                                                         ? 1
                                                         : ref.uploadTotalBytes),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 16,
                                               ),
                                               // GestureDetector(
@@ -212,20 +214,20 @@ class AddPage extends StatelessWidget {
                         controller: name,
                         errorText: error.restaurantName,
                         hintText: "Enter Name",
-                        label: Text("Name"),
+                        label: const Text("Name"),
                         maxLength: 100,
                       ),
-                      SizedBox(
-                        height: 8,
+                      const SizedBox(
+                        height: 16,
                       ),
                       CustomTextField(
                         controller: desc,
                         errorText: error.restaurantCity,
                         hintText: "Enter Description",
-                        label: Text("Description"),
+                        label: const Text("Description"),
                         maxLength: 400,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
@@ -235,11 +237,11 @@ class AddPage extends StatelessWidget {
                           ref.update();
                         },
                         hintText: "Enter Price",
-                        label: Text("Price(AED)"),
+                        label: const Text("Price(AED)"),
                         // maxLength: 1,
                         keyboardType: TextInputType.number,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Container(
@@ -249,7 +251,7 @@ class AddPage extends StatelessWidget {
                           children: [
                             Expanded(
                               child: RadioListTile.adaptive(
-                                title: Text("Inclusive of VAT"),
+                                title: const Text("Inclusive of VAT"),
                                 value: 'Inclusive',
                                 groupValue: radioValue,
                                 activeColor: AppColor.purpleColor,
@@ -262,7 +264,7 @@ class AddPage extends StatelessWidget {
                             ),
                             Expanded(
                               child: RadioListTile.adaptive(
-                                title: Text("Exclusive of VAT"),
+                                title: const Text("Exclusive of VAT"),
                                 value: 'Exclusive',
                                 activeColor: AppColor.purpleColor,
                                 groupValue: radioValue,
@@ -276,12 +278,12 @@ class AddPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 8,
+                      const SizedBox(
+                        height: 16,
                       ),
                       SizedBox(
                         child: (radioValue == 'Inclusive')
-                            ? SizedBox()
+                            ? const SizedBox()
                             : CustomTextField(
                                 controller: tax,
                                 onChanged: (value) {
@@ -293,11 +295,11 @@ class AddPage extends StatelessWidget {
                                 readOnly: true,
                                 hintText: 'Enter VAT',
                                 keyboardType: TextInputType.number,
-                                label: Text("VAT(%)"),
+                                label: const Text("VAT(%)"),
                               ),
                       ),
-                      SizedBox(
-                        height: 8,
+                      const SizedBox(
+                        height: 16,
                       ),
                       CustomTextField(
                         hintText: 'Enter Discount',
@@ -309,24 +311,25 @@ class AddPage extends StatelessWidget {
                             "Price With Discount: ${viewModel.calculatediscount(tax.text, price.text, discount.text)} AED"),
                         keyboardType: TextInputType.number,
                         errorText: error.discount,
-                        label: Text("Discount(%)"),
+                        label: const Text("Discount(%)"),
                       ),
-                      SizedBox(
-                        height: 8,
+                      const SizedBox(
+                        height: 16,
                       ),
                       SizedBox(
                         width: double.infinity,
                         child: data.category.isEmpty
-                            ? SizedBox()
+                            ? const SizedBox()
                             : DropdownButton<String>(
                                 alignment: Alignment.center,
-                                hint: Text("Category"),
+                                hint: const Text("Category"),
                                 onChanged: (value) {
                                   category = value ?? "";
                                   ref.update();
                                 },
                                 value: category,
-                                icon: Icon(Icons.keyboard_arrow_down_rounded),
+                                icon: const Icon(
+                                    Icons.keyboard_arrow_down_rounded),
                                 items: List.generate(
                                     data.category.length,
                                     (index) => DropdownMenuItem(
@@ -360,8 +363,8 @@ class AddPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 8,
+                      const SizedBox(
+                        height: 16,
                       ),
                       Text(
                         "Genre",
@@ -429,8 +432,8 @@ class AddPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 8,
+                      const SizedBox(
+                        height: 16,
                       ),
                       Row(
                         children: [
@@ -446,7 +449,7 @@ class AddPage extends StatelessWidget {
                                 text: "BestSeller",
                                 selected: indexTags == 0,
                               )),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                           ),
                           GestureDetector(
@@ -461,8 +464,8 @@ class AddPage extends StatelessWidget {
                                 text: "New",
                                 selected: indexTags == 1,
                               )),
-                          SizedBox(
-                            width: 8,
+                          const SizedBox(
+                            width: 16,
                           ),
                           GestureDetector(
                             onTap: () {
@@ -477,13 +480,13 @@ class AddPage extends StatelessWidget {
                               selected: indexTags == 2,
                             ),
                           ),
-                          SizedBox(
-                            width: 8,
+                          const SizedBox(
+                            width: 16,
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 8,
+                      const SizedBox(
+                        height: 16,
                       ),
                       SizedBox(
                         width: 396,
@@ -505,7 +508,7 @@ class AddPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 8,
+                        height: 16,
                       ),
                       Wrap(
                         children: List.generate(
@@ -533,7 +536,7 @@ class AddPage extends StatelessWidget {
                                 )),
                       ),
                       const SizedBox(
-                        height: 8,
+                        height: 16,
                       ),
                       GestureDetector(
                         onTap: () {
