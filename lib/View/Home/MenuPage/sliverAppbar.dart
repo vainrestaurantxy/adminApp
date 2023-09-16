@@ -11,14 +11,15 @@ Widget createCustomSliverAppBar({
   ScrollController? controller,
 }) {
   Widget customSliverAppBar = SliverAppBar(
+    leading: const Icon(null),
     floating: false,
-    expandedHeight: 400,
+    expandedHeight: 500,
     elevation: 0,
     pinned: true,
-    collapsedHeight: 150,
+    collapsedHeight: 100,
     flexibleSpace: FlexibleSpaceBar(
       expandedTitleScale: 1,
-      titlePadding: EdgeInsets.all(0),
+      titlePadding: const EdgeInsets.all(0),
       title: Container(
         color: Colors.white,
         width: double.infinity,
@@ -28,7 +29,7 @@ Widget createCustomSliverAppBar({
           child: Column(
             children: [
               SizedBox(
-                height: 50.h,
+                height: 40.h,
               ),
               Container(
                 width: 396.w,
@@ -164,29 +165,30 @@ Widget createCustomSliverAppBar({
           ),
           SizedBox(
             width: double.infinity,
+            height: 0.5.sh,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   width: 100,
                   height: 50,
                   child: Image.network(restaurant.logo!),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Text(restaurant.name!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 24,
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 4,
                 ),
                 Text("${restaurant.city}, ${restaurant.state}",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
                       color: Colors.black,
                       fontWeight: FontWeight.w400,

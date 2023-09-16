@@ -41,7 +41,9 @@ class AddViewModel {
       required String genre,
       String? tag}) async {
     List<String> tags = tag == null ? [genre] : [genre, tag];
-
+    if (dish == null) {
+      return;
+    }
     dish = dish!.copyWith(
       name: name,
       category: category,
