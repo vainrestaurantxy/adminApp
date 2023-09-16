@@ -37,7 +37,7 @@ class AddViewModel {
       required String tax,
       required String itemType,
       required String price,
-      List<String>? recommendedWith,
+      List<String>? recommendedWithau,
       required String genre,
       String? tag}) async {
     List<String> tags = tag == null ? [genre] : [genre, tag];
@@ -49,7 +49,7 @@ class AddViewModel {
       discount: int.parse(discount),
       itemType: itemType,
       price: int.parse(price),
-      recommendedWith: recommendedWith ?? [],
+      recommendedWith: recommendedWithau,
       tags: tags,
       tax: int.parse(tax),
     );
@@ -78,31 +78,32 @@ class AddViewModel {
       required String genre,
       String? tag}) async {
     List<String> tags = tag == null ? [genre] : [genre, tag];
-    if(dish == null){
+    if (dish == null) {
       dish = RestaurantMenu(
         image: image,
-      name: name,
-      category: category,
-      description: desc,
-      discount: int.parse(discount),
-      itemType: itemType,
-      price: int.parse(price),
-      recommendedWith: recommendedWith ?? [],
-      tags: tags,
-      tax: int.parse(tax),
-    );
-    }else{
-    dish = dish!.copyWith(
-      name: name,
-      category: category,
-      description: desc,
-      discount: int.parse(discount),
-      itemType: itemType,
-      price: int.parse(price),
-      recommendedWith: recommendedWith ?? [],
-      tags: tags,
-      tax: int.parse(tax),
-    );}
+        name: name,
+        category: category,
+        description: desc,
+        discount: int.parse(discount),
+        itemType: itemType,
+        price: int.parse(price),
+        recommendedWith: recommendedWith ?? [],
+        tags: tags,
+        tax: int.parse(tax),
+      );
+    } else {
+      dish = dish!.copyWith(
+        name: name,
+        category: category,
+        description: desc,
+        discount: int.parse(discount),
+        itemType: itemType,
+        price: int.parse(price),
+        recommendedWith: recommendedWith ?? [],
+        tags: tags,
+        tax: int.parse(tax),
+      );
+    }
     log(dish.toString());
     Map<String, dynamic>? json = await _db.get("Restaurants", _auth.getUserId!);
     List<dynamic> data = json?["menu"] ?? [];

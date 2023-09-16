@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:admin_app/Data/Providers/cartProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -573,17 +574,24 @@ class AddPage extends StatelessWidget {
                                 price: price.text,
                                 genre: genre,
                                 tag: tag,
-                                recommendedWith: bestwith);
-                            name.clear();
-                            desc.clear();
-                            tax.clear();
-                            discount.clear();
-                            itemType = "Dish";
-                            genre = "first";
-
-                            imageError = 'first';
-                            bestwith.clear();
-                            tag = "";
+                                recommendedWithau: bestwith);
+                            // Future.delayed(Duration(seconds: 2));
+                            // name.clear();
+                            // desc.clear();
+                            // tax.clear();
+                            // viewModel.dishImage = null;
+                            // indexTags = -1;
+                            // discount.clear();
+                            // itemType = "Dish";
+                            // genre = "first";
+                            // price.clear();
+                            // imageError = 'first';
+                            // bestwith.clear();
+                            // tag = "";
+                            // Provider.of<ImageUpload>(context, listen: false)
+                            //     .uploadedBytes = 0;
+                            // Provider.of<ImageUpload>(context, listen: false)
+                            //     .uploadTotalBytes = 0;
                             // ToastContext().init(context);
                             // Toast.show("Dish Added",
                             //     duration: Toast.lengthShort,

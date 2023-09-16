@@ -55,6 +55,7 @@ class EditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = Provider.of<RestaurantData>(context);
+    print(item.toString());
     orgName = item.name ?? "";
     name.text = item.name ?? "";
     desc.text = item.description ?? "";
@@ -65,6 +66,14 @@ class EditPage extends StatelessWidget {
     itemType = item.itemType ?? "Dish";
     bestwith = item.recommendedWith as List<String>? ?? [];
     genre = item.tags?[0] ?? "";
+    String tag2 = item.tags?[1] ?? "";
+    if (tag2 == "BestSeller") {
+      indexTags = 0;
+    } else if (tag2 == "New") {
+      indexTags = 1;
+    } else {
+      indexTags = 2;
+    }
 
     final viewModel = GetIt.instance<AddViewModel>();
 
@@ -455,7 +464,6 @@ class EditPage extends StatelessWidget {
                                         } else {
                                           bestwith.remove(tags[index]);
                                         }
-
                                         ref.update();
                                       },
                                       child: Selectable(
@@ -476,7 +484,7 @@ class EditPage extends StatelessWidget {
                               price.text, tax.text, discount.text, context)) {
                             String tag = "";
                             if (indexTags == 0) {
-                              tag = "Best Seller";
+                              tag = "BestSeller";
                             } else if (indexTags == 1) {
                               tag = "New";
                             } else {
@@ -512,8 +520,7 @@ class EditPage extends StatelessWidget {
                                 title: 'Dish Updated',
                                 text: 'Your dish has been updated',
                                 duration: const Duration(seconds: 3));
-                            Future.delayed(Duration(seconds: 2));
-                            data.notifyListeners();
+                          
                           }
                         },
                         child: PrimaryButton(

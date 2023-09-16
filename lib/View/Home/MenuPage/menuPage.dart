@@ -43,7 +43,7 @@ class _MenuPageState extends State<MenuPage> {
           .snapshots(),
       builder: (context,
           AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
-        print(snapshot.data!.data());
+        
         Restaurant localRestaurant =
             Restaurant.fromJson(snapshot.data!.data()!);
         Provider.of<RestaurantData>(context).restaurant = localRestaurant;
