@@ -8,7 +8,7 @@ import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Providers/restaurantProvider.dart';
 import 'package:admin_app/Model/Restaurant/restaurant.dart';
 import 'package:admin_app/ViewModel/AuthViewModel/SetupViewModel.dart';
-import 'package:admin_app/ViewModel/HomeViewModel/AddPageViewModel.dart';
+
 import 'package:admin_app/ViewModel/HomeViewModel/profilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +16,7 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:web_toast/web_toast.dart';
 
+// ignore: must_be_immutable
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
   TextEditingController name = TextEditingController();
@@ -45,7 +46,7 @@ class ProfilePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 396.w,
                       height: 51.h,
                       child: Column(
@@ -70,16 +71,16 @@ class ProfilePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     CustomTextField(
                       hintText: "Email",
-                      label: Text("Email Id"),
+                      label: const Text("Email Id"),
                       readOnly: true,
                       initialValue: viewModel.getEmail,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     SizedBox(
@@ -90,14 +91,14 @@ class ProfilePage extends StatelessWidget {
                             .copyWith(color: AppColor.disabledColor),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     CustomTextField(
                       readOnly: true,
                       controller: staffKey,
                       hintText: "Staff Key",
-                      label: Text("Staff Account Key"),
+                      label: const Text("Staff Account Key"),
                     ),
                     SizedBox(
                       width: 396.w,
@@ -107,7 +108,7 @@ class ProfilePage extends StatelessWidget {
                             .copyWith(color: AppColor.disabledColor),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     SizedBox(
@@ -121,6 +122,7 @@ class ProfilePage extends StatelessWidget {
                     GestureDetector(
                       onTap: () async {
                         await addViewModel.getImagefromDevice();
+                        // ignore: use_build_context_synchronously
                         addViewModel.upload(context);
                       },
                       child: Stack(
@@ -131,13 +133,13 @@ class ProfilePage extends StatelessWidget {
                             decoration: ShapeDecoration(
                               image: DecorationImage(
                                 image: (ref.restaurant?.logo == null)
-                                    ? NetworkImage(
+                                    ? const NetworkImage(
                                         "https://via.placeholder.com/148x148")
                                     : NetworkImage(ref.restaurant!.logo!),
                                 fit: BoxFit.fill,
                               ),
                               shape: RoundedRectangleBorder(
-                                side: BorderSide(
+                                side: const BorderSide(
                                     width: 1, color: Color(0xFF9997A1)),
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -149,47 +151,47 @@ class ProfilePage extends StatelessWidget {
                             child: Container(
                               width: 36.w,
                               height: 36.h,
-                              child: Icon(
-                                Icons.edit,
-                                color: AppColor.white,
-                              ),
-                              decoration: ShapeDecoration(
+                              decoration: const ShapeDecoration(
                                 color: AppColor.purpleColor,
                                 shape: OvalBorder(),
+                              ),
+                              child: const Icon(
+                                Icons.edit,
+                                color: AppColor.white,
                               ),
                             ),
                           )
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     CustomTextField(
                       hintText: "Enter Name",
                       errorText: error.registerEmail,
-                      label: Text("Restaurant Name"),
+                      label: const Text("Restaurant Name"),
                       controller: name,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     CustomTextField(
                       hintText: "Enter City",
                       errorText: error.restaurantCity,
-                      label: Text("Restaurant City"),
+                      label: const Text("Restaurant City"),
                       controller: city,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     CustomTextField(
                       hintText: "Enter State",
                       errorText: error.restaurantState,
-                      label: Text("Restaurant State"),
+                      label: const Text("Restaurant State"),
                       controller: state,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     CustomTextField(
@@ -199,10 +201,10 @@ class ProfilePage extends StatelessWidget {
                         style: AppTypography.mediumText,
                       ),
                       errorText: error.phoneNo,
-                      label: Text("Restaurant Phone no."),
+                      label: const Text("Restaurant Phone no."),
                       controller: phone,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     GestureDetector(

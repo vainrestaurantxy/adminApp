@@ -23,7 +23,7 @@ void main() async {
       create: (_) => CartProvider(),
     ),
     ListenableProvider<HomeProvider>(create: (_) => HomeProvider())
-  ], child: MyApp()));
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         routerConfig: router,
         title: 'Admin App',
         theme: ThemeData(
-          colorScheme: ColorScheme.light(primary: Color(0xFF241D43)),
+          colorScheme: const ColorScheme.light(primary: Color(0xFF241D43)),
         ),
       ),
     );

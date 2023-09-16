@@ -7,8 +7,8 @@ abstract class IFirebaseService {
 
   signin(String emailId, String password);
   resetPassword(String email);
-   resetPassword_2(String password, String code);
-   String? get getEmailId;
+  resetPassword_2(String password, String code);
+  String? get getEmailId;
 }
 
 @Injectable(as: IFirebaseService)
@@ -27,11 +27,11 @@ class FirebaseService implements IFirebaseService {
     userId = _auth.currentUser?.uid;
   }
 
-  resetPassword_2(String password, String code)async{
+  resetPassword_2(String password, String code) async {
     await _auth.confirmPasswordReset(code: code, newPassword: password);
   }
 
-  resetPassword(String email)async{
+  resetPassword(String email) async {
     await _auth.sendPasswordResetEmail(email: email);
   }
 

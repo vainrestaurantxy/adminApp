@@ -1,5 +1,3 @@
-
-
 import 'package:admin_app/Constants/Colors/colors.dart';
 import 'package:admin_app/Constants/Typography/typography.dart';
 import 'package:admin_app/Constants/Widgets/SecondaryButton.dart';
@@ -85,7 +83,7 @@ class LandingPage extends StatelessWidget {
                         Container(
                           width: 169.w,
                           height: 2,
-                          decoration: BoxDecoration(color: AppColor.grey),
+                          decoration: const BoxDecoration(color: AppColor.grey),
                         ),
                         SizedBox(width: 1.w),
                         SizedBox(
@@ -101,7 +99,7 @@ class LandingPage extends StatelessWidget {
                         Container(
                           width: 169.w,
                           height: 2,
-                          decoration: BoxDecoration(color: AppColor.grey),
+                          decoration: const BoxDecoration(color: AppColor.grey),
                         ),
                       ],
                     ),

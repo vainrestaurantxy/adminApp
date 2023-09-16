@@ -1,12 +1,6 @@
-import 'dart:developer';
-
 import 'package:admin_app/Constants/Colors/colors.dart';
 import 'package:admin_app/Constants/Typography/typography.dart';
-import 'package:admin_app/Constants/Widgets/PrimaryButton.dart';
-import 'package:admin_app/Constants/Widgets/SecondaryButton.dart';
-import 'package:admin_app/Constants/Widgets/TextField.dart';
-import 'package:admin_app/Constants/Widgets/selectable.dart';
-import 'package:admin_app/Data/Providers/errorProvider.dart';
+
 import 'package:admin_app/Data/Providers/homeProvider.dart';
 import 'package:admin_app/View/Home/AddPage/AddPage.dart';
 import 'package:admin_app/View/Home/OrderPage/orderPage.dart';
@@ -16,13 +10,10 @@ import 'package:admin_app/ViewModel/HomeViewModel/homeViewModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
-import '../../Data/Providers/restaurantProvider.dart';
-import '../../ViewModel/HomeViewModel/AddPageViewModel.dart';
 import 'MenuPage/menuPage.dart';
 
 class HomePage extends StatelessWidget {
@@ -43,6 +34,10 @@ class HomePage extends StatelessWidget {
     viewModel.getCategory(context);
     return Consumer<HomeProvider>(builder: (_, ref, __) {
       return Scaffold(
+          appBar: AppBar(
+            leading: const Icon(null),
+            title: const Text('LOGO'),
+          ),
           body: screen[index],
           bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
@@ -53,11 +48,11 @@ class HomePage extends StatelessWidget {
                 ref.notifyListeners();
               },
               showUnselectedLabels: true,
-              unselectedIconTheme: IconThemeData(
+              unselectedIconTheme: const IconThemeData(
                 size: 18,
                 color: AppColor.blackText,
               ),
-              selectedIconTheme: IconThemeData(
+              selectedIconTheme: const IconThemeData(
                 size: 18,
                 color: AppColor.purpleColor,
               ),
@@ -66,19 +61,19 @@ class HomePage extends StatelessWidget {
                   AppTypography.smallText.copyWith(color: AppColor.purpleColor),
               unselectedLabelStyle:
                   AppTypography.smallText.copyWith(color: AppColor.purpleColor),
-              items: [
+              items: const [
                 BottomNavigationBarItem(
                     icon: Icon(Icons.data_usage),
                     activeIcon: Icon(
                       Icons.data_usage,
-                      color: AppColor.purpleColor,
+                      //  color: AppColor.purpleColor,
                     ),
                     label: "Orders"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.qr_code),
                     activeIcon: Icon(
                       Icons.qr_code,
-                      color: AppColor.purpleColor,
+                      //   color: AppColor.purpleColor,
                     ),
                     // icon: SvgPicture.asset('assets/qr_code.svg'),
                     label: "QR Code"),
@@ -86,14 +81,14 @@ class HomePage extends StatelessWidget {
                     icon: Icon(Icons.add),
                     activeIcon: Icon(
                       Icons.add,
-                      color: AppColor.purpleColor,
+                      //  color: AppColor.purpleColor,
                     ),
                     label: "Add"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.fastfood),
                     activeIcon: Icon(
                       Icons.fastfood,
-                      color: AppColor.purpleColor,
+                      //    color: AppColor.purpleColor,
                     ),
                     // icon: SvgPicture.asset('assets/fastfood.svg'),
                     label: "Menu"),
@@ -101,7 +96,7 @@ class HomePage extends StatelessWidget {
                     icon: Icon(Icons.restaurant),
                     activeIcon: Icon(
                       Icons.restaurant,
-                      color: AppColor.purpleColor,
+                      //    color: AppColor.purpleColor,
                     ),
                     // icon: SvgPicture.asset('assets/restaurant.svg'),
                     label: "Profile")

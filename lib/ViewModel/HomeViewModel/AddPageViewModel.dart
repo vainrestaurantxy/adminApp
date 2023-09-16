@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Repositories/DatabaseConnection.dart';
 
-import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +20,7 @@ class AddViewModel {
   RestaurantMenu? dish;
 
   Future<XFile?> getImagefromDevice() async {
+    // ignore: invalid_use_of_visible_for_testing_member
     XFile? imageFile = (await ImagePicker.platform
         .getImageFromSource(source: ImageSource.gallery));
 

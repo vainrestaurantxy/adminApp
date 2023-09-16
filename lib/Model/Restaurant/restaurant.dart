@@ -1,8 +1,6 @@
 import 'package:admin_app/Model/RestaurantMenu/restaurantMenu.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
-
 part 'restaurant.freezed.dart';
 part 'restaurant.g.dart';
 
