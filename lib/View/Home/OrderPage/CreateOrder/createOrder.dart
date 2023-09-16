@@ -1,6 +1,7 @@
 import 'package:admin_app/Constants/Typography/typography.dart';
 import 'package:admin_app/Constants/Widgets/PrimaryButton.dart';
 import 'package:admin_app/Constants/Widgets/TextField.dart';
+import 'package:admin_app/Data/Providers/cartProvider.dart';
 import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/View/Home/OrderPage/CreateOrder/addItem.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +90,10 @@ class CreateOrder extends StatelessWidget {
                       if (ref.restaurantName == null &&
                           ref.phoneNo == null &&
                           ref.price == null) {
+                        Provider.of<CartProvider>(context, listen: false).cart =
+                            {};
+                        Provider.of<CartProvider>(context, listen: false)
+                            .menuCart = [];
                         Navigator.push(
                             context,
                             MaterialPageRoute(

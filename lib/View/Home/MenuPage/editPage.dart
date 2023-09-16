@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:admin_app/View/Home/MenuPage/menuPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
@@ -13,12 +14,14 @@ import '../../../Constants/Widgets/PrimaryButton.dart';
 import '../../../Constants/Widgets/SecondaryButton.dart';
 import '../../../Constants/Widgets/TextField.dart';
 import '../../../Constants/Widgets/selectable.dart';
+import '../../../Data/Providers/cartProvider.dart';
 import '../../../Data/Providers/errorProvider.dart';
 import '../../../Data/Providers/homeProvider.dart';
 import '../../../Data/Providers/restaurantProvider.dart';
 import '../../../Model/RestaurantMenu/restaurantMenu.dart';
 import '../../../ViewModel/HomeViewModel/AddPageViewModel.dart';
 import '../../../ViewModel/HomeViewModel/homeViewModel.dart';
+import '../../../ViewModel/HomeViewModel/menuPageViewModel.dart';
 
 class EditPage extends StatelessWidget {
   EditPage({super.key, required this.item});
@@ -493,7 +496,15 @@ class EditPage extends StatelessWidget {
                                 tag: tag,
                                 recommendedWith: bestwith);
                             final viewModel2 = GetIt.instance<HomeViewModel>();
+                            final viewModelmenu =
+                                GetIt.instance<MenuPageViewModel>();
                             viewModel2.getRestaurant(context);
+                            viewModelmenu.reArrangeCategory(context: context);
+                            viewModelmenu.createMenu(Provider.of<CartProvider>(
+                                    context,
+                                    listen: false)
+                                .categoryDividedMenu);
+                            print(viewModelmenu.items);
 
                             Navigator.pop(context);
 
