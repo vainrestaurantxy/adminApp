@@ -119,7 +119,7 @@ class QRPage extends StatelessWidget {
             ),
             SizedBox(
               child: (readOnly == true)
-                  ? SizedBox()
+                  ? const SizedBox()
                   : InkWell(
                       onTap: () async {
                         final vm = GetIt.instance<HomeViewModel>();
