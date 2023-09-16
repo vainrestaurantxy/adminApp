@@ -143,6 +143,7 @@ class AddPage extends StatelessWidget {
                       GestureDetector(
                           onTap: () async {
                             await viewModel.getImagefromDevice();
+
                             viewModel.uploadImage(context);
                             imageError = 'first';
                             ref.notifyListeners();
@@ -162,7 +163,7 @@ class AddPage extends StatelessWidget {
                             AppTypography.smallText.copyWith(color: Colors.red),
                       ),
                       const SizedBox(
-                        height: 8,
+                        height: 16,
                       ),
                       Consumer<ImageUpload>(
                         builder: (context, ref, _) {
@@ -228,7 +229,7 @@ class AddPage extends StatelessWidget {
                         maxLength: 400,
                       ),
                       const SizedBox(
-                        height: 8,
+                        height: 16,
                       ),
                       CustomTextField(
                         controller: price,
@@ -242,9 +243,9 @@ class AddPage extends StatelessWidget {
                         keyboardType: TextInputType.number,
                       ),
                       const SizedBox(
-                        height: 8,
+                        height: 16,
                       ),
-                      Container(
+                      SizedBox(
                         height: 50,
                         width: double.infinity,
                         child: Row(
@@ -333,8 +334,8 @@ class AddPage extends StatelessWidget {
                                 items: List.generate(
                                     data.category.length,
                                     (index) => DropdownMenuItem(
-                                          child: Text(data.category[index]),
                                           value: data.category[index],
+                                          child: Text(data.category[index]),
                                         )),
                               ),
                       ),
@@ -370,7 +371,7 @@ class AddPage extends StatelessWidget {
                         "Genre",
                         style: AppTypography.largeText,
                       ),
-                      Container(
+                      SizedBox(
                         height: 50,
                         width: double.infinity,
                         child: Row(
@@ -441,8 +442,9 @@ class AddPage extends StatelessWidget {
                               onTap: () {
                                 if (indexTags == 0) {
                                   indexTags = -1;
-                                } else
+                                } else {
                                   indexTags = 0;
+                                }
                                 ref.update();
                               },
                               child: Selectable(
@@ -456,8 +458,9 @@ class AddPage extends StatelessWidget {
                               onTap: () {
                                 if (indexTags == 1) {
                                   indexTags = -1;
-                                } else
+                                } else {
                                   indexTags = 1;
+                                }
                                 ref.update();
                               },
                               child: Selectable(
@@ -471,8 +474,9 @@ class AddPage extends StatelessWidget {
                             onTap: () {
                               if (indexTags == 2) {
                                 indexTags = -1;
-                              } else
+                              } else {
                                 indexTags = 2;
+                              }
                               ref.update();
                             },
                             child: Selectable(
@@ -587,10 +591,7 @@ class AddPage extends StatelessWidget {
                             imageError = 'first';
                             bestwith.clear();
                             tag = "";
-                            // ToastContext().init(context);
-                            // Toast.show("Dish Added",
-                            //     duration: Toast.lengthShort,
-                            //     gravity: Toast.bottom);
+
                             Toast.success(
                                 title: 'Dish Added',
                                 text: 'Your dish has been added',

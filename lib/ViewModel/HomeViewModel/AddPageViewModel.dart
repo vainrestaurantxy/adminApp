@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Repositories/DatabaseConnection.dart';
 
-import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +20,7 @@ class AddViewModel {
   RestaurantMenu? dish;
 
   Future<XFile?> getImagefromDevice() async {
+    // ignore: invalid_use_of_visible_for_testing_member
     XFile? imageFile = (await ImagePicker.platform
         .getImageFromSource(source: ImageSource.gallery));
 
@@ -78,31 +78,32 @@ class AddViewModel {
       required String genre,
       String? tag}) async {
     List<String> tags = tag == null ? [genre] : [genre, tag];
-    if(dish == null){
+    if (dish == null) {
       dish = RestaurantMenu(
         image: image,
-      name: name,
-      category: category,
-      description: desc,
-      discount: int.parse(discount),
-      itemType: itemType,
-      price: int.parse(price),
-      recommendedWith: recommendedWith ?? [],
-      tags: tags,
-      tax: int.parse(tax),
-    );
-    }else{
-    dish = dish!.copyWith(
-      name: name,
-      category: category,
-      description: desc,
-      discount: int.parse(discount),
-      itemType: itemType,
-      price: int.parse(price),
-      recommendedWith: recommendedWith ?? [],
-      tags: tags,
-      tax: int.parse(tax),
-    );}
+        name: name,
+        category: category,
+        description: desc,
+        discount: int.parse(discount),
+        itemType: itemType,
+        price: int.parse(price),
+        recommendedWith: recommendedWith ?? [],
+        tags: tags,
+        tax: int.parse(tax),
+      );
+    } else {
+      dish = dish!.copyWith(
+        name: name,
+        category: category,
+        description: desc,
+        discount: int.parse(discount),
+        itemType: itemType,
+        price: int.parse(price),
+        recommendedWith: recommendedWith ?? [],
+        tags: tags,
+        tax: int.parse(tax),
+      );
+    }
     log(dish.toString());
     Map<String, dynamic>? json = await _db.get("Restaurants", _auth.getUserId!);
     List<dynamic> data = json?["menu"] ?? [];

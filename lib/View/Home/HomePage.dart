@@ -1,12 +1,6 @@
-import 'dart:developer';
-
 import 'package:admin_app/Constants/Colors/colors.dart';
 import 'package:admin_app/Constants/Typography/typography.dart';
-import 'package:admin_app/Constants/Widgets/PrimaryButton.dart';
-import 'package:admin_app/Constants/Widgets/SecondaryButton.dart';
-import 'package:admin_app/Constants/Widgets/TextField.dart';
-import 'package:admin_app/Constants/Widgets/selectable.dart';
-import 'package:admin_app/Data/Providers/errorProvider.dart';
+
 import 'package:admin_app/Data/Providers/homeProvider.dart';
 import 'package:admin_app/View/Home/AddPage/AddPage.dart';
 import 'package:admin_app/View/Home/OrderPage/orderPage.dart';
@@ -16,20 +10,17 @@ import 'package:admin_app/ViewModel/HomeViewModel/homeViewModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
-import '../../Data/Providers/restaurantProvider.dart';
-import '../../ViewModel/HomeViewModel/AddPageViewModel.dart';
 import 'MenuPage/menuPage.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   int index = 0;
   List<Widget> screen = [
-    OrderPage(),
+    const OrderPage(),
     QRPage(),
     AddPage(),
     MenuPage(id: FirebaseAuth.instance.currentUser!.uid),
@@ -53,11 +44,11 @@ class HomePage extends StatelessWidget {
                 ref.notifyListeners();
               },
               showUnselectedLabels: true,
-              unselectedIconTheme: IconThemeData(
+              unselectedIconTheme: const IconThemeData(
                 size: 18,
                 color: AppColor.blackText,
               ),
-              selectedIconTheme: IconThemeData(
+              selectedIconTheme: const IconThemeData(
                 size: 18,
                 color: AppColor.purpleColor,
               ),
@@ -66,7 +57,7 @@ class HomePage extends StatelessWidget {
                   AppTypography.smallText.copyWith(color: AppColor.purpleColor),
               unselectedLabelStyle:
                   AppTypography.smallText.copyWith(color: AppColor.purpleColor),
-              items: [
+              items: const [
                 BottomNavigationBarItem(
                     icon: Icon(Icons.data_usage),
                     activeIcon: Icon(

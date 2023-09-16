@@ -12,6 +12,8 @@ class CustomTextField extends StatelessWidget {
       this.onChanged,
       this.initialValue,
       this.maxLength,
+      this.focusNode,
+      this.enabled = true,
       this.errorText,
       this.suffix,
       this.readOnly = false,
@@ -25,13 +27,17 @@ class CustomTextField extends StatelessWidget {
   String? initialValue;
   void Function(String)? onChanged;
   Widget? prefix;
+  FocusNode? focusNode;
   bool obscureText;
   int? maxLength;
+  bool enabled;
   TextEditingController? controller;
   TextInputType? keyboardType;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
+      focusNode: focusNode,
       controller: controller,
       onChanged: onChanged,
       readOnly: readOnly,
