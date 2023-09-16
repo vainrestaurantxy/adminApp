@@ -153,9 +153,9 @@ class AddPage extends StatelessWidget {
                               text: viewModel.dish?.image == null
                                   ? "Upload Item Thumbnail"
                                   : "Uploaded Item Thumbnail")),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      // const SizedBox(
+                      //   height: 10,
+                      // ),
                       Text(
                         (viewModel.dish?.image == null && imageError != 'first')
                             ? "Upload Dish Image"
@@ -163,9 +163,9 @@ class AddPage extends StatelessWidget {
                         style:
                             AppTypography.smallText.copyWith(color: Colors.red),
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      // const SizedBox(
+                      //   height: 10,
+                      // ),
                       Consumer<ImageUpload>(
                         builder: (context, ref, _) {
                           return Column(
@@ -177,7 +177,7 @@ class AddPage extends StatelessWidget {
                                       : "Uploaded ${viewModel.dishImage?.name}"
                                   : "Uploading ${viewModel.dishImage?.name}"),
                               const SizedBox(
-                                height: 16,
+                                height: 26,
                               ),
                               SizedBox(
                                 child:
@@ -583,22 +583,22 @@ class AddPage extends StatelessWidget {
                                 tag: tag,
                                 recommendedWithau: bestwith);
                             // Future.delayed(Duration(seconds: 2));
-                            // name.clear();
-                            // desc.clear();
-                            // tax.clear();
-                            // viewModel.dishImage = null;
-                            // indexTags = -1;
-                            // discount.clear();
-                            // itemType = "Dish";
-                            // genre = "first";
-                            // price.clear();
-                            // imageError = 'first';
+                            name.clear();
+                            desc.clear();
+                            tax.clear();
+                            viewModel.dishImage = null;
+                            indexTags = -1;
+                            discount.clear();
+                            itemType = "Dish";
+                            genre = "first";
+                            price.clear();
+                            imageError = 'first';
                             // bestwith.clear();
-                            // tag = "";
-                            // Provider.of<ImageUpload>(context, listen: false)
-                            //     .uploadedBytes = 0;
-                            // Provider.of<ImageUpload>(context, listen: false)
-                            //     .uploadTotalBytes = 0;
+                            tag = "";
+                            Provider.of<ImageUpload>(context, listen: false)
+                                .uploadedBytes = 0;
+                            Provider.of<ImageUpload>(context, listen: false)
+                                .uploadTotalBytes = 0;
                             // ToastContext().init(context);
                             // Toast.show("Dish Added",
                             //     duration: Toast.lengthShort,
