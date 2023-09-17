@@ -25,6 +25,14 @@ class LoginPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // Align(
+            //   alignment: Alignment.topLeft,
+            //   child: IconButton(
+            //       onPressed: () {
+            //         context.pop();
+            //       },
+            //       icon: Icon(Icons.arrow_back)),
+            // ),
             header(text: "LOGIN TO RESTAURANTXY"),
             SizedBox(
               height: 28.h,
@@ -48,9 +56,8 @@ class LoginPage extends StatelessWidget {
                         errorText: ref.registerkey,
                         hintText: "Enter Key",
                         obscureText: true,
-
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       GestureDetector(
@@ -67,7 +74,7 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       GestureDetector(
                         onTap: () async {
                           if (viewModel.validateLogin(
@@ -128,9 +135,9 @@ class LoginPage extends StatelessWidget {
                           text: "Create New Account",
                         ),
                       ),
-                  SizedBox(
-                    height: 43.h,
-                  )
+                      SizedBox(
+                        height: 43.h,
+                      )
                     ],
                   );
                 },

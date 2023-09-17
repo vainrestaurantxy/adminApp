@@ -50,7 +50,7 @@ class OrderPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             GestureDetector(
@@ -65,7 +65,7 @@ class OrderPage extends StatelessWidget {
                 text: "Create New Order",
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             StreamBuilder(

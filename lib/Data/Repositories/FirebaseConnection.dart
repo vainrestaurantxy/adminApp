@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 abstract class IFirebaseService {
   signUp(String emailId, String password);
   String? get getUserId;
-
+  logout();
   signin(String emailId, String password);
   resetPassword(String email);
   resetPassword_2(String password, String code);
@@ -17,6 +17,10 @@ class FirebaseService implements IFirebaseService {
   FirebaseAuth _auth;
 
   String? userId;
+
+  Future<void> logout() async {
+    await _auth.signOut();
+  }
 
   signUp(String emailId, String password) async {
     await _auth.createUserWithEmailAndPassword(

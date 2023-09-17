@@ -87,7 +87,6 @@ class QRPage extends StatelessWidget {
               height: 8,
             ),
             CustomTextField(
-              // enabled: readOnly,
               readOnly: readOnly,
               onChanged: (v) {
                 final ref = Provider.of<ErrorProvider>(context, listen: false);
@@ -105,7 +104,6 @@ class QRPage extends StatelessWidget {
                   height: 13,
                   child: GestureDetector(
                       onTap: () {
-                        print(readOnly);
                         readOnly = false;
                         ref.notifyListeners();
                       },

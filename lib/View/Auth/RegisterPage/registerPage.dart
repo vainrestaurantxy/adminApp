@@ -31,6 +31,14 @@ class RegisterPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // Align(
+            //   alignment: Alignment.topLeft,
+            //   child: IconButton(
+            //       onPressed: () {
+            //         context.pop();
+            //       },
+            //       icon: Icon(Icons.arrow_back)),
+            // ),
             header(
                 text: "CREATE ${ref.isClub ? "CLUB" : "RESTAURANT"} ACCOUNT"),
             Padding(
@@ -82,10 +90,9 @@ class RegisterPage extends StatelessWidget {
                 },
               ),
             ),
-            
-                  SizedBox(
-                    height: 43.h,
-                  )
+            SizedBox(
+              height: 43.h,
+            )
           ],
         ),
       ),

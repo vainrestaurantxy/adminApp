@@ -54,7 +54,7 @@ class EditPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = Provider.of<RestaurantData>(context);
+    final data = Provider.of<RestaurantData>(context, listen: false);
     print(item.toString());
     orgName = item.name ?? "";
     name.text = item.name ?? "";
@@ -92,7 +92,7 @@ class EditPage extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      SizedBox(
                         width: 396.w,
                         height: 51.h,
                         child: Column(
@@ -121,7 +121,7 @@ class EditPage extends StatelessWidget {
                         "Item Type",
                         style: AppTypography.smallText,
                       ),
-                      Container(
+                      SizedBox(
                         height: 50,
                         width: double.infinity,
                         child: Row(
@@ -129,7 +129,7 @@ class EditPage extends StatelessWidget {
                           children: [
                             Expanded(
                               child: RadioListTile.adaptive(
-                                title: Text("Dish"),
+                                title: const Text("Dish"),
                                 value: 'Dish',
                                 groupValue: itemType,
                                 activeColor: AppColor.purpleColor,
@@ -141,7 +141,7 @@ class EditPage extends StatelessWidget {
                             ),
                             Expanded(
                               child: RadioListTile.adaptive(
-                                title: Text("Drink"),
+                                title: const Text("Drink"),
                                 value: 'Drink',
                                 activeColor: AppColor.purpleColor,
                                 groupValue: itemType,
@@ -154,7 +154,7 @@ class EditPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       GestureDetector(
@@ -164,27 +164,27 @@ class EditPage extends StatelessWidget {
                           },
                           child:
                               SecondaryButton(text: "Upload Item Thumbnail")),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
                         controller: name,
                         errorText: error.restaurantCity,
                         hintText: "Enter Name",
-                        label: Text("Name"),
+                        label: const Text("Name"),
                         maxLength: 100,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
                         controller: desc,
                         errorText: error.restaurantCity,
                         hintText: "Enter Description",
-                        label: Text("Description"),
+                        label: const Text("Description"),
                         maxLength: 400,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
@@ -194,21 +194,21 @@ class EditPage extends StatelessWidget {
                           ref.update();
                         },
                         hintText: "Enter Price",
-                        label: Text("Price(AED)"),
+                        label: const Text("Price(AED)"),
                         // maxLength: 1,
                         keyboardType: TextInputType.number,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
-                      Container(
+                      SizedBox(
                         height: 50,
                         width: double.infinity,
                         child: Row(
                           children: [
                             Expanded(
                               child: RadioListTile.adaptive(
-                                title: Text("Inclusive of Taxes"),
+                                title: const Text("Inclusive of Taxes"),
                                 value: 'Inclusive',
                                 groupValue: radioValue,
                                 activeColor: AppColor.purpleColor,
@@ -221,7 +221,7 @@ class EditPage extends StatelessWidget {
                             ),
                             Expanded(
                               child: RadioListTile.adaptive(
-                                title: Text("Exclusive of Taxes"),
+                                title: const Text("Exclusive of Taxes"),
                                 value: 'Exclusive',
                                 activeColor: AppColor.purpleColor,
                                 groupValue: radioValue,
@@ -234,7 +234,7 @@ class EditPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
@@ -248,9 +248,9 @@ class EditPage extends StatelessWidget {
                         readOnly: radioValue == "Inclusive",
                         hintText: 'Enter Tax',
                         keyboardType: TextInputType.number,
-                        label: Text("Tax(%)"),
+                        label: const Text("Tax(%)"),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
@@ -263,24 +263,25 @@ class EditPage extends StatelessWidget {
                             "Price With Discount: ${viewModel.calculatediscount(tax.text, price.text, discount.text)} AED"),
                         keyboardType: TextInputType.number,
                         errorText: error.discount,
-                        label: Text("Discount(%)"),
+                        label: const Text("Discount(%)"),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       SizedBox(
                         width: double.infinity,
                         child: data.category.isEmpty
-                            ? SizedBox()
+                            ? const SizedBox()
                             : DropdownButton<String>(
                                 alignment: Alignment.center,
-                                hint: Text("Category"),
+                                hint: const Text("Category"),
                                 onChanged: (value) {
                                   category = value ?? "";
                                   ref.update();
                                 },
                                 value: category,
-                                icon: Icon(Icons.keyboard_arrow_down_rounded),
+                                icon: const Icon(
+                                    Icons.keyboard_arrow_down_rounded),
                                 items: List.generate(
                                     data.category.length,
                                     (index) => DropdownMenuItem(
@@ -307,14 +308,14 @@ class EditPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Text(
                         "Genre",
                         style: AppTypography.largeText,
                       ),
-                      Container(
+                      SizedBox(
                         height: 50,
                         width: double.infinity,
                         child: Row(
@@ -371,7 +372,7 @@ class EditPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Row(
@@ -388,7 +389,7 @@ class EditPage extends StatelessWidget {
                                 text: "BestSeller",
                                 selected: indexTags == 0,
                               )),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                           ),
                           GestureDetector(
@@ -403,7 +404,7 @@ class EditPage extends StatelessWidget {
                                 text: "New",
                                 selected: indexTags == 1,
                               )),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                           ),
                           GestureDetector(
@@ -419,12 +420,12 @@ class EditPage extends StatelessWidget {
                               selected: indexTags == 2,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 8,
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       SizedBox(
@@ -446,7 +447,7 @@ class EditPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Wrap(
@@ -474,7 +475,7 @@ class EditPage extends StatelessWidget {
                                       )),
                                 )),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       GestureDetector(

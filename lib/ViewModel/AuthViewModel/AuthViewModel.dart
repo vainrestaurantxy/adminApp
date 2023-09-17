@@ -1,4 +1,3 @@
-
 import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Repositories/FirebaseConnection.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +13,18 @@ class AuthViewModel {
     _firebaseService.signUp(emailId, password);
   }
 
-  sendrestLink(String email){
+  sendrestLink(String email) {
     _firebaseService.resetPassword(email);
   }
 
-  resetPassword(String code,String password)async{
-await _firebaseService.resetPassword_2(code,password);
+  resetPassword(String code, String password) async {
+    await _firebaseService.resetPassword_2(code, password);
   }
+
+  logout() async {
+    await _firebaseService.logout();
+  }
+
   validateRegister(
       {required String emailId,
       required String password,
@@ -42,7 +46,9 @@ await _firebaseService.resetPassword_2(code,password);
   }
 
   Future<void> login(String emailid, String password) async {
-    await _firebaseService.signin(emailid, password);
+    try {
+      await _firebaseService.signin(emailid, password);
+    } catch (e) {}
   }
 
   bool isLoggedIn() {
