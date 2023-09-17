@@ -59,14 +59,14 @@ class LogoPreview extends StatelessWidget {
                               ),
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
+                                borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(12),
                                     topRight: Radius.circular(12)),
                                 border: Border.all(
                                     width: 5, color: AppColor.purpleColor),
                                 gradient: LinearGradient(
-                                  begin: Alignment(-0.00, -1.00),
-                                  end: Alignment(0, 1),
+                                  begin: const Alignment(-0.00, -1.00),
+                                  end: const Alignment(0, 1),
                                   colors: [
                                     gradientColor,
                                     Colors.white.withOpacity(0)
@@ -114,7 +114,7 @@ class LogoPreview extends StatelessWidget {
                                                 Text(
                                                   ref.restaurant?.name ??
                                                       'TAJ HOTEL',
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Color(0xFF323232),
                                                     fontSize: 15.14,
                                                     fontFamily: 'Poppins',
@@ -127,7 +127,7 @@ class LogoPreview extends StatelessWidget {
                                                   child: Text(
                                                     '${ref.restaurant?.city ?? "Mumbai"}, ${ref.restaurant?.city ?? "Maharashtra"}\nYour order will be ready in 00:01:23',
                                                     textAlign: TextAlign.center,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       color: Color(0xFF323232),
                                                       fontSize: 8.20,
                                                       fontFamily: 'Poppins',
@@ -147,7 +147,7 @@ class LogoPreview extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             ),
                             SizedBox(
@@ -157,7 +157,7 @@ class LogoPreview extends StatelessWidget {
                                 style: AppTypography.smallText,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             ),
                             SizedBox(
@@ -175,27 +175,46 @@ class LogoPreview extends StatelessWidget {
                                   },
                                   child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        width: 48.w,
-                                        height: 48.w,
-                                        decoration: ShapeDecoration(
-                                          color: viewModel.colors[index].color,
-                                          shape: RoundedRectangleBorder(
-                                            side: BorderSide(
-                                                width: 0.50,
-                                                color: Color(0xFF9997A1)),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
+                                      child: Stack(children: [
+                                        Container(
+                                          height: 49.h,
+                                          width: 49.h,
+                                          color: AppColor.purpleColor,
+                                          decoration: ShapeDecoration(
+                                            color:
+                                                viewModel.colors[index].color,
+                                            shape: RoundedRectangleBorder(
+                                              side: const BorderSide(
+                                                  width: 0.50,
+                                                  color: Color(0xFF9997A1)),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
                                           ),
                                         ),
-                                      )),
+                                        Container(
+                                          width: 48.w,
+                                          height: 48.w,
+                                          decoration: ShapeDecoration(
+                                            color:
+                                                viewModel.colors[index].color,
+                                            shape: RoundedRectangleBorder(
+                                              side: const BorderSide(
+                                                  width: 0.50,
+                                                  color: Color(0xFF9997A1)),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                          ),
+                                        ),
+                                      ])),
                                 ),
                               ),
                             )
                           ],
                         );
                       }),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       GestureDetector(
