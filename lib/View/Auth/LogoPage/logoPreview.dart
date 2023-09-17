@@ -23,6 +23,7 @@ class LogoPreview extends StatelessWidget {
   PaletteGenerator? pallete;
   List<PaletteColor> colors = [];
   Color gradientColor = Color(0xFFFFD79A);
+  int selectedColorIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -171,43 +172,31 @@ class LogoPreview extends StatelessWidget {
                                   onTap: () {
                                     gradientColor =
                                         viewModel.colors[index].color;
+                                    selectedColorIndex = index;
                                     ref.update();
                                   },
                                   child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Stack(children: [
-                                        Container(
-                                          height: 49.h,
-                                          width: 49.h,
-                                          color: AppColor.purpleColor,
-                                          decoration: ShapeDecoration(
-                                            color:
-                                                viewModel.colors[index].color,
-                                            shape: RoundedRectangleBorder(
-                                              side: const BorderSide(
-                                                  width: 0.50,
-                                                  color: Color(0xFF9997A1)),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(
+                                      child: Container(
+                                        width: 48.w,
+                                        height: 48.w,
+                                        decoration: ShapeDecoration(
+                                          color: viewModel.colors[index].color,
+                                          shape: RoundedRectangleBorder(
+                                            side: BorderSide(
+                                                width: 3,
+                                                color:
+                                                    selectedColorIndex == index
+                                                        ? AppColor.purpleColor
+                                                        : Colors.transparent),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                           ),
                                         ),
-                                        Container(
-                                          width: 48.w,
-                                          height: 48.w,
-                                          decoration: ShapeDecoration(
-                                            color:
-                                                viewModel.colors[index].color,
-                                            shape: RoundedRectangleBorder(
-                                              side: const BorderSide(
-                                                  width: 0.50,
-                                                  color: Color(0xFF9997A1)),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                        ),
-                                      ])),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             )
