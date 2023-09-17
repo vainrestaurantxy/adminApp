@@ -43,7 +43,12 @@ class _MenuPageState extends State<MenuPage> {
           .snapshots(),
       builder: (context,
           AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
-        
+        if (!snapshot.hasData) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
         Restaurant localRestaurant =
             Restaurant.fromJson(snapshot.data!.data()!);
         Provider.of<RestaurantData>(context).restaurant = localRestaurant;

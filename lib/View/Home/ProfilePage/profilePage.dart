@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:admin_app/Constants/Colors/colors.dart';
 import 'package:admin_app/Constants/Typography/typography.dart';
 import 'package:admin_app/Constants/Widgets/PrimaryButton.dart';
+import 'package:admin_app/Constants/Widgets/SecondaryButton.dart';
 import 'package:admin_app/Constants/Widgets/TextField.dart';
 import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Providers/restaurantProvider.dart';
@@ -260,7 +261,8 @@ class ProfilePage extends StatelessWidget {
 
                         context.go('/');
                       },
-                      child: PrimaryButton(
+                      child: SecondaryButton(
+                        borderColor: AppColor.errorColor,
                         text: 'Log Out',
                       ),
                     )

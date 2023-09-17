@@ -1,4 +1,6 @@
+import 'dart:async';
 
+import 'package:admin_app/Data/Repositories/DatabaseConnection.dart';
 import 'package:admin_app/View/Auth/LandingPage/landingPage.dart';
 import 'package:admin_app/View/Auth/LoginPage/loginPage.dart';
 import 'package:admin_app/View/Auth/LogoPage/logoPage.dart';
@@ -9,26 +11,70 @@ import 'package:admin_app/View/Auth/PasswordReset/emailpage.dart';
 import 'package:admin_app/View/Auth/SetUpPage/setUpPage.dart';
 import 'package:admin_app/View/Home/AddPage/manageCategory.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:injectable/injectable.dart';
 
 import '../View/Auth/RegisterPage/registerPage.dart';
 import '../View/Home/HomePage.dart';
 
-redirect(){
-  
+@injectable
+class Redirect {
+  Redirect(this._db);
+  IDatabaseService _db;
+
+  FutureOr<String> redirect(GoRouterState state) async {
+    String status = await _db.getStatus();
+    print(state.fullPath);
+    print(status);
+    if (status == "NotLoggedIn") {
+      if (state.fullPath == '/' ||
+          state.fullPath == '/login' ||
+          state.fullPath == '/login/email' ||
+          state.fullPath == '/register') {
+        return state.fullPath ?? "/";
+      } else {
+        return "/";
+      }
+    } else if (status == "Registered") {
+      if (state.fullPath == '/register/setup' ||
+          state.fullPath == '/register/setup/logo' ||
+          state.fullPath == '/register/setup/logo/upload' ||
+          state.fullPath == '/register/setup/logo/upload/preview') {
+        return state.fullPath ?? "/register/setup";
+      } else {
+        return "/register/setup";
+      }
+    } else if (status == "LoggedIn") {
+      if (state.fullPath == 'home' || state.fullPath == '/home/category') {
+        return state.fullPath ?? "/home";
+      } else {
+        return "/home";
+      }
+    } else {
+      return '/';
+    }
+  }
 }
 
-
 final GoRouter router = GoRouter(
-  
+  redirect: (context, state) {
+    return GetIt.instance<Redirect>().redirect(state);
+  },
   routes: <RouteBase>[
     GoRoute(
+        redirect: (context, state) {
+          return GetIt.instance<Redirect>().redirect(state);
+        },
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
           return const LandingPage();
         },
         routes: [
           GoRoute(
+              redirect: (context, state) {
+                return GetIt.instance<Redirect>().redirect(state);
+              },
               path: 'home',
               builder: (context, state) {
                 return HomePage();
@@ -52,12 +98,18 @@ final GoRouter router = GoRouter(
                     }),
               ]),
           GoRoute(
+              redirect: (context, state) {
+                return GetIt.instance<Redirect>().redirect(state);
+              },
               path: 'register',
               builder: (context, state) {
                 return RegisterPage();
               },
               routes: [
                 GoRoute(
+                    redirect: (context, state) {
+                      return GetIt.instance<Redirect>().redirect(state);
+                    },
                     path: 'setup',
                     builder: (context, state) {
                       return SetUpPage();

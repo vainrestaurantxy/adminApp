@@ -81,6 +81,7 @@ class RegisterPage extends StatelessWidget {
                               } catch (e) {
                                 log(e.toString());
                               }
+                              
                               context.go('/register/setup');
                             }
                           },

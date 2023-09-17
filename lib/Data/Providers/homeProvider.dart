@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';import 'package:admin_app/Model/Order/ord
 
 class HomeProvider extends ChangeNotifier{
   Map<String, List<Order>> orders ={};
-  update(){
+  String state = "";
+    update(){
     notifyListeners();
   }
   
