@@ -41,11 +41,7 @@ class LandingPage extends StatelessWidget {
                   ),
                   GestureDetector(
                       onTap: () {
-                        if (viewModel.isLoggedIn()) {
-                          context.go('/home');
-                        } else {
-                          context.go("/login");
-                        }
+                        context.go("/login");
                       },
                       child: createButton(
                           image: 'assets/Restaurant icon.png',

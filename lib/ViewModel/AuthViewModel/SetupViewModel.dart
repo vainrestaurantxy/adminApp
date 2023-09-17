@@ -57,6 +57,7 @@ class SetupViewModel {
         docId: _auth.getUserId!,
         data: json,
         merge: false);
+    
   }
 
   setColor(Color color) {
@@ -65,6 +66,7 @@ class SetupViewModel {
         docId: _auth.getUserId!,
         data: {"color": color.value.toString()},
         merge: true);
+    _db.setStatus("LoggedIn");
   }
 
   Future<XFile?> getImagefromDevice() async {

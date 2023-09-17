@@ -1,6 +1,7 @@
 import 'dart:js_interop';
 
 import 'package:admin_app/Data/Providers/errorProvider.dart';
+import 'package:admin_app/Data/Repositories/DatabaseConnection.dart';
 import 'package:admin_app/Data/Repositories/FirebaseConnection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +10,13 @@ import 'package:provider/provider.dart';
 
 @lazySingleton
 class AuthViewModel {
-  AuthViewModel(this._firebaseService);
+  AuthViewModel(this._firebaseService,this._db);
   IFirebaseService _firebaseService;
+  IDatabaseService _db;
 
   Future<void> register(String emailId, String password) async {
     _firebaseService.signUp(emailId, password);
+    _db.setStatus("Registered");
   }
 
   sendrestLink(String email) {

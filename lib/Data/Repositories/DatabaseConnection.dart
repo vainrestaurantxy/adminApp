@@ -32,6 +32,8 @@ abstract class IDatabaseService {
   setSubcollection(String collection, String subCollection, String docid,
       Map<String, dynamic> data, bool merge);
   getSubcollection(String collection, String subCollection, String docid);
+  setStatus(String status) ;
+  getStatus();
 }
 
 @Injectable(as: IDatabaseService)
@@ -42,6 +44,16 @@ class DatabaseService implements IDatabaseService {
   FirebaseStorage imageStore;
 
   String? userId;
+
+  setStatus(String status) async{
+    await store.collection("Status").doc(_auth.getUserId).set({"status": status});
+  }
+
+  Future<String> getStatus() async{
+   DocumentSnapshot<Map<String, dynamic>> statusJson= await store.collection("Status").doc(_auth.getUserId).get();
+   return statusJson.data()?["status"]??"NotLoggedIn";
+  }
+
   @override
   Future<Map<String, dynamic>?> get(String collection, String id) async {
     log("Getting Data from Collection : ${collection} \n DocId: ${id}");
