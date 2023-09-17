@@ -57,7 +57,7 @@ class SetupViewModel {
         docId: _auth.getUserId!,
         data: json,
         merge: false);
-    
+    _db.setStatus('restaurantAdded');
   }
 
   setColor(Color color) {

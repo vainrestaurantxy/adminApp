@@ -11,8 +11,8 @@ import 'package:provider/provider.dart';
 class HomeViewModel extends ChangeNotifier {
   HomeViewModel(this._db, this._auth);
 
-  IDatabaseService _db;
-  IFirebaseService _auth;
+  final IDatabaseService _db;
+  final IFirebaseService _auth;
   getRestaurant(context) async {
     final ref = Provider.of<RestaurantData>(context, listen: false);
     Map<String, dynamic>? data = await _db.get("Restaurants", _auth.getUserId!);

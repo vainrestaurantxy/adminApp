@@ -56,11 +56,11 @@ class LandingPage extends StatelessWidget {
                         final ref =
                             Provider.of<RestaurantData>(context, listen: false);
                         ref.isClub = true;
-                        if (viewModel.isLoggedIn()) {
-                          context.go('/home');
-                        } else {
-                          context.go("/login");
-                        }
+                        // if (viewModel.isLoggedIn()) {
+                        //   context.go('/home');
+                        // } else {
+                        context.go("/login");
+                        // }
                       },
                       child: createButton(
                           image: 'assets/club icon.png',

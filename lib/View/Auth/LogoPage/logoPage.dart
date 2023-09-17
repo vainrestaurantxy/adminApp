@@ -3,6 +3,7 @@ import 'package:admin_app/Constants/Widgets/SecondaryButton.dart';
 import 'package:admin_app/Constants/Widgets/TextField.dart';
 import 'package:admin_app/Data/Providers/restaurantProvider.dart';
 import 'package:admin_app/ViewModel/AuthViewModel/SetupViewModel.dart';
+import 'package:admin_app/ViewModel/HomeViewModel/homeViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
@@ -21,6 +22,8 @@ class LogoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = GetIt.instance<SetupViewModel>();
     final data = Provider.of<RestaurantData>(context, listen: false);
+    final homeModel = GetIt.instance<HomeViewModel>();
+    homeModel.getRestaurant(context);
 
     return Scaffold(
       body: SingleChildScrollView(

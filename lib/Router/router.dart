@@ -36,17 +36,24 @@ class Redirect {
       } else {
         return "/";
       }
-    } else if (status == "Registered") {
-      if (state.fullPath == '/register/setup' ||
-          state.fullPath == '/register/setup/logo' ||
+    } else if (status == 'restaurantAdded') {
+      if (state.fullPath == '/register/setup/logo' ||
           state.fullPath == '/register/setup/logo/upload' ||
           state.fullPath == '/register/setup/logo/upload/preview') {
-        return state.fullPath ?? "/register/setup";
+        return state.fullPath ?? '/register/setup/logo';
       } else {
-        return "/register/setup";
+        return '/register/setup/logo';
       }
+    } else if (status == "Registered") {
+      // if (state.fullPath == '/register/setup') {
+      //   return state.fullPath ?? "/register/setup";
+      // } else {
+      return "/register/setup";
+      // }
     } else if (status == "LoggedIn") {
-      if (state.fullPath == 'home' || state.fullPath == '/home/category') {
+      if (state.fullPath == 'home' ||
+          state.fullPath == '/home/category' ||
+          state.fullPath == '/homestaff') {
         return state.fullPath ?? "/home";
       } else {
         return "/home";

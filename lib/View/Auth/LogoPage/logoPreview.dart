@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 
 import '../../../Constants/Colors/colors.dart';
 import '../../../Constants/Typography/typography.dart';
+import '../../../ViewModel/HomeViewModel/homeViewModel.dart';
 import '../widgets.dart';
 
 class LogoPreview extends StatelessWidget {
@@ -31,6 +32,8 @@ class LogoPreview extends StatelessWidget {
     viewModel.getRestaurant(context);
     final ref = Provider.of<RestaurantData>(context, listen: false);
     viewModel.palette(ref);
+    final homeModel = GetIt.instance<HomeViewModel>();
+    homeModel.getRestaurant(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

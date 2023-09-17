@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../Constants/Colors/colors.dart';
 import '../../../Constants/Typography/typography.dart';
 import '../../../Data/Providers/imageUpload.dart';
+import '../../../ViewModel/HomeViewModel/homeViewModel.dart';
 import '../widgets.dart';
 
 class LogoUploadPage extends StatelessWidget {
@@ -17,6 +18,8 @@ class LogoUploadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = GetIt.instance<SetupViewModel>();
+    final homeModel = GetIt.instance<HomeViewModel>();
+    homeModel.getRestaurant(context);
 
     return Scaffold(
       body: SingleChildScrollView(
