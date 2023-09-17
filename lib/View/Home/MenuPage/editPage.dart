@@ -64,10 +64,9 @@ class EditPage extends StatelessWidget {
     discount.text = item.discount.toString();
     category = item.category ?? data.category[0] ?? "";
     itemType = item.itemType ?? "Dish";
-    bestwith = item.recommendedWith ?? [];
-    //
-    log("here is the best with ${bestwith.toString()}");
-    //
+    var bestwithunmodifiable = (item.recommendedWith as List<String>?) ?? [];
+    List<String> bestwith = bestwithunmodifiable.map((e) => e).toList();
+    // List<String>.
     genre = item.tags?[0] ?? "";
     String tag2 = item.tags?[1] ?? "";
     if (tag2 == "BestSeller") {
@@ -77,13 +76,10 @@ class EditPage extends StatelessWidget {
     } else {
       indexTags = 2;
     }
-
     final viewModel = GetIt.instance<AddViewModel>();
-
     if (data.isClub) {
       itemType = "Drink";
     }
-
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
