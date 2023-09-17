@@ -25,14 +25,6 @@ class LoginPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Align(
-            //   alignment: Alignment.topLeft,
-            //   child: IconButton(
-            //       onPressed: () {
-            //         context.pop();
-            //       },
-            //       icon: Icon(Icons.arrow_back)),
-            // ),
             header(text: "LOGIN TO RESTAURANTXY"),
             SizedBox(
               height: 28.h,
@@ -81,9 +73,15 @@ class LoginPage extends StatelessWidget {
                               email: email.text,
                               password: password.text,
                               context: context)) {
-                            await viewModel.login(email.text, password.text);
+                            String? status = await viewModel.login(
+                                email.text, password.text);
+
                             if (viewModel.isLoggedIn()) {
-                              context.go('/home');
+                              if (status == 'admin') {
+                                context.go('/home');
+                              } else if (status == 'staff') {
+                                context.go('/homestaff');
+                              }
                             }
                           }
                         },
@@ -91,7 +89,7 @@ class LoginPage extends StatelessWidget {
                           text: "Login",
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       SizedBox(
                         width: 396.w,
                         height: 21.h,
@@ -103,7 +101,8 @@ class LoginPage extends StatelessWidget {
                             Container(
                               width: 173.w,
                               height: 2,
-                              decoration: BoxDecoration(color: AppColor.grey),
+                              decoration:
+                                  const BoxDecoration(color: AppColor.grey),
                             ),
                             const SizedBox(width: 1),
                             SizedBox(
@@ -119,12 +118,13 @@ class LoginPage extends StatelessWidget {
                             Container(
                               width: 173.w,
                               height: 2,
-                              decoration: BoxDecoration(color: AppColor.grey),
+                              decoration:
+                                  const BoxDecoration(color: AppColor.grey),
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       GestureDetector(

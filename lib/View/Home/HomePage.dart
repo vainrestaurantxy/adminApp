@@ -104,3 +104,75 @@ class HomePage extends StatelessWidget {
     });
   }
 }
+
+class StaffPage extends StatelessWidget {
+  StaffPage({super.key});
+  int index = 0;
+  List<Widget> screen = [
+    const OrderPage(),
+    QRPage(),
+    MenuPage(id: FirebaseAuth.instance.currentUser!.uid),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    final viewModel = GetIt.instance<HomeViewModel>();
+    viewModel.getRestaurant(context);
+
+    viewModel.getCategory(context);
+    return Consumer<HomeProvider>(builder: (_, ref, __) {
+      return Scaffold(
+          appBar: AppBar(
+            leading: const Icon(null),
+            title: const Text('LOGO'),
+          ),
+          body: screen[index],
+          bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              fixedColor: AppColor.purpleColor,
+              currentIndex: index,
+              onTap: (index) {
+                this.index = index;
+                ref.notifyListeners();
+              },
+              showUnselectedLabels: true,
+              unselectedIconTheme: const IconThemeData(
+                size: 18,
+                color: AppColor.blackText,
+              ),
+              selectedIconTheme: const IconThemeData(
+                size: 18,
+                color: AppColor.purpleColor,
+              ),
+              unselectedItemColor: AppColor.blackText,
+              selectedLabelStyle:
+                  AppTypography.smallText.copyWith(color: AppColor.purpleColor),
+              unselectedLabelStyle:
+                  AppTypography.smallText.copyWith(color: AppColor.purpleColor),
+              items: const [
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.data_usage),
+                    activeIcon: Icon(
+                      Icons.data_usage,
+                      //  color: AppColor.purpleColor,
+                    ),
+                    label: "Orders"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.qr_code),
+                    activeIcon: Icon(
+                      Icons.qr_code,
+                      //   color: AppColor.purpleColor,
+                    ),
+                    // icon: SvgPicture.asset('assets/qr_code.svg'),
+                    label: "QR Code"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.fastfood),
+                    activeIcon: Icon(
+                      Icons.fastfood,
+                      //    color: AppColor.purpleColor,
+                    ),
+                    // icon: SvgPicture.asset('assets/fastfood.svg'),
+                    label: "Menu"),
+              ]));
+    });
+  }
+}

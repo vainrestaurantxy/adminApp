@@ -1,4 +1,3 @@
-
 import 'package:admin_app/View/Auth/LandingPage/landingPage.dart';
 import 'package:admin_app/View/Auth/LoginPage/loginPage.dart';
 import 'package:admin_app/View/Auth/LogoPage/logoPage.dart';
@@ -14,13 +13,9 @@ import 'package:go_router/go_router.dart';
 import '../View/Auth/RegisterPage/registerPage.dart';
 import '../View/Home/HomePage.dart';
 
-redirect(){
-  
-}
-
+redirect() {}
 
 final GoRouter router = GoRouter(
-  
   routes: <RouteBase>[
     GoRoute(
         path: '/',
@@ -28,6 +23,10 @@ final GoRouter router = GoRouter(
           return const LandingPage();
         },
         routes: [
+          GoRoute(
+            path: 'homestaff',
+            builder: (context, state) => StaffPage(),
+          ),
           GoRoute(
               path: 'home',
               builder: (context, state) {

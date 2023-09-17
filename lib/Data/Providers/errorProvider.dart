@@ -76,7 +76,7 @@ class ErrorProvider extends ChangeNotifier {
   }
 
   validateRegisterEmail(String email) {
-    final pattern = r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$';
+    const pattern = r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$';
     final regExp = RegExp(pattern);
     if (!regExp.hasMatch(email)) {
       registerEmail = "Invalid Email";

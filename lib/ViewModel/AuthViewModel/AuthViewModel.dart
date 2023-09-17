@@ -1,5 +1,8 @@
+import 'dart:js_interop';
+
 import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Repositories/FirebaseConnection.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:provider/provider.dart';
@@ -45,10 +48,33 @@ class AuthViewModel {
     }
   }
 
-  Future<void> login(String emailid, String password) async {
+  Future<String?> login(String emailid, String password) async {
     try {
       await _firebaseService.signin(emailid, password);
-    } catch (e) {}
+      return 'admin';
+    } catch (e) {
+      if (e == 'wrong-password') {
+        String staffKey = await getStaffKey(emailid);
+        if (password == staffKey) {
+          return 'staff';
+        }
+      }
+    }
+  }
+
+  Future<String> getStaffKey(String email) async {
+    final String staffKey;
+    final snapshot = await FirebaseFirestore.instance
+        .collection("StaffLogin")
+        .doc(email)
+        .get();
+
+    if (snapshot.exists) {
+      final Map<String, dynamic>? key = snapshot.data();
+      staffKey = key!['staffkey'] as String;
+      return staffKey;
+    }
+    return "";
   }
 
   bool isLoggedIn() {
