@@ -25,10 +25,10 @@ class OrderItem extends StatelessWidget {
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(
-          side: BorderSide(width: 1, color: Color(0xFFE0E6ED)),
+          side: const BorderSide(width: 1, color: Color(0xFFE0E6ED)),
           borderRadius: BorderRadius.circular(11),
         ),
-        shadows: [
+        shadows: const [
           BoxShadow(
             color: Color(0xFFD3DAE2),
             blurRadius: 14,
@@ -42,14 +42,14 @@ class OrderItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             height: 85.h,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
                   width: 396.w,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -60,7 +60,7 @@ class OrderItem extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 8),
                         decoration: ShapeDecoration(
-                          color: Color(0xFFE7E7FF),
+                          color: const Color(0xFFE7E7FF),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(6)),
                         ),
@@ -72,7 +72,7 @@ class OrderItem extends StatelessWidget {
                             Text.rich(
                               TextSpan(
                                 children: [
-                                  TextSpan(
+                                  const TextSpan(
                                     text: 'Order ID:',
                                     style: TextStyle(
                                       color: Color(0xFF323232),
@@ -81,7 +81,7 @@ class OrderItem extends StatelessWidget {
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
-                                  TextSpan(
+                                  const TextSpan(
                                     text: ' ',
                                     style: TextStyle(
                                       color: Color(0xFF323232),
@@ -92,7 +92,7 @@ class OrderItem extends StatelessWidget {
                                   ),
                                   TextSpan(
                                     text: order["orderNo"]!.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Color(0xFF53389E),
                                       fontSize: 12,
                                       fontFamily: 'Poppins',
@@ -117,7 +117,7 @@ class OrderItem extends StatelessWidget {
                               decoration: ShapeDecoration(
                                 color: AppColor.purpleColor,
                                 shape: RoundedRectangleBorder(
-                                  side: BorderSide(
+                                  side: const BorderSide(
                                       width: 0.50, color: Color(0xFF241D43)),
                                   borderRadius: BorderRadius.circular(6),
                                 ),
@@ -131,10 +131,10 @@ class OrderItem extends StatelessWidget {
                                     width: 18.w,
                                     height: 18.w,
                                     clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: AppColor.purpleColor,
                                     ),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.check,
                                       color: AppColor.white,
                                       size: 18,
@@ -184,7 +184,7 @@ class OrderItem extends StatelessWidget {
                                       ? AppColor.purpleColor
                                       : AppColor.white,
                                   shape: RoundedRectangleBorder(
-                                    side: BorderSide(
+                                    side: const BorderSide(
                                         width: 1, color: Color(0xFF241C43)),
                                     borderRadius: BorderRadius.circular(6),
                                   ),
@@ -198,7 +198,7 @@ class OrderItem extends StatelessWidget {
                                       width: 18.w,
                                       height: 18.w,
                                       clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                       child: Icon(
                                         Icons.room_service_outlined,
                                         color: (order["orderStatus"] ==
@@ -249,7 +249,7 @@ class OrderItem extends StatelessWidget {
                                       ? AppColor.purpleColor
                                       : AppColor.white,
                                   shape: RoundedRectangleBorder(
-                                    side: BorderSide(
+                                    side: const BorderSide(
                                         width: 1, color: Color(0xFF241C43)),
                                     borderRadius: BorderRadius.circular(6),
                                   ),
@@ -263,7 +263,7 @@ class OrderItem extends StatelessWidget {
                                       width: 18.w,
                                       height: 18.w,
                                       clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                       child: Icon(
                                         Icons.attach_money,
                                         size: 18,
@@ -284,7 +284,7 @@ class OrderItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 8.h),
-                Container(
+                SizedBox(
                   height: 40.h,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -296,7 +296,7 @@ class OrderItem extends StatelessWidget {
                         child: Text.rich(
                           TextSpan(
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                 text: 'Table Number: ',
                                 style: TextStyle(
                                   color: Color(0xFF3B3F5C),
@@ -307,7 +307,7 @@ class OrderItem extends StatelessWidget {
                               ),
                               TextSpan(
                                 text: order["tableNo"].toString(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Color(0xFF53389E),
                                   fontSize: 16,
                                   fontFamily: 'Poppins',
@@ -324,7 +324,7 @@ class OrderItem extends StatelessWidget {
                         child: Text.rich(
                           TextSpan(
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                 text: 'Status:',
                                 style: TextStyle(
                                   color: Color(0xFF323232),
@@ -333,7 +333,7 @@ class OrderItem extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: ' ',
                                 style: TextStyle(
                                   color: Color(0xFF323232),
@@ -344,7 +344,7 @@ class OrderItem extends StatelessWidget {
                               ),
                               TextSpan(
                                 text: order["orderStatus"],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Color(0xFF53389E),
                                   fontSize: 12,
                                   fontFamily: 'Poppins',
@@ -382,7 +382,7 @@ class OrderItem extends StatelessWidget {
                           RestaurantMenu menu =
                               RestaurantMenu.fromJson(order["items"]?[index]);
                           return Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: SizedBox(
                               width: 396.w,
                               child: Item(
@@ -421,7 +421,7 @@ class OrderItem extends StatelessWidget {
                     child: Text.rich(
                       TextSpan(
                         children: [
-                          TextSpan(
+                          const TextSpan(
                             text: 'Order Total:',
                             style: TextStyle(
                               color: Color(0xFF3B3F5C),
@@ -432,14 +432,14 @@ class OrderItem extends StatelessWidget {
                           ),
                           TextSpan(
                             text: ' ${order["price"]} AED\n',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFF3B3F5C),
                               fontSize: 12,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          TextSpan(
+                          const TextSpan(
                             text: 'Tax (5%):',
                             style: TextStyle(
                               color: Color(0xFF3B3F5C),
@@ -450,14 +450,14 @@ class OrderItem extends StatelessWidget {
                           ),
                           TextSpan(
                             text: ' ${order["tax"]} AED\n',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFF3B3F5C),
                               fontSize: 12,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          TextSpan(
+                          const TextSpan(
                             text: 'Discount :',
                             style: TextStyle(
                               color: Color(0xFF3B3F5C),
@@ -468,14 +468,14 @@ class OrderItem extends StatelessWidget {
                           ),
                           TextSpan(
                             text: ' ${order["discount"]} AED\n',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFF3B3F5C),
                               fontSize: 12,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          TextSpan(
+                          const TextSpan(
                             text: 'Total: ',
                             style: TextStyle(
                               color: Color(0xFF3B3F5C),
@@ -486,7 +486,7 @@ class OrderItem extends StatelessWidget {
                           ),
                           TextSpan(
                             text: '${order["totalPrice"]} AED',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color(0xFF53389E),
                               fontSize: 16,
                               fontFamily: 'Poppins',
@@ -508,7 +508,7 @@ class OrderItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Container(
+                SizedBox(
                   width: 235.w,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -520,7 +520,7 @@ class OrderItem extends StatelessWidget {
                         child: Text.rich(
                           TextSpan(
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                 text: 'Customer Name:',
                                 style: TextStyle(
                                   color: Color(0xFF323232),
@@ -529,7 +529,7 @@ class OrderItem extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: ' ',
                                 style: TextStyle(
                                   color: Color(0xFF323232),
@@ -540,14 +540,14 @@ class OrderItem extends StatelessWidget {
                               ),
                               TextSpan(
                                 text: '${order["customerName"]}\n',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Color(0xFF53389E),
                                   fontSize: 12,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: 'Customer Contact:',
                                 style: TextStyle(
                                   color: Color(0xFF323232),
@@ -556,7 +556,7 @@ class OrderItem extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: ' ',
                                 style: TextStyle(
                                   color: Color(0xFF323232),
@@ -567,7 +567,7 @@ class OrderItem extends StatelessWidget {
                               ),
                               TextSpan(
                                 text: '${order["contactNo"]}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Color(0xFF53389E),
                                   fontSize: 12,
                                   fontFamily: 'Poppins',
@@ -607,7 +607,7 @@ class OrderItem extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: ShapeDecoration(
-                      color: Color(0xFF241C43),
+                      color: const Color(0xFF241C43),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6)),
                     ),
@@ -620,12 +620,12 @@ class OrderItem extends StatelessWidget {
                           width: 18.w,
                           height: 18.w,
                           clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(),
-                          child:
-                              Icon(Icons.edit, color: AppColor.white, size: 18),
+                          decoration: const BoxDecoration(),
+                          child: const Icon(Icons.edit,
+                              color: AppColor.white, size: 18),
                         ),
                         const SizedBox(width: 4),
-                        Text(
+                        const Text(
                           'Edit Items',
                           style: TextStyle(
                             color: Colors.white,

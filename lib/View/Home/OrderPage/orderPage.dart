@@ -1,9 +1,8 @@
 import 'package:admin_app/Constants/Typography/typography.dart';
 import 'package:admin_app/Constants/Widgets/PrimaryButton.dart';
-import 'package:admin_app/Data/Providers/cartProvider.dart';
-import 'package:admin_app/Data/Providers/homeProvider.dart';
+
 import 'package:admin_app/View/Home/OrderPage/CreateOrder/createOrder.dart';
-import 'package:admin_app/View/Home/OrderPage/CreateOrder/item.dart';
+
 import 'package:admin_app/View/Home/OrderPage/orderItem.dart';
 import 'package:admin_app/ViewModel/HomeViewModel/orderViewModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,7 +10,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
-import 'package:provider/provider.dart';
 
 import '../../../Model/Order/order.dart' as order;
 
@@ -27,7 +25,7 @@ class OrderPage extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               width: 396.w,
               height: 51.h,
               child: Column(
@@ -82,25 +80,53 @@ class OrderPage extends StatelessWidget {
                 }
 
                 return Column(
-                  children: List.generate(
-                      snapshot.data!.docs.length,
-                      (index) => ExpansionTile(
-                            initiallyExpanded: true,
-                            title: Text(snapshot.data!.docs[index].id),
-                            children: List.generate(
-                                snapshot.data!.docs[index]
-                                    .data()["order"]
-                                    .length,
-                                (i) => Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0),
-                                      child: OrderItem(
-                                        index: i,
-                                        order: snapshot.data!.docs[index]
-                                            .data()["order"][i],
-                                      ),
-                                    )),
-                          )),
+                  children:
+                      //[
+                      //   ListView.builder(
+                      //       itemCount: snapshot.data!.docs.length,
+                      //       itemBuilder: (context, index) {
+                      //         final reversedIndex =
+                      //             snapshot.data!.docs.length - 1 - index;
+                      //         final doc = snapshot.data!.docs[reversedIndex];
+                      //         return ExpansionTile(
+                      //           initiallyExpanded: true,
+                      //           title: Text(doc.id),
+                      //           children: List.generate(
+                      //             doc.data()["order"].length,
+                      //             (i) => Padding(
+                      //               padding:
+                      //                   const EdgeInsets.symmetric(vertical: 8.0),
+                      //               child: OrderItem(
+                      //                 index: i,
+                      //                 order: doc.data()["order"][i],
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         );
+                      //       })
+                      // ]
+
+                      List.generate(snapshot.data!.docs.length, (index) {
+                    final reversedIndex =
+                        snapshot.data!.docs.length - 1 - index;
+                    return ExpansionTile(
+                      initiallyExpanded: true,
+                      title: Text(snapshot.data!.docs[reversedIndex].id),
+                      children: List.generate(
+                          snapshot.data!.docs[reversedIndex]
+                              .data()["order"]
+                              .length,
+                          (i) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: OrderItem(
+                                  index: i,
+                                  order: snapshot.data!.docs[reversedIndex]
+                                      .data()["order"][i],
+                                ),
+                              )),
+                    );
+                  }),
                 );
               },
             )
