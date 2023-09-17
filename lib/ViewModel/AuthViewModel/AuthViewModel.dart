@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 @lazySingleton
 class AuthViewModel {
-  AuthViewModel(this._firebaseService,this._db);
+  AuthViewModel(this._firebaseService, this._db);
   IFirebaseService _firebaseService;
   IDatabaseService _db;
 
@@ -56,12 +56,12 @@ class AuthViewModel {
       await _firebaseService.signin(emailid, password);
       return 'admin';
     } catch (e) {
-      if (e == 'wrong-password') {
-        String staffKey = await getStaffKey(emailid);
-        if (password == staffKey) {
-          return 'staff';
-        }
-      }
+      // if (e == 'wrong-password') {
+      //   String staffKey = await getStaffKey(emailid);
+      //   if (password == staffKey) {
+      //     return 'staff';
+      //   }
+      // }
     }
   }
 

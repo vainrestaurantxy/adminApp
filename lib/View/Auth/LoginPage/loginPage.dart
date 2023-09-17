@@ -77,11 +77,11 @@ class LoginPage extends StatelessWidget {
                                 email.text, password.text);
 
                             if (viewModel.isLoggedIn()) {
-                              if (status == 'admin') {
-                                context.go('/home');
-                              } else if (status == 'staff') {
-                                context.go('/homestaff');
-                              }
+                              // if (status == 'admin') {
+                              context.go('/home');
+                              // } else if (status == 'staff') {
+                              //   context.go('/homestaff');
+                              // }
                             }
                           }
                         },
