@@ -14,8 +14,13 @@ import 'package:go_router/go_router.dart';
 import '../View/Auth/RegisterPage/registerPage.dart';
 import '../View/Home/HomePage.dart';
 
+redirect(){
+  
+}
+
 
 final GoRouter router = GoRouter(
+  
   routes: <RouteBase>[
     GoRoute(
         path: '/',
