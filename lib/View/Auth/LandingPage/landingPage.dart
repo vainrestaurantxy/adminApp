@@ -48,6 +48,7 @@ class LandingPage extends StatelessWidget {
                         }
                       },
                       child: createButton(
+                          image: 'assets/Restaurant icon.png',
                           heading: "Restaurant",
                           subtitle: "I am a restaurant owner, admin or staff",
                           color: AppColor.purpleColor)),
@@ -66,6 +67,7 @@ class LandingPage extends StatelessWidget {
                         }
                       },
                       child: createButton(
+                          image: 'assets/club icon.png',
                           heading: "Club",
                           subtitle: "I am a club/pub owner, admin or staff",
                           color: AppColor.darkPink)),

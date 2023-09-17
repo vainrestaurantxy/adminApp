@@ -6,6 +6,7 @@ import 'package:admin_app/Constants/Widgets/PrimaryButton.dart';
 import 'package:admin_app/Constants/Widgets/TextField.dart';
 import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Providers/restaurantProvider.dart';
+import 'package:admin_app/Data/Repositories/FirebaseConnection.dart';
 import 'package:admin_app/Model/Restaurant/restaurant.dart';
 import 'package:admin_app/ViewModel/AuthViewModel/SetupViewModel.dart';
 
@@ -13,8 +14,11 @@ import 'package:admin_app/ViewModel/HomeViewModel/profilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:web_toast/web_toast.dart';
+
+import '../../../ViewModel/AuthViewModel/AuthViewModel.dart';
 
 // ignore: must_be_immutable
 class ProfilePage extends StatelessWidget {
@@ -29,6 +33,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = GetIt.instance<ProfileViewModel>();
     final addViewModel = GetIt.instance<SetupViewModel>();
+    AuthViewModel vm = GetIt.instance<AuthViewModel>();
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -244,6 +249,19 @@ class ProfilePage extends StatelessWidget {
                       },
                       child: PrimaryButton(
                         text: "Update Account",
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        await vm.logout();
+
+                        context.go('/');
+                      },
+                      child: PrimaryButton(
+                        text: 'Log Out',
                       ),
                     )
                   ],

@@ -37,7 +37,10 @@ Widget header({String text = "RestaurantXY"}) {
 }
 
 Widget createButton(
-    {required String heading, required String subtitle, required Color color}) {
+    {required String heading,
+    required String subtitle,
+    required Color color,
+    required String image}) {
   return Container(
     width: 396.w,
     height: 83.h,
@@ -54,14 +57,17 @@ Widget createButton(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          width: 51.h,
-          height: 51.h,
-          decoration: const ShapeDecoration(
-            color: AppColor.grey,
-            shape: OvalBorder(),
+        Stack(children: [
+          Container(
+            width: 51.h,
+            height: 51.h,
+            decoration: const ShapeDecoration(
+              color: AppColor.grey,
+              shape: OvalBorder(),
+            ),
           ),
-        ),
+          Image.asset(image),
+        ]),
         SizedBox(width: 10.w),
         SizedBox(
           height: 51.h,

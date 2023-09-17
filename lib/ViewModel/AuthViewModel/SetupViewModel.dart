@@ -20,6 +20,14 @@ class SetupViewModel {
   XFile? _logoImage;
   List<PaletteColor> colors = [];
   Restaurant? restaurant;
+
+  setStaffKey(String staffKey) {
+    _db.set(
+        collection: "StaffLogin",
+        docId: _auth.getEmailId!,
+        data: {"staffkey": staffKey});
+  }
+
   validate(
       {required String restaurantName,
       required String restaurantCity,

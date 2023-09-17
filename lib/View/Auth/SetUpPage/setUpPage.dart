@@ -102,9 +102,15 @@ class SetUpPage extends StatelessWidget {
                                   hasSymbols: false,
                                   hasDigits: true,
                                   mustHaveAtLeastOneOfEach: true);
+                              String staffKey = generator.generate();
+                              viewModel.setStaffKey(staffKey);
                               Restaurant restaurant = Restaurant(
                                   name: restaurantName.text,
-                                  staffKey: generator.generate(),
+                                  isRestaurant: !Provider.of<RestaurantData>(
+                                          context,
+                                          listen: false)
+                                      .isClub,
+                                  staffKey: staffKey,
                                   city: restaurantCity.text,
                                   state: restaurantState.text,
                                   phone: phoneno.text);
