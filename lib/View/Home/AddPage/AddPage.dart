@@ -563,6 +563,7 @@ class AddPage extends StatelessWidget {
                           if (viewModel.validate(name.text, desc.text,
                               price.text, tax.text, discount.text, context)) {
                             String tag = "";
+                            var list = bestwith;
                             if (indexTags == 0) {
                               tag = "Best Seller";
                             } else if (indexTags == 1) {
@@ -580,7 +581,7 @@ class AddPage extends StatelessWidget {
                                 price: price.text,
                                 genre: genre,
                                 tag: tag,
-                                recommendedWithau: bestwith);
+                                recommendedWithau: list);
                             // Future.delayed(Duration(seconds: 2));
                             name.clear();
                             desc.clear();
