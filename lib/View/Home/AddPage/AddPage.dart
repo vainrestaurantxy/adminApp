@@ -516,29 +516,28 @@ class AddPage extends StatelessWidget {
                         height: 16,
                       ),
                       Wrap(
-                        children: List.generate(
-                            tags.length,
-                            (index) => Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        if (!bestwith.contains(tags[index])) {
-                                          if (bestwith.length < 3) {
-                                            bestwith.add("${tags[index]}");
-                                          }
-                                        } else {
-                                          bestwith.remove(tags[index]);
-                                        }
-                                        ref.update();
-                                      },
-                                      child: Selectable(
-                                        text: tags[index],
-                                        selected:
-                                            bestwith.contains(tags[index]),
-                                        number:
-                                            bestwith.indexOf(tags[index]) + 1,
-                                      )),
+                        children: List.generate(tags.length, (index) {
+                          var list = bestwith;
+                          return Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: GestureDetector(
+                                onTap: () {
+                                  if (!list.contains(tags[index])) {
+                                    if (list.length < 3) {
+                                      list.add("${tags[index]}");
+                                    }
+                                  } else {
+                                    list.remove(tags[index]);
+                                  }
+                                  ref.update();
+                                },
+                                child: Selectable(
+                                  text: tags[index],
+                                  selected: list.contains(tags[index]),
+                                  number: list.indexOf(tags[index]) + 1,
                                 )),
+                          );
+                        }),
                       ),
                       const SizedBox(
                         height: 16,
@@ -593,7 +592,7 @@ class AddPage extends StatelessWidget {
                             genre = "first";
                             price.clear();
                             imageError = 'first';
-                            // bestwith.clear();
+                            bestwith.clear();
                             tag = "";
                             Provider.of<ImageUpload>(context, listen: false)
                                 .uploadedBytes = 0;
