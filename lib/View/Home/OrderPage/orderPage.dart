@@ -87,22 +87,34 @@ class OrderPage extends StatelessWidget {
                         snapshot.data!.docs.length - 1 - index;
                     // log('hello ${snapshot.data!.docs[reversedIndex].data()["order"]["orderNo"].toString()}'
                     //     .toString());
+                    // List<int> orders = [];
+
+                    // final orderNo = snapshot.data!.docs[reversedIndex]
+                    // .data()["order"][index];
+                    List<dynamic> orders =
+                        snapshot.data!.docs[reversedIndex].data()["order"];
+
+                    orders.sort((a, b) {
+                      return int.parse(a["orderNo"].toString())
+                          .compareTo(int.parse(b["orderNo"].toString()));
+                    });
+
                     return ExpansionTile(
                       initiallyExpanded: true,
                       title: Text(snapshot.data!.docs[reversedIndex].id),
-                      children: List.generate(
-                          snapshot.data!.docs[reversedIndex]
-                              .data()["order"]
-                              .length, (i) {
+                      children: List.generate(orders.length, (i) {
                         // var _order = snapshot.data!.docs[reversedIndex]
-                        //     .data()["order"]["orderNo:"][i];
-                        // log('hello $_order');
+                        //     .data()["order"][index]["orderNo"];
+                        // log('hello $_order'.toString());
+                        //  log(i.toString());
+                        log(snapshot.data!.docs[reversedIndex]
+                            .data()["order"][i]
+                            .toString());
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: OrderItem(
                             index: i,
-                            order: snapshot.data!.docs[reversedIndex]
-                                .data()["order"][i],
+                            order: orders[i],
                           ),
                         );
                       }),
