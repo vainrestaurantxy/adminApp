@@ -79,14 +79,14 @@ class _ItemState extends State<Item> {
                           horizontal: 16, vertical: 4),
                       clipBehavior: Clip.antiAlias,
                       decoration: ShapeDecoration(
-                        color: Color(0xFFF4F4FF),
+                        color: const Color(0xFFF4F4FF),
                         shape: RoundedRectangleBorder(
-                          side:
-                              BorderSide(width: 0.50, color: Color(0xFF341885)),
+                          side: const BorderSide(
+                              width: 0.50, color: Color(0xFF341885)),
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -108,7 +108,7 @@ class _ItemState extends State<Item> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 12,
           ),
           SingleChildScrollView(
@@ -124,18 +124,18 @@ class _ItemState extends State<Item> {
                       scrollDirection: Axis.horizontal,
                       itemCount: widget.tags.length,
                       itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(3.0),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
-                            color: Color(0xFF00632E),
+                            color: const Color(0xFF00632E),
                           ),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 6, vertical: 4),
                           child: Row(
                             children: [
                               Text(widget.tags[index],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 8,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w500,
@@ -154,7 +154,7 @@ class _ItemState extends State<Item> {
                             60,
                         child: Text(widget.name,
                             overflow: TextOverflow.fade,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
                             )),
@@ -163,20 +163,20 @@ class _ItemState extends State<Item> {
                         width: (MediaQuery.of(context).size.width / 428) * 252 -
                             60,
                         child: Text("AED ${widget.price}",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                             )),
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
                     width: (MediaQuery.of(context).size.width / 428) * 252 - 60,
                     child: Text(widget.desc,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: Color(0xFF8C8C8C),
                           fontWeight: FontWeight.w400,

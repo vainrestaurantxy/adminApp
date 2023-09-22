@@ -107,10 +107,7 @@ class QRPage extends StatelessWidget {
                         readOnly = false;
                         ref.notifyListeners();
                       },
-                      child: SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: IcnBtn(isenabled: readOnly)))),
+                      child: IcnBtn(isenabled: readOnly))),
             ),
             const SizedBox(
               height: 8,
