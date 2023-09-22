@@ -94,9 +94,9 @@ class OrderPage extends StatelessWidget {
                           snapshot.data!.docs[reversedIndex]
                               .data()["order"]
                               .length, (i) {
-                        var _order = snapshot.data!.docs[reversedIndex]
-                            .data()["order"]["orderNo:"][i];
-                        log('hello $_order');
+                        // var _order = snapshot.data!.docs[reversedIndex]
+                        //     .data()["order"]["orderNo:"][i];
+                        // log('hello $_order');
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: OrderItem(
