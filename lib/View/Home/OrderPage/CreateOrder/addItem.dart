@@ -54,7 +54,7 @@ class AddItemOrder extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Consumer<CartProvider>(
@@ -65,10 +65,11 @@ class AddItemOrder extends StatelessWidget {
                     decoration: ShapeDecoration(
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1, color: Color(0xFFE0E6ED)),
+                        side: const BorderSide(
+                            width: 1, color: Color(0xFFE0E6ED)),
                         borderRadius: BorderRadius.circular(11),
                       ),
-                      shadows: [
+                      shadows: const [
                         BoxShadow(
                           color: Color(0xFFD3DAE2),
                           blurRadius: 14,
@@ -121,7 +122,7 @@ class AddItemOrder extends StatelessWidget {
                                                       child: Text.rich(
                                                         TextSpan(
                                                           children: [
-                                                            TextSpan(
+                                                            const TextSpan(
                                                               text:
                                                                   'Table Number: ',
                                                               style: TextStyle(
@@ -137,7 +138,8 @@ class AddItemOrder extends StatelessWidget {
                                                             ),
                                                             TextSpan(
                                                               text: '${table}',
-                                                              style: TextStyle(
+                                                              style:
+                                                                  const TextStyle(
                                                                 color: Color(
                                                                     0xFF53389E),
                                                                 fontSize: 16,
@@ -244,7 +246,7 @@ class AddItemOrder extends StatelessWidget {
                                     menu: ref.menuCart[index],
                                   );
                                 }),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
                                 // Divider(
@@ -255,7 +257,7 @@ class AddItemOrder extends StatelessWidget {
                                 SizedBox(
                                   width: double.infinity,
                                   child: (ref.menuCart.length == 0)
-                                      ? SizedBox()
+                                      ? const SizedBox()
                                       : Container(
                                           width: 364.w,
                                           height: 88.h,
@@ -278,7 +280,7 @@ class AddItemOrder extends StatelessWidget {
                                                   child: Text.rich(
                                                     TextSpan(
                                                       children: [
-                                                        TextSpan(
+                                                        const TextSpan(
                                                           text: 'Order Total:',
                                                           style: TextStyle(
                                                             color: Color(
@@ -293,7 +295,8 @@ class AddItemOrder extends StatelessWidget {
                                                         TextSpan(
                                                           text:
                                                               ' ${ref.getTotal()} AED\n',
-                                                          style: TextStyle(
+                                                          style:
+                                                              const TextStyle(
                                                             color: Color(
                                                                 0xFF3B3F5C),
                                                             fontSize: 12,
@@ -303,7 +306,7 @@ class AddItemOrder extends StatelessWidget {
                                                                 FontWeight.w700,
                                                           ),
                                                         ),
-                                                        TextSpan(
+                                                        const TextSpan(
                                                           text: 'Tax (5%):',
                                                           style: TextStyle(
                                                             color: Color(
@@ -318,7 +321,8 @@ class AddItemOrder extends StatelessWidget {
                                                         TextSpan(
                                                           text:
                                                               ' ${ref.getTotal() * 0.05} AED\n',
-                                                          style: TextStyle(
+                                                          style:
+                                                              const TextStyle(
                                                             color: Color(
                                                                 0xFF3B3F5C),
                                                             fontSize: 12,
@@ -328,7 +332,7 @@ class AddItemOrder extends StatelessWidget {
                                                                 FontWeight.w700,
                                                           ),
                                                         ),
-                                                        TextSpan(
+                                                        const TextSpan(
                                                           text: 'Discount:',
                                                           style: TextStyle(
                                                             color: Color(
@@ -343,7 +347,8 @@ class AddItemOrder extends StatelessWidget {
                                                         TextSpan(
                                                           text:
                                                               ' ${ref.getDiscount()} AED\n',
-                                                          style: TextStyle(
+                                                          style:
+                                                              const TextStyle(
                                                             color: Color(
                                                                 0xFF3B3F5C),
                                                             fontSize: 12,
@@ -353,7 +358,7 @@ class AddItemOrder extends StatelessWidget {
                                                                 FontWeight.w700,
                                                           ),
                                                         ),
-                                                        TextSpan(
+                                                        const TextSpan(
                                                           text: 'Total: ',
                                                           style: TextStyle(
                                                             color: Color(
@@ -368,7 +373,8 @@ class AddItemOrder extends StatelessWidget {
                                                         TextSpan(
                                                           text:
                                                               '${(ref.getTotal() + ref.getTotal() * 0.05) - ref.getDiscount()} AED',
-                                                          style: TextStyle(
+                                                          style:
+                                                              const TextStyle(
                                                             color: Color(
                                                                 0xFF53389E),
                                                             fontSize: 16,
@@ -390,7 +396,7 @@ class AddItemOrder extends StatelessWidget {
                                 ),
                                 SizedBox(
                                     child: ref.menuCart.length == 0
-                                        ? SizedBox()
+                                        ? const SizedBox()
                                         : GestureDetector(
                                             onTap: () {
                                               Order order = Order(
@@ -408,7 +414,8 @@ class AddItemOrder extends StatelessWidget {
                                                   orderStatus:
                                                       "Order Confirmed",
                                                   tableNo: table);
-                                              viewModel.saveOrder(order,context);
+                                              viewModel.saveOrder(
+                                                  order, context);
                                               Navigator.pop(context);
                                               Navigator.pop(context);
                                             },
@@ -423,7 +430,7 @@ class AddItemOrder extends StatelessWidget {
                   );
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Consumer<RestaurantData>(

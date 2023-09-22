@@ -128,7 +128,7 @@ class StaffPage extends StatelessWidget {
           body: screen[index],
           bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              fixedColor: AppColor.purpleColor,
+              fixedColor: Color(0xff53389E),
               currentIndex: index,
               onTap: (index) {
                 this.index = index;
@@ -141,7 +141,7 @@ class StaffPage extends StatelessWidget {
               ),
               selectedIconTheme: const IconThemeData(
                 size: 18,
-                color: AppColor.purpleColor,
+                color: Color(0xff53389E),
               ),
               unselectedItemColor: AppColor.blackText,
               selectedLabelStyle:

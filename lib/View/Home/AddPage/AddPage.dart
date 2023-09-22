@@ -322,22 +322,38 @@ class AddPage extends StatelessWidget {
                         width: double.infinity,
                         child: data.category.isEmpty
                             ? const SizedBox()
-                            : DropdownButton<String>(
-                                alignment: Alignment.center,
-                                hint: const Text("Category"),
-                                onChanged: (value) {
-                                  category = value ?? "";
-                                  ref.update();
-                                },
-                                value: category,
-                                icon: const Icon(
-                                    Icons.keyboard_arrow_down_rounded),
-                                items: List.generate(
-                                    data.category.length,
-                                    (index) => DropdownMenuItem(
-                                          value: data.category[index],
-                                          child: Text(data.category[index]),
-                                        )),
+                            : Container(
+                                height: 53,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 1, color: Color(0xff9997A1)),
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: DropdownButton<String>(
+                                  underline: Container(
+                                    height: 0,
+                                    color: Colors.transparent,
+                                  ),
+                                  alignment: Alignment.center,
+                                  hint: const Text("Category"),
+                                  onChanged: (value) {
+                                    category = value ?? "";
+                                    ref.update();
+                                  },
+                                  value: category,
+                                  borderRadius: BorderRadius.circular(12),
+                                  icon: const Icon(
+                                      Icons.keyboard_arrow_down_rounded),
+                                  items: List.generate(
+                                      data.category.length,
+                                      (index) => DropdownMenuItem(
+                                            value: data.category[index],
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(data.category[index]),
+                                            ),
+                                          )),
+                                ),
                               ),
                       ),
                       Text(

@@ -20,7 +20,7 @@ class CreateOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: SingleChildScrollView(child: Consumer<ErrorProvider>(
             builder: (_, ref, __) {
               return Column(
@@ -48,35 +48,35 @@ class CreateOrder extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   CustomTextField(
                     controller: tableno,
                     errorText: ref.price,
                     hintText: 'Ex. 12',
-                    label: Text("Table Number"),
+                    label: const Text("Table Number"),
                     keyboardType: TextInputType.number,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   CustomTextField(
                     errorText: ref.restaurantName,
                     controller: name,
                     hintText: 'Enter Name',
-                    label: Text("Customer Name"),
+                    label: const Text("Customer Name"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   CustomTextField(
                     errorText: ref.phoneNo,
                     controller: phone,
                     hintText: 'Enter Number',
-                    label: Text("Customer Mobile"),
+                    label: const Text("Customer Mobile"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   GestureDetector(

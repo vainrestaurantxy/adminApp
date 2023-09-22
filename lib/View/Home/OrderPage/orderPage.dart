@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin_app/Constants/Typography/typography.dart';
 import 'package:admin_app/Constants/Widgets/PrimaryButton.dart';
 
@@ -80,28 +82,30 @@ class OrderPage extends StatelessWidget {
                 }
 
                 return Column(
-                  children:
-                  
-
-                      List.generate(snapshot.data!.docs.length, (index) {
+                  children: List.generate(snapshot.data!.docs.length, (index) {
                     final reversedIndex =
                         snapshot.data!.docs.length - 1 - index;
+                    // log('hello ${snapshot.data!.docs[reversedIndex].data()["order"]["orderNo"].toString()}'
+                    //     .toString());
                     return ExpansionTile(
                       initiallyExpanded: true,
                       title: Text(snapshot.data!.docs[reversedIndex].id),
                       children: List.generate(
                           snapshot.data!.docs[reversedIndex]
                               .data()["order"]
-                              .length,
-                          (i) => Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                child: OrderItem(
-                                  index: i,
-                                  order: snapshot.data!.docs[reversedIndex]
-                                      .data()["order"][i],
-                                ),
-                              )),
+                              .length, (i) {
+                        var _order = snapshot.data!.docs[reversedIndex]
+                            .data()["order"]["orderNo:"][i];
+                        log('hello $_order');
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: OrderItem(
+                            index: i,
+                            order: snapshot.data!.docs[reversedIndex]
+                                .data()["order"][i],
+                          ),
+                        );
+                      }),
                     );
                   }),
                 );
