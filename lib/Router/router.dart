@@ -22,7 +22,6 @@ import '../View/Home/HomePage.dart';
 class Redirect {
   Redirect(this._db);
   IDatabaseService _db;
-
   FutureOr<String> redirect(GoRouterState state) async {
     String status = await _db.getStatus();
     print(state.fullPath);

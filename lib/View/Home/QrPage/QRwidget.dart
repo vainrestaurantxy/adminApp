@@ -23,7 +23,9 @@ class QR extends StatelessWidget {
       width: 190.w,
       child: Column(
         children: [
-          QRCode(data: "${id}/${index + 1}"),
+          QRCode(
+              data:
+                  "https://customer.feastdubai.com/#/menu/${id}/table/${index + 1}"),
         ],
       ),
     );
