@@ -31,18 +31,18 @@ class SetupViewModel {
   validate(
       {required String restaurantName,
       required String restaurantCity,
-      required String restaurantState,
+      String? restaurantAddress,
       required String phoneno,
       required BuildContext context}) {
     final validator = Provider.of<ErrorProvider>(context, listen: false);
 
     validator.validaterestaurantName(restaurantName);
     validator.validaterestaurantCity(restaurantCity);
-    validator.validaterestaurantState(restaurantState);
+    validator.validaterestaurantAddress(restaurantAddress!);
     validator.validatePhoneNo(phoneno);
     if (validator.phoneNo == null &&
         validator.restaurantName == null &&
-        validator.restaurantState == null &&
+        validator.restaurantAddress == null &&
         validator.restaurantCity == null) {
       return true;
     }

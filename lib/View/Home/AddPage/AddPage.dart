@@ -3,6 +3,8 @@
 import 'dart:developer';
 
 import 'package:admin_app/Data/Providers/cartProvider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -50,11 +52,14 @@ class AddPage extends StatelessWidget {
   int indexTags = -1;
   List<String> bestwith = [];
   String imageError = 'first';
+  List<String> temp = [];
 
   @override
   Widget build(BuildContext context) {
     final viewModel = GetIt.instance<AddViewModel>();
     final data = Provider.of<RestaurantData>(context, listen: false);
+
+    log('logging ${viewModel.getMenu().toString()}');
     if (data.isClub) {
       itemType = "Drink";
     }
@@ -62,6 +67,7 @@ class AddPage extends StatelessWidget {
       category = data.category[0];
     }
     tax.text = "5";
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),

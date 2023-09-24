@@ -67,11 +67,11 @@ class SetUpPage extends StatelessWidget {
                         height: 8,
                       ),
                       CustomTextField(
-                        errorText: ref.restaurantState,
-                        hintText: "Enter State",
+                        errorText: ref.restaurantAddress,
+                        hintText: "Enter Address",
                         controller: restaurantState,
                         label: Text(
-                            "${data.isClub ? "Club" : "Restaurant"} State"),
+                            "${data.isClub ? "Club" : "Restaurant"} Address"),
                       ),
                       const SizedBox(
                         height: 8,
@@ -93,7 +93,7 @@ class SetUpPage extends StatelessWidget {
                           if (viewModel.validate(
                               restaurantName: restaurantName.text,
                               restaurantCity: restaurantCity.text,
-                              restaurantState: restaurantState.text,
+                              restaurantAddress: restaurantState.text,
                               phoneno: phoneno.text,
                               context: context)) {
                             try {

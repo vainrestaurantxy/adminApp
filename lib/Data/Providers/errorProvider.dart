@@ -8,7 +8,7 @@ class ErrorProvider extends ChangeNotifier {
   String? registerReKey;
   String? restaurantName;
   String? restaurantCity;
-  String? restaurantState;
+  String? restaurantAddress;
   String? phoneNo;
   String? price;
   String? tax;
@@ -61,13 +61,13 @@ class ErrorProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  validaterestaurantState(String restaurantState) {
-    this.restaurantState = _validateisEmpty(restaurantState);
+  validaterestaurantAddress(String restaurantAddress) {
+    this.restaurantAddress = _validateisEmpty(restaurantAddress);
     notifyListeners();
   }
 
   validatePhoneNo(String phone) {
-    if (phone.length != 10) {
+    if (phone.length != 9) {
       phoneNo = "Invalid Phone Number";
     } else {
       phoneNo = null;

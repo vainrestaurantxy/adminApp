@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Repositories/DatabaseConnection.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
@@ -18,6 +20,7 @@ class AddViewModel {
   final IFirebaseService _auth;
   XFile? dishImage;
   RestaurantMenu? dish;
+  List<String> dishesList = [];
 
   Future<XFile?> getImagefromDevice() async {
     // ignore: invalid_use_of_visible_for_testing_member
@@ -218,5 +221,24 @@ class AddViewModel {
         docId: _auth.getUserId!,
         data: {"categories": ref.category});
     getCategory(context);
+  }
+
+  getMenu() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection("Restaurants")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    List<String> temp = [];
+    if (snapshot.exists) {
+      final data = snapshot.data();
+      List<dynamic> menu = data!['menu'];
+      for (var names in menu) {
+        temp.add(names);
+      }
+      dishesList = temp;
+    }
+    log('temp ${temp.toString()}');
+    // log(dishesList.toString());
+    return dishesList;
   }
 }

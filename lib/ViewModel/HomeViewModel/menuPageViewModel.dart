@@ -46,12 +46,14 @@ class MenuPageViewModel {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               i.key,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.w700),
             ),
           ),
+          childrenPadding: const EdgeInsets.all(8),
+          initiallyExpanded: true,
           children: List.generate(
               i.value.length,
               (index) => Item(
@@ -62,8 +64,6 @@ class MenuPageViewModel {
                   name: i.value[index].name!,
                   code: i.value[index].code ?? "",
                   tags: i.value[index].tags!)),
-          childrenPadding: EdgeInsets.all(8),
-          initiallyExpanded: true,
         ),
       );
     }

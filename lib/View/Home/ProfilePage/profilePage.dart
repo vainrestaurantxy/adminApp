@@ -192,9 +192,9 @@ class ProfilePage extends StatelessWidget {
                       height: 16,
                     ),
                     CustomTextField(
-                      hintText: "Enter State",
-                      errorText: error.restaurantState,
-                      label: const Text("Restaurant State"),
+                      hintText: "Enter Address",
+                      errorText: error.restaurantAddress,
+                      label: const Text("Restaurant Address"),
                       controller: state,
                     ),
                     const SizedBox(
@@ -226,7 +226,7 @@ class ProfilePage extends StatelessWidget {
                         if (addViewModel.validate(
                             restaurantName: name.text,
                             restaurantCity: city.text,
-                            restaurantState: state.text,
+                            restaurantAddress: state.text,
                             phoneno: phone.text,
                             context: context)) {
                           if (ref.restaurant == null) {
