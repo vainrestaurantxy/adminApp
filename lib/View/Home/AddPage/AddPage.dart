@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as prov;
 import 'package:web_toast/web_toast.dart';
 
 import '../../../Constants/Colors/colors.dart';
@@ -37,17 +37,17 @@ class AddPage extends StatelessWidget {
   String itemType = 'Dish';
   String radioValue = 'Exclusive';
   String category = "first";
-  final List<String> tags = [
-    "Egg",
-    "Chicken",
-    "Salad",
-    "Raita",
-    "Juice",
-    "Paratha",
-    "Pasta",
-    "Coke",
-    "Pizza",
-    "Barfi"
+  List<String> tags = [
+    // "Egg",
+    // "Chicken",
+    // "Salad",
+    // "Raita",
+    // "Juice",
+    // "Paratha",
+    // "Pasta",
+    // "Coke",
+    // "Pizza",
+    // "Barfi"
   ];
   int indexTags = -1;
   List<String> bestwith = [];
@@ -57,9 +57,10 @@ class AddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = GetIt.instance<AddViewModel>();
-    final data = Provider.of<RestaurantData>(context, listen: false);
-
-    log('logging ${viewModel.getMenu().toString()}');
+    final data = prov.Provider.of<RestaurantData>(context, listen: false);
+    final repo = prov.Provider.of<GetMenu>(context, listen: false);
+    repo.getMenu();
+    //log('logging ${viewModel.getMenu().toString()}');
     if (data.isClub) {
       itemType = "Drink";
     }
@@ -72,9 +73,9 @@ class AddPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Consumer<HomeProvider>(
+          child: prov.Consumer<HomeProvider>(
             builder: (_, ref, __) {
-              return Consumer<ErrorProvider>(
+              return prov.Consumer<ErrorProvider>(
                 builder: (_, error, __) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,7 +173,7 @@ class AddPage extends StatelessWidget {
                       // const SizedBox(
                       //   height: 10,
                       // ),
-                      Consumer<ImageUpload>(
+                      prov.Consumer<ImageUpload>(
                         builder: (context, ref, _) {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -537,30 +538,37 @@ class AddPage extends StatelessWidget {
                       const SizedBox(
                         height: 16,
                       ),
-                      Wrap(
-                        children: List.generate(tags.length, (index) {
+                      prov.Consumer<GetMenu>(
+                        builder: (context, getMenu, child) {
+                          final listt = getMenu.dishesList;
                           var list = bestwith;
-                          return Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: GestureDetector(
-                                onTap: () {
-                                  if (!list.contains(tags[index])) {
-                                    if (list.length < 3) {
-                                      list.add("${tags[index]}");
-                                    }
-                                  } else {
-                                    list.remove(tags[index]);
-                                  }
-                                  ref.update();
-                                },
-                                child: Selectable(
-                                  text: tags[index],
-                                  selected: list.contains(tags[index]),
-                                  number: list.indexOf(tags[index]) + 1,
-                                )),
+                          log('dishes list ${listt.toString()}');
+                          return Wrap(
+                            children: List.generate(listt.length, (index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: GestureDetector(
+                                    onTap: () {
+                                      if (!list.contains(listt[index])) {
+                                        if (list.length < 3) {
+                                          list.add("$listt[index]");
+                                        }
+                                      } else {
+                                        list.remove(listt[index]);
+                                      }
+                                      ref.update();
+                                    },
+                                    child: Selectable(
+                                      text: listt[index],
+                                      selected: list.contains(listt[index]),
+                                      number: list.indexOf(listt[index]) + 1,
+                                    )),
+                              );
+                            }),
                           );
-                        }),
+                        },
                       ),
+
                       const SizedBox(
                         height: 16,
                       ),
@@ -617,9 +625,11 @@ class AddPage extends StatelessWidget {
                             imageError = 'first';
                             bestwith.clear();
                             tag = "";
-                            Provider.of<ImageUpload>(context, listen: false)
+                            prov.Provider.of<ImageUpload>(context,
+                                    listen: false)
                                 .uploadedBytes = 0;
-                            Provider.of<ImageUpload>(context, listen: false)
+                            prov.Provider.of<ImageUpload>(context,
+                                    listen: false)
                                 .uploadTotalBytes = 0;
                             // ToastContext().init(context);
                             // Toast.show("Dish Added",
