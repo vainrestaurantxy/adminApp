@@ -14,9 +14,9 @@ class Selectable extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             clipBehavior: Clip.antiAlias,
             decoration: ShapeDecoration(
-              color: Color(0xFF544C68),
+              color: const Color(0xFF544C68),
               shape: RoundedRectangleBorder(
-                side: BorderSide(width: 1, color: Color(0xFF5E3DB2)),
+                side: const BorderSide(width: 1, color: Color(0xFF5E3DB2)),
                 borderRadius: BorderRadius.circular(4),
               ),
             ),
@@ -27,7 +27,7 @@ class Selectable extends StatelessWidget {
               children: [
                 Text(
                   '${text} ',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontFamily: 'Poppins',
@@ -47,7 +47,7 @@ class Selectable extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   '${number}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Color(0xFF323232),
                                     fontSize: 12,
                                     fontFamily: 'Poppins',
@@ -57,7 +57,7 @@ class Selectable extends StatelessWidget {
                               ),
                             ),
                           ),
-                          decoration: ShapeDecoration(
+                          decoration: const ShapeDecoration(
                             color: Color(0xFF43FF8E),
                             shape: OvalBorder(),
                           ),
@@ -72,9 +72,9 @@ class Selectable extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 clipBehavior: Clip.antiAlias,
                 decoration: ShapeDecoration(
-                  color: Color(0xFFFCFCFC),
+                  color: const Color(0xFFFCFCFC),
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 0.50, color: AppColor.grey),
+                    side: const BorderSide(width: 0.50, color: AppColor.grey),
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -85,7 +85,7 @@ class Selectable extends StatelessWidget {
                   children: [
                     Text(
                       text,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF9997A1),
                         fontSize: 14,
                         fontFamily: 'Poppins',
