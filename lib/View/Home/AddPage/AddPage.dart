@@ -551,12 +551,18 @@ class AddPage extends StatelessWidget {
                                     onTap: () {
                                       if (!list.contains(listt[index])) {
                                         if (list.length < 3) {
-                                          list.add("$listt[index]");
+                                          list.add("${listt[index]}");
+                                          getMenu.notifyListeners();
+                                          log('list me ${list.toString()}');
                                         }
                                       } else {
                                         list.remove(listt[index]);
+                                        getMenu.notifyListeners();
                                       }
                                       ref.update();
+                                      log(list
+                                          .contains(listt[index])
+                                          .toString());
                                     },
                                     child: Selectable(
                                       text: listt[index],
