@@ -25,7 +25,7 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: 43.h,
           width: double.infinity,
           child: Row(
@@ -40,18 +40,18 @@ class Item extends StatelessWidget {
                   Container(
                     width: 43.w,
                     height: 43.w,
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFFD9D9D9),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                    ),
                     child: Image.network(
                       image!,
                       fit: BoxFit.cover,
                     ),
-                    decoration: ShapeDecoration(
-                      color: Color(0xFFD9D9D9),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                    ),
                   ),
                   SizedBox(width: 8.w),
-                  Container(
+                  SizedBox(
                     width: 253.w / 2,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -62,7 +62,7 @@ class Item extends StatelessWidget {
                           width: 297.w / 2,
                           child: Text(
                             '${name}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontFamily: 'Poppins',
@@ -75,7 +75,7 @@ class Item extends StatelessWidget {
                           children: [
                             Text(
                               'AED ${price}      ',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
                                 fontFamily: 'Poppins',
@@ -85,10 +85,10 @@ class Item extends StatelessWidget {
                             SizedBox(
                               child:
                                   quantity[name] == null || quantity[name] == 0
-                                      ? SizedBox()
+                                      ? const SizedBox()
                                       : Text(
                                           'Qty: ${quantity[name]} ',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.black,
                                             fontSize: 12,
                                             fontFamily: 'Poppins',
@@ -112,7 +112,7 @@ class Item extends StatelessWidget {
                               code: name!, ref: ref, menu: menu!);
                         },
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               )
             ],
           ),

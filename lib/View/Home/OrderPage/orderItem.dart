@@ -18,7 +18,7 @@ class OrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(order);
+    // print(order);
     return Container(
       width: 396.w,
       padding: const EdgeInsets.all(16),
@@ -232,7 +232,7 @@ class OrderItem extends StatelessWidget {
                                       Map<String, dynamic>? json = data.data();
                                       json!["order"][index]["orderStatus"] =
                                           "Order Paid";
-                                      print(json);
+                                      //  print(json);
                                       await FirebaseFirestore.instance
                                           .collection("Restaurants")
                                           .doc(FirebaseAuth

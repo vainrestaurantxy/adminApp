@@ -3,10 +3,13 @@ import 'package:admin_app/Model/RestaurantMenu/restaurantMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-getAddButton({required String code, required CartProvider ref,required RestaurantMenu menu}) {
+getAddButton(
+    {required String code,
+    required CartProvider ref,
+    required RestaurantMenu menu}) {
   return ref.cart[code] == 0 || ref.cart[code] == null
       ? GestureDetector(
-          onTap: () => ref.addOnTap(code,menu),
+          onTap: () => ref.addOnTap(code, menu),
           child: Container(
             width: 70.w,
             height: 40.h,
@@ -14,8 +17,8 @@ getAddButton({required String code, required CartProvider ref,required Restauran
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: const Color(0xFF351985)),
                 color: const Color(0xFFF4F4FF)),
-            child: Center(
-              child: const Row(
+            child: const Center(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -43,7 +46,7 @@ getAddButton({required String code, required CartProvider ref,required Restauran
               children: [
                 GestureDetector(
                     onTap: () {
-                      ref.subOnTap(code,menu);
+                      ref.subOnTap(code, menu);
                     },
                     child: Icon(
                       Icons.remove,
@@ -57,7 +60,7 @@ getAddButton({required String code, required CartProvider ref,required Restauran
                     )),
                 GestureDetector(
                     onTap: () {
-                      ref.addOnTap(code,menu);
+                      ref.addOnTap(code, menu);
                     },
                     child: Icon(
                       Icons.add,

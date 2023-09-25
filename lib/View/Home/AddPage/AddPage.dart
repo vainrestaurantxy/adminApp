@@ -51,6 +51,7 @@ class AddPage extends StatelessWidget {
   ];
   int indexTags = -1;
   List<String> bestwith = [];
+  List<String> copyBestwith = [];
   String imageError = 'first';
   List<String> temp = [];
 
@@ -541,40 +542,40 @@ class AddPage extends StatelessWidget {
                       prov.Consumer<GetMenu>(
                         builder: (context, getMenu, child) {
                           final listt = getMenu.dishesList;
-                          var list = bestwith;
-                          log('dishes list ${listt.toString()}');
+                          //  bestwith;
+                          //  log('dishes list ${listt.toString()}');
                           return Wrap(
                             children: List.generate(listt.length, (index) {
                               return Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: GestureDetector(
                                     onTap: () {
-                                      if (!list.contains(listt[index])) {
-                                        if (list.length < 3) {
-                                          list.add("${listt[index]}");
+                                      if (!bestwith.contains(listt[index])) {
+                                        if (bestwith.length < 3) {
+                                          bestwith.add("${listt[index]}");
                                           getMenu.notifyListeners();
-                                          log('list me ${list.toString()}');
+                                          //  log('bestwith me ${bestwith.toString()}');
                                         }
                                       } else {
-                                        list.remove(listt[index]);
+                                        bestwith.remove(listt[index]);
                                         getMenu.notifyListeners();
                                       }
                                       ref.update();
-                                      log(list
+                                      log(bestwith
                                           .contains(listt[index])
                                           .toString());
                                     },
                                     child: Selectable(
                                       text: listt[index],
-                                      selected: list.contains(listt[index]),
-                                      number: list.indexOf(listt[index]) + 1,
+                                      selected: bestwith.contains(listt[index]),
+                                      number:
+                                          bestwith.indexOf(listt[index]) + 1,
                                     )),
                               );
                             }),
                           );
                         },
                       ),
-
                       const SizedBox(
                         height: 16,
                       ),
@@ -585,7 +586,7 @@ class AddPage extends StatelessWidget {
                             ref.notifyListeners();
                             return;
                           }
-                          log(category);
+                          //  log(category);
                           if (category == 'first') {
                             category = '';
                             ref.notifyListeners();
@@ -599,7 +600,7 @@ class AddPage extends StatelessWidget {
                           if (viewModel.validate(name.text, desc.text,
                               price.text, tax.text, discount.text, context)) {
                             String tag = "";
-                            var list = bestwith;
+                            // var list = bestwith;
                             if (indexTags == 0) {
                               tag = "Best Seller";
                             } else if (indexTags == 1) {
@@ -607,6 +608,9 @@ class AddPage extends StatelessWidget {
                             } else {
                               tag = "Recommended";
                             }
+                            // log(bestwith.toString());
+                            print('calling uploadDish');
+                            copyBestwith = bestwith.map((e) => e).toList();
                             viewModel.uploadDish(
                                 name: name.text,
                                 category: category,
@@ -617,7 +621,7 @@ class AddPage extends StatelessWidget {
                                 price: price.text,
                                 genre: genre,
                                 tag: tag,
-                                recommendedWithau: list);
+                                recommendedWithau: copyBestwith);
                             // Future.delayed(Duration(seconds: 2));
                             name.clear();
                             desc.clear();

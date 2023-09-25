@@ -47,6 +47,8 @@ class AddViewModel {
     if (dish == null) {
       return;
     }
+    print("bestWith:");
+    print(recommendedWithau);
     dish = dish!.copyWith(
       name: name,
       category: category,
@@ -58,10 +60,20 @@ class AddViewModel {
       tags: tags,
       tax: int.parse(tax),
     );
-    log(dish.toString());
+
+    // print(dish.toString());
+    log('json awaiting');
+
     Map<String, dynamic>? json = await _db.get("Restaurants", _auth.getUserId!);
+
+    log('json awaited completed');
+
+    // print(json!['menu'][1].toString());
+
     List<dynamic> data = json?["menu"] ?? [];
+    //  print('data $data');
     data.add(dish!.toJson());
+    print(data);
     _db.set(
         collection: "Restaurants",
         docId: _auth.getUserId!,
@@ -92,7 +104,7 @@ class AddViewModel {
         discount: int.parse(discount),
         itemType: itemType,
         price: int.parse(price),
-        recommendedWith: recommendedWith ?? [],
+        recommendedWith: recommendedWith,
         tags: tags,
         tax: int.parse(tax),
       );
@@ -109,7 +121,8 @@ class AddViewModel {
         tax: int.parse(tax),
       );
     }
-    log(dish.toString());
+    // print("dish");
+    // print(dish);
     Map<String, dynamic>? json = await _db.get("Restaurants", _auth.getUserId!);
     List<dynamic> data = json?["menu"] ?? [];
     dynamic dataToBeDeleted =
@@ -133,7 +146,7 @@ class AddViewModel {
 
   setImage(String image) {
     dish = RestaurantMenu(image: image);
-    log(dish?.image ?? "Null");
+    // log(dish?.image ?? "Null");
   }
 
   validate(String name, String desc, String price, String tax, String discount,
@@ -234,15 +247,15 @@ class GetMenu extends ChangeNotifier {
 
     List<String> temp = [];
     if (snapshot.exists) {
-      log('item name ${snapshot.data()!['menu'][0]['name'].toString()}');
+      //  log('item name ${snapshot.data()!['menu'][0]['name'].toString()}');
       final data = snapshot.data();
       List<dynamic> menu = data!['menu'];
       for (int i = 0; i < menu.length; i++) {
         temp.add(menu[i]['name']);
       }
-      log('temp ${temp.toString()}');
+      // log('temp ${temp.toString()}');
       dishesList = temp;
-      log('dish $dishesList');
+      // log('dish $dishesList');
       notifyListeners();
     }
   }
