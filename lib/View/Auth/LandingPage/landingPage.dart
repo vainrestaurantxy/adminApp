@@ -41,6 +41,9 @@ class LandingPage extends StatelessWidget {
                   ),
                   GestureDetector(
                       onTap: () {
+                        final ref =
+                            Provider.of<RestaurantData>(context, listen: false);
+                        ref.isClub = false;
                         context.go("/login");
                       },
                       child: createButton(

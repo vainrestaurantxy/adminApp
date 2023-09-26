@@ -11,6 +11,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../Data/Providers/restaurantProvider.dart';
 import '../../../ViewModel/AuthViewModel/AuthViewModel.dart';
 
 class LoginPage extends StatelessWidget {
@@ -21,11 +22,12 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = GetIt.instance<AuthViewModel>();
+    final ref = Provider.of<RestaurantData>(context, listen: false);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            header(text: "LOGIN TO RESTAURANTXY"),
+            header(text: ref.isClub ? "LOGIN TO CLUB" : "LOGIN TO RESTAURANT"),
             SizedBox(
               height: 28.h,
             ),
