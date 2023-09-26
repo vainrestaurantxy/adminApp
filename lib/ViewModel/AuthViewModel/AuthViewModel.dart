@@ -15,8 +15,8 @@ class AuthViewModel {
   IDatabaseService _db;
 
   Future<void> register(String emailId, String password) async {
-    _firebaseService.signUp(emailId, password);
-    _db.setStatus("Registered");
+    await _firebaseService.signUp(emailId, password);
+    await _db.setStatus("Registered");
   }
 
   sendrestLink(String email) {
