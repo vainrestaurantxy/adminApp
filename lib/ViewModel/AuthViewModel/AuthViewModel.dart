@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:provider/provider.dart';
+import 'package:web_toast/web_toast.dart';
 
 @lazySingleton
 class AuthViewModel {
@@ -56,6 +57,10 @@ class AuthViewModel {
       await _firebaseService.signin(emailid, password);
       return 'admin';
     } catch (e) {
+      Toast.warning(
+          text: 'Please enter correct credentials',
+          duration: Duration(seconds: 2),
+          title: 'Wrong credentials');
       // if (e == 'wrong-password') {
       //   String staffKey = await getStaffKey(emailid);
       //   if (password == staffKey) {

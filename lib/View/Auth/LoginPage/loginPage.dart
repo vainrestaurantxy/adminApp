@@ -84,11 +84,6 @@ class LoginPage extends StatelessWidget {
                               // } else if (status == 'staff') {
                               //   context.go('/homestaff');
                               // }
-                            } else {
-                              Toast.warning(
-                                  text: 'Please enter correct credentials',
-                                  duration: Duration(seconds: 2),
-                                  title: 'Wrong credentials');
                             }
                           } else {
                             Toast.warning(
