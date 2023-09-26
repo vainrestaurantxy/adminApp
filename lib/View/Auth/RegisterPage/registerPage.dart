@@ -12,6 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:web_toast/web_toast.dart';
 
 import '../../../Data/Providers/restaurantProvider.dart';
 
@@ -81,8 +82,13 @@ class RegisterPage extends StatelessWidget {
                               } catch (e) {
                                 log(e.toString());
                               }
-                              
+
                               context.go('/register/setup');
+                            } else {
+                              Toast.warning(
+                                  text: 'Please enter full credentials',
+                                  duration: Duration(seconds: 2),
+                                  title: 'Enter credentials');
                             }
                           },
                           child: PrimaryButton(text: "Create Account"))

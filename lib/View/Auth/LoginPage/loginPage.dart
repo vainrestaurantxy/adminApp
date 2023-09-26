@@ -4,7 +4,7 @@ import 'package:admin_app/Constants/Widgets/PrimaryButton.dart';
 import 'package:admin_app/Constants/Widgets/TextField.dart';
 import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/View/Auth/widgets.dart';
-
+import 'package:web_toast/web_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
@@ -84,7 +84,17 @@ class LoginPage extends StatelessWidget {
                               // } else if (status == 'staff') {
                               //   context.go('/homestaff');
                               // }
+                            } else {
+                              Toast.warning(
+                                  text: 'Please enter correct credentials',
+                                  duration: Duration(seconds: 2),
+                                  title: 'Wrong credentials');
                             }
+                          } else {
+                            Toast.warning(
+                                text: 'Please enter full credentials',
+                                duration: Duration(seconds: 2),
+                                title: 'Enter credentials');
                           }
                         },
                         child: PrimaryButton(
