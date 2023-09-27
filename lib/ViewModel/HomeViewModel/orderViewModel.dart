@@ -50,19 +50,18 @@ class OrderViewModel {
     List<dynamic> jsonItems = items.map((e) => e.toJson()).toList();
     print('list after fetch $list');
     order = order.copyWith(orderNo: orderNo);
-
     Map<String, dynamic> jsonOrder = order.toJson();
     //  print(jsonOrder);
 
     jsonOrder["items"] = jsonItems;
-    //  log('jsonOrder items ${jsonOrder['items']}');
+    log('jsonOrder items ${jsonOrder['items']}');
     dynamic itemToBeRemoved =
         list.where((element) => element["orderNo"] == orderNo).first;
-    log('itemsremoved $itemToBeRemoved');
+    log('itemsremoved ${jsonOrder['items']}');
     list.remove(itemToBeRemoved);
 
     log('removed elements list $list');
-    list = jsonOrder['items'];
+    list.add(jsonOrder);
 
     print('list after add $list');
     await _db.setSubcollection(
@@ -80,22 +79,27 @@ class OrderViewModel {
       );
 
       List<dynamic> list = data?["order"] ?? [];
+      print('possibly error causing list data ${list}');
       List<model.Order> order = list.map((e) {
         List<dynamic> itemJson = e["items"];
+        log('itemJson ${e['items']}');
+
         List<RestaurantMenu> item =
             itemJson.map((t) => RestaurantMenu.fromJson(t)).toList();
         e["items"] = [];
+        log('item $item');
         model.Order order = model.Order.fromJson(e);
-
+        // log('$order');
+        //log('model order $order');
         return order.copyWith(items: item);
       }).toList();
+      log('orders $order');
       ref.orders[
               '${dateTime.toUtc().day}/${dateTime.toUtc().month}/${dateTime.toUtc().year}'] =
           order;
 
       dateTime = dateTime.subtract(const Duration(days: 1));
     }
-
     ref.notifyListeners();
   }
 }

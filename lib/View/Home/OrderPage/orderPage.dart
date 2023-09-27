@@ -75,7 +75,7 @@ class OrderPage extends StatelessWidget {
                   .collection("Orders")
                   .snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) {
+                if (!snapshot.hasData || snapshot.data == null) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
@@ -86,13 +86,17 @@ class OrderPage extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 }
-
+                //  print(snapshot.connectionState);
                 return Column(
-                  children: List.generate(snapshot.data!.docs.length, (index) {
-                    final reversedIndex =
-                        snapshot.data!.docs.length - 1 - index;
+                  children:
+                      List.generate(snapshot.data?.docs.length ?? 0, (index) {
+                    var reversedIndex = snapshot.data!.docs.length - 1 - index;
+                    if (reversedIndex == -1) {
+                      reversedIndex = 0;
+                    }
                     List<dynamic>? orders =
-                        snapshot.data?.docs[reversedIndex].data()?["order"];
+                        snapshot.data?.docs[reversedIndex].data()["order"];
+                    //  print('orders $orders');
 
                     if (orders == null || orders.isEmpty) {
                       return Container(); // Handle empty or null orders.
