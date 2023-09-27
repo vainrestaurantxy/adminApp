@@ -40,29 +40,31 @@ class OrderViewModel {
   }
 
   updateOrder(model.Order order, orderNo) async {
-    var time =
+    final time =
         '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}';
     Map<String, dynamic>? data =
         await _db.getSubcollection("Restaurants", "Orders", time);
+    log('data fetched $data');
     List<dynamic> list = data?["order"] ?? [];
     List<RestaurantMenu> items = order.items ?? [];
     List<dynamic> jsonItems = items.map((e) => e.toJson()).toList();
-
+    print('list after fetch $list');
     order = order.copyWith(orderNo: orderNo);
 
     Map<String, dynamic> jsonOrder = order.toJson();
     //  print(jsonOrder);
-    print(jsonOrder);
+
     jsonOrder["items"] = jsonItems;
+    //  log('jsonOrder items ${jsonOrder['items']}');
     dynamic itemToBeRemoved =
         list.where((element) => element["orderNo"] == orderNo).first;
     log('itemsremoved $itemToBeRemoved');
     list.remove(itemToBeRemoved);
 
     log('removed elements list $list');
-    list.add(jsonOrder);
+    list = jsonOrder['items'];
 
-    print('list $list');
+    print('list after add $list');
     await _db.setSubcollection(
         "Restaurants", "Orders", time, {"order": list}, true);
   }

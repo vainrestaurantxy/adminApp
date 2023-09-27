@@ -176,7 +176,7 @@ class AddViewModel {
     } catch (e) {
       return 0;
     }
-    return priceI + priceI * taxI * 0.01;
+    return (priceI + priceI * taxI * 0.01).toPrecision(2);
   }
 
   calculatediscount(String tax, String price, String discount) {
@@ -194,8 +194,7 @@ class AddViewModel {
       return 0;
     }
     double taxAmmount = priceI + priceI * taxI * 0.01;
-    return taxAmmount.toPrecision(2) -
-        taxAmmount.toPrecision(2) * discountI * 0.01.toPrecision(2);
+    return (taxAmmount - taxAmmount * discountI * 0.01).toPrecision(2);
   }
 
   getCategory(context) async {

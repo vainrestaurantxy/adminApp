@@ -32,7 +32,7 @@ abstract class IDatabaseService {
   setSubcollection(String collection, String subCollection, String docid,
       Map<String, dynamic> data, bool merge);
   getSubcollection(String collection, String subCollection, String docid);
-  setStatus(String status) ;
+  setStatus(String status);
   getStatus();
 }
 
@@ -45,13 +45,17 @@ class DatabaseService implements IDatabaseService {
 
   String? userId;
 
-  setStatus(String status) async{
-    await store.collection("Status").doc(_auth.getUserId).set({"status": status});
+  setStatus(String status) async {
+    await store
+        .collection("Status")
+        .doc(_auth.getUserId)
+        .set({"status": status});
   }
 
-  Future<String> getStatus() async{
-   DocumentSnapshot<Map<String, dynamic>> statusJson= await store.collection("Status").doc(_auth.getUserId).get();
-   return statusJson.data()?["status"]??"NotLoggedIn";
+  Future<String> getStatus() async {
+    DocumentSnapshot<Map<String, dynamic>> statusJson =
+        await store.collection("Status").doc(_auth.getUserId).get();
+    return statusJson.data()?["status"] ?? "NotLoggedIn";
   }
 
   @override
@@ -142,7 +146,7 @@ class DatabaseService implements IDatabaseService {
         .set(data, SetOptions(merge: merge));
   }
 
-  getSubcollection(
+  Future<Map<String, dynamic>?> getSubcollection(
       String collection, String subCollection, String docid) async {
     DocumentSnapshot<Map<String, dynamic>> data = await store
         .collection(collection)
@@ -150,6 +154,7 @@ class DatabaseService implements IDatabaseService {
         .collection(subCollection)
         .doc(docid)
         .get();
+    // log('data in getSubcollection ${data.data()}');
     return data.data();
   }
 

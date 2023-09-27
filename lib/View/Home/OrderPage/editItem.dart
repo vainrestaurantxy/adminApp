@@ -415,7 +415,7 @@ class EditItem extends StatelessWidget {
                                                   orderStatus:
                                                       "Order Confirmed",
                                                   tableNo: table);
-                                              viewModel.updateOrder(
+                                              await viewModel.updateOrder(
                                                   order, orderNo);
                                               Navigator.pop(context);
                                             },

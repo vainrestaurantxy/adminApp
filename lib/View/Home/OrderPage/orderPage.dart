@@ -75,7 +75,13 @@ class OrderPage extends StatelessWidget {
                   .collection("Orders")
                   .snapshots(),
               builder: (context, snapshot) {
-                if (snapshot.data == null) {
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
@@ -85,14 +91,12 @@ class OrderPage extends StatelessWidget {
                   children: List.generate(snapshot.data!.docs.length, (index) {
                     final reversedIndex =
                         snapshot.data!.docs.length - 1 - index;
-                    // log('hello ${snapshot.data!.docs[reversedIndex].data()["order"]["orderNo"].toString()}'
-                    //     .toString());
-                    // List<int> orders = [];
+                    List<dynamic>? orders =
+                        snapshot.data?.docs[reversedIndex].data()?["order"];
 
-                    // final orderNo = snapshot.data!.docs[reversedIndex]
-                    // .data()["order"][index];
-                    List<dynamic> orders =
-                        snapshot.data!.docs[reversedIndex].data()["order"];
+                    if (orders == null || orders.isEmpty) {
+                      return Container(); // Handle empty or null orders.
+                    }
 
                     orders.sort((a, b) {
                       return int.parse(a["orderNo"].toString())
@@ -103,13 +107,6 @@ class OrderPage extends StatelessWidget {
                       initiallyExpanded: true,
                       title: Text(snapshot.data!.docs[reversedIndex].id),
                       children: List.generate(orders.length, (i) {
-                        // var _order = snapshot.data!.docs[reversedIndex]
-                        //     .data()["order"][index]["orderNo"];
-                        // log('hello $_order'.toString());
-                        //  log(i.toString());
-                        // log(snapshot.data!.docs[reversedIndex]
-                        //     .data()["order"][i]
-                        //     .toString());
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: OrderItem(
