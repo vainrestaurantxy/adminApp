@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:provider/provider.dart';
+import 'package:screenshot/screenshot.dart';
 
 import '../../Data/Providers/restaurantProvider.dart';
 import '../../Data/Repositories/FirebaseConnection.dart';
@@ -193,7 +194,8 @@ class AddViewModel {
       return 0;
     }
     double taxAmmount = priceI + priceI * taxI * 0.01;
-    return taxAmmount - taxAmmount * discountI * 0.01;
+    return taxAmmount.toPrecision(2) -
+        taxAmmount.toPrecision(2) * discountI * 0.01.toPrecision(2);
   }
 
   getCategory(context) async {

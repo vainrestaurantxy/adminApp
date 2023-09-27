@@ -399,7 +399,7 @@ class EditItem extends StatelessWidget {
                                     child: ref.menuCart.length == 0
                                         ? const SizedBox()
                                         : GestureDetector(
-                                            onTap: () {
+                                            onTap: () async {
                                               Order order = Order(
                                                   items: ref.menuCart,
                                                   contactNo: phone,

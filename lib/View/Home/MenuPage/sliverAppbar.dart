@@ -13,23 +13,23 @@ Widget createCustomSliverAppBar({
   Widget customSliverAppBar = SliverAppBar(
     leading: const Icon(null),
     floating: false,
-    expandedHeight: 500,
+    expandedHeight: 450,
     elevation: 0,
     pinned: true,
-    collapsedHeight: 100,
+    collapsedHeight: 180,
     flexibleSpace: FlexibleSpaceBar(
       expandedTitleScale: 1,
       titlePadding: const EdgeInsets.all(0),
       title: Container(
         color: Colors.white,
         width: double.infinity,
-        height: 160.h,
+        height: 175.h,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
           child: Column(
             children: [
               SizedBox(
-                height: 40.h,
+                height: 60.h,
               ),
               Container(
                 width: 396.w,
