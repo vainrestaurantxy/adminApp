@@ -100,23 +100,23 @@ class ProfilePage extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                    CustomTextField(
-                      readOnly: true,
-                      controller: staffKey,
-                      hintText: "Staff Key",
-                      label: const Text("Staff Account Key"),
-                    ),
-                    SizedBox(
-                      width: 396.w,
-                      child: Text(
-                        'Your staff can use staff account key for login to take & manage orders. They will not have admin features - “profile” and “add”',
-                        style: AppTypography.smallText
-                            .copyWith(color: AppColor.disabledColor),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
+                    // CustomTextField(
+                    //   readOnly: true,
+                    //   controller: staffKey,
+                    //   hintText: "Staff Key",
+                    //   label: const Text("Staff Account Key"),
+                    // ),
+                    // SizedBox(
+                    //   width: 396.w,
+                    //   child: Text(
+                    //     'Your staff can use staff account key for login to take & manage orders. They will not have admin features - “profile” and “add”',
+                    //     style: AppTypography.smallText
+                    //         .copyWith(color: AppColor.disabledColor),
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   height: 16,
+                    // ),
                     SizedBox(
                       width: 396.w,
                       child: Text(
