@@ -155,15 +155,14 @@ class AddPage extends StatelessWidget {
 
                             viewModel.uploadImage(context);
                             imageError = 'first';
+
                             ref.notifyListeners();
                           },
                           child: SecondaryButton(
                               text: viewModel.dish?.image == null
                                   ? "Upload Item Thumbnail"
                                   : "Uploaded Item Thumbnail")),
-                      // const SizedBox(
-                      //   height: 10,
-                      // ),
+
                       Text(
                         (viewModel.dish?.image == null && imageError != 'first')
                             ? "Upload Dish Image"
@@ -582,11 +581,13 @@ class AddPage extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           log('button pressed1');
-                          if (imageError == 'first') {
-                            imageError = '';
-                            ref.notifyListeners();
-                            return;
-                          }
+                          // if (imageError == 'first') {
+                          //   log('image error $imageError');
+                          //   imageError = '';
+                          //   ref.notifyListeners();
+                          //   log('image error $imageError');
+                          //   return;
+                          // }
                           log('button pressed2');
                           //  log(category);
                           if (category == 'first') {
