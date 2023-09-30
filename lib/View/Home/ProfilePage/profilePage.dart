@@ -193,7 +193,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     CustomTextField(
                       hintText: "Enter Address",
-                      errorText: error.restaurantAddress,
+                      errorText: error.restaurantState,
                       label: const Text("Restaurant Address"),
                       controller: state,
                     ),

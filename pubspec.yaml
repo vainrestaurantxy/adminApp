@@ -66,6 +66,7 @@ dependencies:
   toast: ^0.3.0
   web_toast: ^1.0.4-nullsafety
   flutter_native_splash: ^2.3.2
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

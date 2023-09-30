@@ -67,7 +67,7 @@ class SetUpPage extends StatelessWidget {
                         height: 8,
                       ),
                       CustomTextField(
-                        errorText: ref.restaurantAddress,
+                        errorText: ref.restaurantState,
                         hintText: "Enter Address",
                         controller: restaurantState,
                         label: Text(

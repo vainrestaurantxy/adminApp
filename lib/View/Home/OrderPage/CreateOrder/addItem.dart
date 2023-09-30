@@ -26,6 +26,18 @@ class AddItemOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = GetIt.instance<OrderViewModel>();
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              context.pop();
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(

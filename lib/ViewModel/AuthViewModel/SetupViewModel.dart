@@ -42,7 +42,7 @@ class SetupViewModel {
     validator.validatePhoneNo(phoneno);
     if (validator.phoneNo == null &&
         validator.restaurantName == null &&
-        validator.restaurantAddress == null &&
+        validator.restaurantState == null &&
         validator.restaurantCity == null) {
       return true;
     }

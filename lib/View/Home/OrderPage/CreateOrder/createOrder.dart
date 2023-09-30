@@ -6,6 +6,7 @@ import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/View/Home/OrderPage/CreateOrder/addItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class CreateOrder extends StatelessWidget {
@@ -19,17 +20,66 @@ class CreateOrder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              context.pop();
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
+      ),
       body: Padding(
           padding: const EdgeInsets.all(16),
           child: SingleChildScrollView(child: Consumer<ErrorProvider>(
             builder: (_, ref, __) {
               return Column(
                 children: [
+                  //  Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     GestureDetector(
+                  //      onTap: () {
+                  //     if (name.text.isNotEmpty) {
+                  //       ref.validaterestaurantName(name.text);
+                  //     }
+                  //     ref.validateprice(tableno.text);
+                  //     if (phone.text.isNotEmpty) {
+                  //       ref.validatePhoneNo(phone.text);
+                  //     }
+
+                  //     if (ref.restaurantName == null &&
+                  //         ref.phoneNo == null &&
+                  //         ref.price == null) {
+                  //       Provider.of<CartProvider>(context, listen: false).cart =
+                  //           {};
+                  //       Provider.of<CartProvider>(context, listen: false)
+                  //           .menuCart = [];
+                  //       Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //             builder: (context) => AddItemOrder(
+                  //                 table: int.parse(tableno.text),
+                  //                 name: name.text,
+                  //                 phone: phone.text),
+                  //           ));
+                  //     }
+                  //   },
+                  //       child: Text(
+                  //         'Skip →',
+                  //         style: TextStyle(color: Colors.black),
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
                   Container(
                     width: 396.h,
                     height: 51.h,
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                      // mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -85,8 +135,10 @@ class CreateOrder extends StatelessWidget {
                         ref.validaterestaurantName(name.text);
                       }
                       ref.validateprice(tableno.text);
-                      if (phone.text.isNotEmpty)
+                      if (phone.text.isNotEmpty) {
                         ref.validatePhoneNo(phone.text);
+                      }
+
                       if (ref.restaurantName == null &&
                           ref.phoneNo == null &&
                           ref.price == null) {

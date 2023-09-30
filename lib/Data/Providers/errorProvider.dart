@@ -8,7 +8,7 @@ class ErrorProvider extends ChangeNotifier {
   String? registerReKey;
   String? restaurantName;
   String? restaurantCity;
-  String? restaurantAddress;
+  String? restaurantState;
   String? phoneNo;
   String? price;
   String? tax;
@@ -61,13 +61,15 @@ class ErrorProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  validaterestaurantAddress(String restaurantAddress) {
-    this.restaurantAddress = _validateisEmpty(restaurantAddress);
+  validaterestaurantAddress(String restaurantState) {
+    this.restaurantState = _validateisEmpty(restaurantState);
     notifyListeners();
   }
 
   validatePhoneNo(String phone) {
-    if (phone.length != 9) {
+    const pattern = r'^[0-9]{9}$';
+    final regex = RegExp(pattern);
+    if (phone.length != 9 || !regex.hasMatch(phone)) {
       phoneNo = "Invalid Phone Number";
     } else {
       phoneNo = null;

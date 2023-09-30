@@ -96,13 +96,16 @@ class OrderPage extends StatelessWidget {
                     }
                     List<dynamic>? orders =
                         snapshot.data?.docs[reversedIndex].data()["order"];
-                    //  print('orders $orders');
-
+                    // if (orders![reversedIndex]['customerName'] == '') {
+                    //   print('null name');
+                    // } else {
+                    //   print(orders![reversedIndex]['customerName']);
+                    // }
                     if (orders == null || orders.isEmpty) {
                       return Container(); // Handle empty or null orders.
                     }
 
-                    orders.sort((a, b) {
+                    orders.sort((b, a) {
                       return int.parse(a["orderNo"].toString())
                           .compareTo(int.parse(b["orderNo"].toString()));
                     });
@@ -116,6 +119,7 @@ class OrderPage extends StatelessWidget {
                           child: OrderItem(
                             index: i,
                             order: orders[i],
+                            docDate: snapshot.data!.docs[reversedIndex].id,
                           ),
                         );
                       }),

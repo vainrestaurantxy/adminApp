@@ -12,13 +12,41 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class OrderItem extends StatelessWidget {
-  OrderItem({super.key, required this.order, required this.index});
+  OrderItem(
+      {super.key,
+      required this.order,
+      required this.index,
+      required this.docDate});
   Map<String, dynamic> order;
   int index;
+  String docDate;
 
   @override
   Widget build(BuildContext context) {
     // print(order);
+
+    final today =
+        '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}';
+    print('today $today');
+
+    Future<String> getlatestDate() async {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection("Restaurants")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection("Orders")
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        // The document.id contains the name of the document
+        print(
+            'todayDoc ${querySnapshot.docs[querySnapshot.docs.length - 1].id}');
+        return querySnapshot.docs[querySnapshot.docs.length - 1].id;
+      } else {
+        // Return an appropriate value or handle the case where no documents are found
+        return ""; // You can change this to suit your needs
+      }
+    }
+
     return Container(
       width: 396.w,
       padding: const EdgeInsets.all(16),
@@ -134,10 +162,12 @@ class OrderItem extends StatelessWidget {
                                     decoration: const BoxDecoration(
                                       color: AppColor.purpleColor,
                                     ),
-                                    child: const Icon(
-                                      Icons.check,
-                                      color: AppColor.white,
-                                      size: 18,
+                                    child: const Center(
+                                      child: Icon(
+                                        Icons.check,
+                                        color: AppColor.white,
+                                        size: 18,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -199,15 +229,17 @@ class OrderItem extends StatelessWidget {
                                       height: 18.w,
                                       clipBehavior: Clip.antiAlias,
                                       decoration: const BoxDecoration(),
-                                      child: Icon(
-                                        Icons.room_service_outlined,
-                                        color: (order["orderStatus"] ==
-                                                    "Order Delivered" ||
-                                                order["orderStatus"] ==
-                                                    "Order Paid")
-                                            ? AppColor.white
-                                            : AppColor.purpleColor,
-                                        size: 18,
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.room_service_outlined,
+                                          color: (order["orderStatus"] ==
+                                                      "Order Delivered" ||
+                                                  order["orderStatus"] ==
+                                                      "Order Paid")
+                                              ? AppColor.white
+                                              : AppColor.purpleColor,
+                                          size: 18,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -264,13 +296,15 @@ class OrderItem extends StatelessWidget {
                                       height: 18.w,
                                       clipBehavior: Clip.antiAlias,
                                       decoration: const BoxDecoration(),
-                                      child: Icon(
-                                        Icons.attach_money,
-                                        size: 18,
-                                        color: (order["orderStatus"] ==
-                                                "Order Paid")
-                                            ? AppColor.white
-                                            : AppColor.purpleColor,
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.attach_money,
+                                          size: 18,
+                                          color: (order["orderStatus"] ==
+                                                  "Order Paid")
+                                              ? AppColor.white
+                                              : AppColor.purpleColor,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -582,62 +616,69 @@ class OrderItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 16.w),
-                GestureDetector(
-                  onTap: () {
-                    final ref =
-                        Provider.of<CartProvider>(context, listen: false);
+                today == docDate
+                    ? GestureDetector(
+                        onTap: () {
+                          final ref =
+                              Provider.of<CartProvider>(context, listen: false);
 
-                    dynamic da = order["quanntity"];
+                          dynamic da = order["quanntity"];
 
-                    ref.cart = Map<String, int>.from(order["quanntity"]);
-                    List<dynamic> list = order['items'];
-                    ref.menuCart =
-                        list.map((e) => RestaurantMenu.fromJson(e)).toList();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EditItem(
-                                  table: order["tableNo"],
-                                  name: order["customerName"],
-                                  phone: order["contactNo"],
-                                  orderNo: order["orderNo"],
-                                )));
-                  },
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: ShapeDecoration(
-                      color: const Color(0xFF241C43),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6)),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 18.w,
-                          height: 18.w,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: const BoxDecoration(),
-                          child: const Icon(Icons.edit,
-                              color: AppColor.white, size: 18),
-                        ),
-                        const SizedBox(width: 4),
-                        const Text(
-                          'Edit Items',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
+                          ref.cart = Map<String, int>.from(order["quanntity"]);
+                          List<dynamic> list = order['items'];
+                          ref.menuCart = list
+                              .map((e) => RestaurantMenu.fromJson(e))
+                              .toList();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EditItem(
+                                        table: order["tableNo"],
+                                        name: order["customerName"],
+                                        phone: order["contactNo"],
+                                        orderNo: order["orderNo"],
+                                      )));
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          decoration: ShapeDecoration(
+                            color: const Color(0xFF241C43),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6)),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 18.w,
+                                height: 18.w,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: const BoxDecoration(),
+                                child: const Center(
+                                  child: Icon(Icons.add,
+                                      color: AppColor.white, size: 18),
+                                ),
+                              ),
+                              const SizedBox(width: 4),
+                              const Text(
+                                'Edit Items',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
+                      )
+                    : const SizedBox(
+                        height: 18,
+                      ),
               ],
             ),
           ),

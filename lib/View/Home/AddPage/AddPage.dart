@@ -581,22 +581,26 @@ class AddPage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
+                          log('button pressed1');
                           if (imageError == 'first') {
                             imageError = '';
                             ref.notifyListeners();
                             return;
                           }
+                          log('button pressed2');
                           //  log(category);
                           if (category == 'first') {
                             category = '';
                             ref.notifyListeners();
                             return;
                           }
+                          log('button pressed3');
                           if (genre == 'first') {
                             genre = '';
                             ref.notifyListeners();
                             return;
                           }
+                          log('button pressed4');
                           if (viewModel.validate(name.text, desc.text,
                               price.text, tax.text, discount.text, context)) {
                             String tag = "";
@@ -608,6 +612,7 @@ class AddPage extends StatelessWidget {
                             } else {
                               tag = "Recommended";
                             }
+                            log('button pressed5');
                             // log(bestwith.toString());
                             print('calling uploadDish');
                             copyBestwith = bestwith.map((e) => e).toList();
@@ -622,6 +627,7 @@ class AddPage extends StatelessWidget {
                                 genre: genre,
                                 tag: tag,
                                 recommendedWithau: copyBestwith);
+                            log('button pressed6');
                             // Future.delayed(Duration(seconds: 2));
                             name.clear();
                             desc.clear();
@@ -645,10 +651,12 @@ class AddPage extends StatelessWidget {
                             // Toast.show("Dish Added",
                             //     duration: Toast.lengthShort,
                             //     gravity: Toast.bottom);
+                            log('button pressed7');
                             Toast.success(
                                 title: 'Dish Added',
                                 text: 'Your dish has been added',
                                 duration: const Duration(seconds: 3));
+                            log('button pressed8');
                           }
                         },
                         child: PrimaryButton(

@@ -35,8 +35,15 @@ class HomePage extends StatelessWidget {
     return Consumer<HomeProvider>(builder: (_, ref, __) {
       return Scaffold(
           appBar: AppBar(
-            leading: const Icon(null),
-            title: const Text('LOGO'),
+            automaticallyImplyLeading: false,
+            title: Container(
+              height: 100,
+              width: 100,
+              child: Image.asset(
+                'assets/Small with Black BG.png',
+                width: 200,
+              ),
+            ),
           ),
           body: screen[index],
           bottomNavigationBar: BottomNavigationBar(
@@ -122,8 +129,7 @@ class StaffPage extends StatelessWidget {
     return Consumer<HomeProvider>(builder: (_, ref, __) {
       return Scaffold(
           appBar: AppBar(
-            leading: const Icon(null),
-            title: const Text('LOGO'),
+            leading: Image.asset('assets/Small with Black BG.png'),
           ),
           body: screen[index],
           bottomNavigationBar: BottomNavigationBar(

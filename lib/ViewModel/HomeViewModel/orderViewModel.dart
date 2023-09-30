@@ -48,22 +48,22 @@ class OrderViewModel {
     List<dynamic> list = data?["order"] ?? [];
     List<RestaurantMenu> items = order.items ?? [];
     List<dynamic> jsonItems = items.map((e) => e.toJson()).toList();
-    print('list after fetch $list');
+    //  print('list after fetch $list');
     order = order.copyWith(orderNo: orderNo);
     Map<String, dynamic> jsonOrder = order.toJson();
     //  print(jsonOrder);
 
     jsonOrder["items"] = jsonItems;
-    log('jsonOrder items ${jsonOrder['items']}');
+    // log('jsonOrder items ${jsonOrder['items']}');
     dynamic itemToBeRemoved =
         list.where((element) => element["orderNo"] == orderNo).first;
-    log('itemsremoved ${jsonOrder['items']}');
+    // log('itemsremoved ${jsonOrder['items']}');
     list.remove(itemToBeRemoved);
 
-    log('removed elements list $list');
+    // log('removed elements list $list');
     list.add(jsonOrder);
 
-    print('list after add $list');
+    //  print('list after add $list');
     await _db.setSubcollection(
         "Restaurants", "Orders", time, {"order": list}, true);
   }
@@ -79,21 +79,21 @@ class OrderViewModel {
       );
 
       List<dynamic> list = data?["order"] ?? [];
-      print('possibly error causing list data ${list}');
+      //    print('possibly error causing list data ${list}');
       List<model.Order> order = list.map((e) {
         List<dynamic> itemJson = e["items"];
-        log('itemJson ${e['items']}');
+        //      log('itemJson ${e['items']}');
 
         List<RestaurantMenu> item =
             itemJson.map((t) => RestaurantMenu.fromJson(t)).toList();
         e["items"] = [];
-        log('item $item');
+        //      log('item $item');
         model.Order order = model.Order.fromJson(e);
         // log('$order');
         //log('model order $order');
         return order.copyWith(items: item);
       }).toList();
-      log('orders $order');
+      //   log('orders $order');
       ref.orders[
               '${dateTime.toUtc().day}/${dateTime.toUtc().month}/${dateTime.toUtc().year}'] =
           order;

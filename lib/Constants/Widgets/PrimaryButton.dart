@@ -4,40 +4,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PrimaryButton extends StatelessWidget {
-  PrimaryButton({super.key, this.text, this.disabled = false,this.width=396});
+  PrimaryButton(
+      {super.key, this.text, this.disabled = false, this.width = 396});
   String? text;
   bool disabled;
   int width;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: width.w,
-          height: 53.h,
-          padding: const EdgeInsets.all(16),
-          clipBehavior: Clip.antiAlias,
-          decoration: ShapeDecoration(
-            color: disabled ? AppColor.disabledColor : AppColor.purpleColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                '$text',
-                style: AppTypography.smallText
-                    .copyWith(fontWeight: FontWeight.w600, color: Colors.white),
-              ),
-            ],
-          ),
+    return Container(
+      width: width.w,
+      height: 53.h,
+      padding: const EdgeInsets.all(16),
+      clipBehavior: Clip.antiAlias,
+      decoration: ShapeDecoration(
+        color: disabled ? AppColor.disabledColor : AppColor.purpleColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
         ),
-      ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            '$text',
+            style: AppTypography.smallText
+                .copyWith(fontWeight: FontWeight.w600, color: Colors.white),
+          ),
+        ],
+      ),
     );
   }
 }
