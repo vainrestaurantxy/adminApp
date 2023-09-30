@@ -20,10 +20,14 @@ class OrderItem extends StatelessWidget {
   Map<String, dynamic> order;
   int index;
   String docDate;
-
+//int orderItemRate
   @override
   Widget build(BuildContext context) {
     // print(order);
+    double price = order['price'];
+    double tax = order['tax'];
+    double discount = order['discount'];
+    double totalPrice = order['totalPrice'];
 
     final today =
         '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}';
@@ -465,7 +469,7 @@ class OrderItem extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: ' ${order["price"]} AED\n',
+                            text: ' ${price.toStringAsFixed(2)} AED\n',
                             style: const TextStyle(
                               color: Color(0xFF3B3F5C),
                               fontSize: 12,
@@ -483,7 +487,7 @@ class OrderItem extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: ' ${order["tax"]} AED\n',
+                            text: ' ${tax.toStringAsFixed(2)} AED\n',
                             style: const TextStyle(
                               color: Color(0xFF3B3F5C),
                               fontSize: 12,
@@ -501,7 +505,7 @@ class OrderItem extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: ' ${order["discount"]} AED\n',
+                            text: ' ${discount.toStringAsFixed(2)} AED\n',
                             style: const TextStyle(
                               color: Color(0xFF3B3F5C),
                               fontSize: 12,
@@ -519,7 +523,7 @@ class OrderItem extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: '${order["totalPrice"]} AED',
+                            text: '${totalPrice.toStringAsFixed(2)} AED',
                             style: const TextStyle(
                               color: Color(0xFF53389E),
                               fontSize: 16,
@@ -554,15 +558,17 @@ class OrderItem extends StatelessWidget {
                         child: Text.rich(
                           TextSpan(
                             children: [
-                              const TextSpan(
-                                text: 'Customer Name:',
-                                style: TextStyle(
-                                  color: Color(0xFF323232),
-                                  fontSize: 12,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
+                              order["customerName"] != ''
+                                  ? const TextSpan(
+                                      text: 'Customer Name:',
+                                      style: TextStyle(
+                                        color: Color(0xFF323232),
+                                        fontSize: 12,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    )
+                                  : const TextSpan(),
                               const TextSpan(
                                 text: ' ',
                                 style: TextStyle(
@@ -581,15 +587,17 @@ class OrderItem extends StatelessWidget {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              const TextSpan(
-                                text: 'Customer Contact:',
-                                style: TextStyle(
-                                  color: Color(0xFF323232),
-                                  fontSize: 12,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
+                              order["contactNo"] != ''
+                                  ? const TextSpan(
+                                      text: 'Customer Contact:',
+                                      style: TextStyle(
+                                        color: Color(0xFF323232),
+                                        fontSize: 12,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    )
+                                  : const TextSpan(),
                               const TextSpan(
                                 text: ' ',
                                 style: TextStyle(
