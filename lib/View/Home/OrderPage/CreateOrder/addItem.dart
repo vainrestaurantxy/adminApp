@@ -197,11 +197,15 @@ class AddItemOrder extends StatelessWidget {
                                                 child: Text.rich(
                                                   TextSpan(
                                                     children: [
-                                                      TextSpan(
-                                                        text: 'Customer Name: ',
-                                                        style: AppTypography
-                                                            .smallText,
-                                                      ),
+                                                      name != ''
+                                                          ? TextSpan(
+                                                              text:
+                                                                  'Customer Name: ',
+                                                              style:
+                                                                  AppTypography
+                                                                      .smallText,
+                                                            )
+                                                          : TextSpan(),
                                                       TextSpan(
                                                         text: '\n',
                                                         style: AppTypography
@@ -213,12 +217,15 @@ class AddItemOrder extends StatelessWidget {
                                                                 color: AppColor
                                                                     .purpleColor),
                                                       ),
-                                                      TextSpan(
-                                                        text:
-                                                            'Customer Contact:',
-                                                        style: AppTypography
-                                                            .smallText,
-                                                      ),
+                                                      phone != ''
+                                                          ? TextSpan(
+                                                              text:
+                                                                  'Customer Contact:',
+                                                              style:
+                                                                  AppTypography
+                                                                      .smallText,
+                                                            )
+                                                          : TextSpan(),
                                                       TextSpan(
                                                         text: phone,
                                                         style: AppTypography

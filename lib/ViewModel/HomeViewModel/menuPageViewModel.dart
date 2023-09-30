@@ -10,6 +10,7 @@ import '../../View/Home/MenuPage/widgets.dart';
 
 @lazySingleton
 class MenuPageViewModel {
+  int selectedFilterIndex = -1;
   List<Widget> items = [];
   static List<GlobalKey> keys = [];
   reArrangeCategory({required BuildContext context}) {

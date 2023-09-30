@@ -5,9 +5,14 @@ createAppBar(BuildContext context) {
     elevation: 0,
     backgroundColor: Colors.transparent,
     automaticallyImplyLeading: false,
-    title: const Row(
+    title: Row(
       children: [
-        Text("DINE",
+        Image.asset(
+          'assets/Smallwith White BG.png',
+          height: 100,
+          // width: 200,
+        ),
+        const Text("Feast",
             style: TextStyle(
               color: Colors.black,
               fontSize: 24,

@@ -34,17 +34,18 @@ class HomePage extends StatelessWidget {
     viewModel.getCategory(context);
     return Consumer<HomeProvider>(builder: (_, ref, __) {
       return Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: Container(
-              height: 100,
-              width: 100,
-              child: Image.asset(
-                'assets/Small with Black BG.png',
-                width: 200,
-              ),
-            ),
-          ),
+          // appBar: AppBar(
+          //   backgroundColor: Colors.transparent,
+          //   automaticallyImplyLeading: false,
+          //   title: Container(
+          //     height: 100,
+          //     width: 100,
+          //     child: Image.asset(
+          //       'assets/Small with Black BG.png',
+          //       width: 200,
+          //     ),
+          //   ),
+          // ),
           body: screen[index],
           bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
@@ -61,11 +62,12 @@ class HomePage extends StatelessWidget {
               ),
               selectedIconTheme: const IconThemeData(
                 size: 18,
-                color: AppColor.purpleColor,
+                color: Color(0xff53389E),
               ),
               unselectedItemColor: AppColor.blackText,
-              selectedLabelStyle:
-                  AppTypography.smallText.copyWith(color: AppColor.purpleColor),
+              selectedLabelStyle: AppTypography.smallText.copyWith(
+                color: Color(0xff53389E),
+              ),
               unselectedLabelStyle:
                   AppTypography.smallText.copyWith(color: AppColor.purpleColor),
               items: const [

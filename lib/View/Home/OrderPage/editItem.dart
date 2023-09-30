@@ -28,6 +28,11 @@ class EditItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = GetIt.instance<OrderViewModel>();
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: IconThemeData(),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(

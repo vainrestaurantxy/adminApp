@@ -581,13 +581,13 @@ class AddPage extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           log('button pressed1');
-                          // if (imageError == 'first') {
-                          //   log('image error $imageError');
-                          //   imageError = '';
-                          //   ref.notifyListeners();
-                          //   log('image error $imageError');
-                          //   return;
-                          // }
+                          if (imageError == 'first') {
+                            log('image error $imageError');
+                            imageError = '';
+                            ref.notifyListeners();
+                            log('image error $imageError');
+                            return;
+                          }
                           log('button pressed2');
                           //  log(category);
                           if (category == 'first') {
