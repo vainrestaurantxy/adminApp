@@ -581,9 +581,9 @@ class AddPage extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           log('button pressed1');
-                          if (imageError == 'first') {
+                          if (viewModel.dishImage == null) {
                             log('image error $imageError');
-                            imageError = '';
+                            imageError = 'Image Not Uploaded';
                             ref.notifyListeners();
                             log('image error $imageError');
                             return;

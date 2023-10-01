@@ -27,7 +27,6 @@ class Item extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 43.h,
           width: double.infinity,
           child: Row(
             mainAxisSize: MainAxisSize.min,

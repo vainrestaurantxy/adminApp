@@ -159,18 +159,78 @@ class OrderItem extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Container(
-                                    width: 18.w,
-                                    height: 18.w,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: const BoxDecoration(
-                                      color: AppColor.purpleColor,
-                                    ),
-                                    child: const Center(
-                                      child: Icon(
-                                        Icons.check,
-                                        color: AppColor.white,
-                                        size: 18,
+                                  GestureDetector(
+                                    onTap:
+                                        (order["orderStatus"] ==
+                                                    "Order Confirmed" ||
+                                                order["orderStatus"] ==
+                                                    "Order Delivered" ||
+                                                order["orderStatus"] ==
+                                                    "Order Paid")
+                                            ? null
+                                            : () async {
+                                                DocumentSnapshot<
+                                                        Map<String,
+                                                            dynamic>>
+                                                    data =
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection(
+                                                            "Restaurants")
+                                                        .doc(FirebaseAuth
+                                                            .instance
+                                                            .currentUser!
+                                                            .uid)
+                                                        .collection("Orders")
+                                                        .doc(
+                                                            '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                                        .get();
+
+                                                Map<String, dynamic>? json =
+                                                    data.data();
+
+                                                json!["order"][index]
+                                                        ["orderStatus"] =
+                                                    "Order Confirmed";
+
+                                                await FirebaseFirestore.instance
+                                                    .collection("Restaurants")
+                                                    .doc(FirebaseAuth.instance
+                                                        .currentUser!.uid)
+                                                    .collection("Orders")
+                                                    .doc(
+                                                        '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                                    .set(json);
+                                              },
+                                    child: Container(
+                                      width: 18.w,
+                                      height: 18.w,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            (order["orderStatus"] ==
+                                                        "Order Confirmed" ||
+                                                    order["orderStatus"] ==
+                                                        "Order Delivered" ||
+                                                    order["orderStatus"] ==
+                                                        "Order Paid")
+                                                ? AppColor.purpleColor
+                                                : Colors.white,
+                                      ),
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.check,
+                                          color:
+                                              (order["orderStatus"] ==
+                                                          "Order Confirmed" ||
+                                                      order["orderStatus"] ==
+                                                          "Order Delivered" ||
+                                                      order["orderStatus"] ==
+                                                          "Order Paid")
+                                                  ? AppColor.white
+                                                  : AppColor.purpleColor,
+                                          size: 18,
+                                        ),
                                       ),
                                     ),
                                   ),

@@ -50,17 +50,30 @@ class AddViewModel {
     }
     print("bestWith:");
     print(recommendedWithau);
-    dish = dish!.copyWith(
-      name: name,
-      category: category,
-      description: desc,
-      discount: int.parse(discount),
-      itemType: itemType,
-      price: int.parse(price),
-      recommendedWith: recommendedWithau,
-      tags: tags,
-      tax: int.parse(tax),
-    );
+    if (discount == null || discount == "null" || discount == "") {
+      dish = dish!.copyWith(
+        name: name,
+        category: category,
+        description: desc,
+        discount: 0,
+        itemType: itemType,
+        price: int.parse(price),
+        recommendedWith: recommendedWithau,
+        tags: tags,
+        tax: int.parse(tax),
+      );
+    } else
+      dish = dish!.copyWith(
+        name: name,
+        category: category,
+        description: desc,
+        discount: int.parse(discount),
+        itemType: itemType,
+        price: int.parse(price),
+        recommendedWith: recommendedWithau,
+        tags: tags,
+        tax: int.parse(tax),
+      );
 
     // print(dish.toString());
     log('json awaiting');

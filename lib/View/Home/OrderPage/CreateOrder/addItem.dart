@@ -431,7 +431,7 @@ class AddItemOrder extends StatelessWidget {
                                                               0.05) -
                                                       ref.getDiscount(),
                                                   orderStatus:
-                                                      "Order Confirmed",
+                                                      "Order Placed",
                                                   tableNo: table);
                                               viewModel.saveOrder(
                                                   order, context);

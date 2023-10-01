@@ -2,6 +2,7 @@ import 'package:admin_app/Data/Providers/cartProvider.dart';
 import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Providers/imageUpload.dart';
 import 'package:admin_app/ViewModel/HomeViewModel/AddPageViewModel.dart';
+import 'package:admin_app/ViewModel/HomeViewModel/menuPageViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,10 @@ void main() async {
     ListenableProvider<CartProvider>(
       create: (_) => CartProvider(),
     ),
-    ListenableProvider<HomeProvider>(create: (_) => HomeProvider())
+    ListenableProvider<HomeProvider>(
+      create: (_) => HomeProvider(),
+    ),
+    ListenableProvider<MenuPageViewModel>(create: (_) => MenuPageViewModel())
   ], child: const MyApp()));
 }
 
