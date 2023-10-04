@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../Constants/Colors/colors.dart';
 import '../../Constants/Typography/typography.dart';
 
-Widget header({String text = "RestaurantXY"}) {
+Widget header({String text = "Feast"}) {
   return SizedBox(
     width: 428.w,
     height: 344.h,
