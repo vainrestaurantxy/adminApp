@@ -4,10 +4,7 @@ import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Repositories/DatabaseConnection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-<<<<<<< Updated upstream
 import 'package:flutter/material.dart';
-=======
->>>>>>> Stashed changes
 
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
