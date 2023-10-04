@@ -41,6 +41,7 @@ class MenuPageViewModel extends ChangeNotifier {
     List<Widget> items = [];
     List<String> category = [];
 
+<<<<<<< Updated upstream
     if (tag == "") {
       for (var i in categoryDividedMenu.entries) {
         // keys.add(GlobalKey());
@@ -59,6 +60,21 @@ class MenuPageViewModel extends ChangeNotifier {
                     fontSize: 18,
                     fontWeight: FontWeight.w700),
               ),
+=======
+    for (var i in categoryDividedMenu.entries) {
+      keys.add(GlobalKey());
+      items.add(
+        ExpansionTile(
+          key: keys[keys.length - 1],
+          title: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              i.key,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700),
+>>>>>>> Stashed changes
             ),
             childrenPadding: const EdgeInsets.all(8),
             initiallyExpanded: true,
@@ -73,6 +89,7 @@ class MenuPageViewModel extends ChangeNotifier {
                     code: i.value[index].code ?? "",
                     tags: i.value[index].tags ?? [])),
           ),
+<<<<<<< Updated upstream
         );
       }
     } else {
@@ -114,6 +131,22 @@ class MenuPageViewModel extends ChangeNotifier {
           ),
         );
       }
+=======
+          childrenPadding: const EdgeInsets.all(8),
+          initiallyExpanded: true,
+          children: List.generate(
+              i.value.length,
+              (index) => Item(
+                  item: i.value[index],
+                  image: i.value[index].image!,
+                  desc: i.value[index].description!,
+                  price: i.value[index].price!,
+                  name: i.value[index].name!,
+                  code: i.value[index].code ?? "",
+                  tags: i.value[index].tags!)),
+        ),
+      );
+>>>>>>> Stashed changes
     }
     this.items = items;
     tags = category;

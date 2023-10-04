@@ -58,10 +58,16 @@ class AddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = GetIt.instance<AddViewModel>();
+<<<<<<< Updated upstream
     final data = prov.Provider.of<RestaurantData>(context, listen: false);
     final repo = prov.Provider.of<GetMenu>(context, listen: false);
     repo.getMenu();
     //log('logging ${viewModel.getMenu().toString()}');
+=======
+    final data = Provider.of<RestaurantData>(context, listen: false);
+
+    log('logging ${viewModel.getMenu().toString()}');
+>>>>>>> Stashed changes
     if (data.isClub) {
       itemType = "Drink";
     }
