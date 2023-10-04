@@ -22,44 +22,60 @@ class EmailPage extends StatelessWidget {
     final viewModel = GetIt.instance<AuthViewModel>();
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
+        child: Stack(
           children: [
-            header(text: "FORGOT PASSWORD?"),
-            SizedBox(
-              height: 28.h,
+            Column(
+              children: [
+                header(text: "FORGOT PASSWORD?"),
+                SizedBox(
+                  height: 28.h,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Consumer<ErrorProvider>(
+                    builder: (_, ref, __) {
+                      return Column(
+                        children: [
+                          CustomTextField(
+                            controller: email,
+                            errorText: ref.registerEmail,
+                            hintText: "Enter Email Id",
+                          ),
+                          SizedBox(
+                            height: 8.h,
+                          ),
+                          GestureDetector(
+                              onTap: () {
+                                if (viewModel.validateEmail(
+                                    email.text, context)) {
+                                  viewModel.sendrestLink(email.text);
+                                  context.go('/login');
+                                }
+                              },
+                              child: PrimaryButton(
+                                text: "Send Me Password Link",
+                              ))
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 43.h,
+                )
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Consumer<ErrorProvider>(
-                builder: (_, ref, __) {
-                  return Column(
-                    children: [
-                      CustomTextField(
-                        controller: email,
-                        errorText: ref.registerEmail,
-                        hintText: "Enter Email Id",
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      GestureDetector(
-                          onTap: () {
-                            if (viewModel.validateEmail(email.text, context)) {
-                              viewModel.sendrestLink(email.text);
-                              context.go('/login');
-                            }
-                          },
-                          child: PrimaryButton(
-                            text: "Send Me Password Link",
-                          ))
-                    ],
-                  );
-                },
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                    onPressed: () {
+                      context.pop();
+                    },
+                    icon: Icon(Icons.arrow_back)),
               ),
             ),
-                  SizedBox(
-                    height: 43.h,
-                  )
           ],
         ),
       ),
