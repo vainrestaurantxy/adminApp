@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart' as prov;
+import 'package:provider/provider.dart';
 import 'package:web_toast/web_toast.dart';
 
 import '../../../Constants/Colors/colors.dart';
@@ -58,16 +59,9 @@ class AddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = GetIt.instance<AddViewModel>();
-<<<<<<< Updated upstream
-    final data = prov.Provider.of<RestaurantData>(context, listen: false);
-    final repo = prov.Provider.of<GetMenu>(context, listen: false);
-    repo.getMenu();
-    //log('logging ${viewModel.getMenu().toString()}');
-=======
     final data = Provider.of<RestaurantData>(context, listen: false);
 
     log('logging ${viewModel.getMenu().toString()}');
->>>>>>> Stashed changes
     if (data.isClub) {
       itemType = "Drink";
     }

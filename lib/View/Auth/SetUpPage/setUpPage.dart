@@ -67,11 +67,7 @@ class SetUpPage extends StatelessWidget {
                         height: 8,
                       ),
                       CustomTextField(
-<<<<<<< Updated upstream
-                        errorText: ref.restaurantState,
-=======
                         errorText: ref.restaurantAddress,
->>>>>>> Stashed changes
                         hintText: "Enter Address",
                         controller: restaurantState,
                         label: Text(
