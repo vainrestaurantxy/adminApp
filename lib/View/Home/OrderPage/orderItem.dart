@@ -147,7 +147,15 @@ class OrderItem extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: ShapeDecoration(
-                                color: AppColor.purpleColor,
+                                color:
+                                    (order["orderStatus"] ==
+                                                "Order Confirmed" ||
+                                            order["orderStatus"] ==
+                                                "Order Delivered" ||
+                                            order["orderStatus"] ==
+                                                "Order Paid")
+                                        ? AppColor.purpleColor
+                                        : Colors.white,
                                 shape: RoundedRectangleBorder(
                                   side: const BorderSide(
                                       width: 0.50, color: Color(0xFF241D43)),
