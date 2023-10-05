@@ -31,7 +31,7 @@ class EditItem extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(),
+        iconTheme: const IconThemeData(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -91,151 +91,136 @@ class EditItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          width: 324.w,
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 203.w,
-                                                      child: Text.rich(
-                                                        TextSpan(
-                                                          children: [
-                                                            const TextSpan(
-                                                              text:
-                                                                  'Table Number: ',
-                                                              style: TextStyle(
-                                                                color: Color(
-                                                                    0xFF3B3F5C),
-                                                                fontSize: 16,
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                              ),
-                                                            ),
-                                                            TextSpan(
-                                                              text: '${table}',
-                                                              style:
-                                                                  const TextStyle(
-                                                                color: Color(
-                                                                    0xFF53389E),
-                                                                fontSize: 16,
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                              ),
-                                                            ),
-                                                          ],
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: 324.w,
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  width: 203.w,
+                                                  child: Text.rich(
+                                                    TextSpan(
+                                                      children: [
+                                                        const TextSpan(
+                                                          text:
+                                                              'Table Number: ',
+                                                          style: TextStyle(
+                                                            color: Color(
+                                                                0xFF3B3F5C),
+                                                            fontSize: 16,
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
                                                         ),
-                                                      ),
+                                                        TextSpan(
+                                                          text: '${table}',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Color(
+                                                                0xFF53389E),
+                                                            fontSize: 16,
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(width: 16.w),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        SizedBox(
-                                          width: 233.w,
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                width: double.infinity,
-                                                child: Text.rich(
-                                                  TextSpan(
-                                                    children: [
-                                                      TextSpan(
-                                                        text: 'Customer Name: ',
-                                                        style: AppTypography
-                                                            .smallText,
-                                                      ),
-                                                      TextSpan(
-                                                        text: '\n',
-                                                        style: AppTypography
-                                                            .smallText
-                                                            .copyWith(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: AppColor
-                                                                    .purpleColor),
-                                                      ),
-                                                      TextSpan(
-                                                        text:
-                                                            'Customer Contact:',
-                                                        style: AppTypography
-                                                            .smallText,
-                                                      ),
-                                                      TextSpan(
-                                                        text: phone,
-                                                        style: AppTypography
-                                                            .smallText
-                                                            .copyWith(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: AppColor
-                                                                    .purpleColor),
-                                                      ),
-                                                    ],
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
+                                    SizedBox(width: 16.w),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    SizedBox(
+                                      width: 233.w,
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: double.infinity,
+                                            child: Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Customer Name: ',
+                                                    style:
+                                                        AppTypography.smallText,
+                                                  ),
+                                                  TextSpan(
+                                                    text: '\n',
+                                                    style: AppTypography
+                                                        .smallText
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: AppColor
+                                                                .purpleColor),
+                                                  ),
+                                                  TextSpan(
+                                                    text: 'Customer Contact:',
+                                                    style:
+                                                        AppTypography.smallText,
+                                                  ),
+                                                  TextSpan(
+                                                    text: phone,
+                                                    style: AppTypography
+                                                        .smallText
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: AppColor
+                                                                .purpleColor),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ],
                         ),

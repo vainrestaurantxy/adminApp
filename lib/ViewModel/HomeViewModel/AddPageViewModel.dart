@@ -281,8 +281,8 @@ class GetMenu extends ChangeNotifier {
 
     List<String> temp = [];
     if (snapshot.exists) {
-      //  log('item name ${snapshot.data()!['menu'][0]['name'].toString()}');
       final data = snapshot.data();
+
       List<dynamic> menu = data!['menu'];
       for (int i = 0; i < menu.length; i++) {
         temp.add(menu[i]['name']);

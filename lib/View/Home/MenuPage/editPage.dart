@@ -37,18 +37,7 @@ class EditPage extends StatelessWidget {
   String itemType = 'Dish';
   String radioValue = 'Exclusive';
   String category = "";
-  final List<String> tags = [
-    "Egg",
-    "Chicken",
-    "Salad",
-    "Raita",
-    "Juice",
-    "Paratha",
-    "Pasta",
-    "Coke",
-    "Pizza",
-    "Barfi"
-  ];
+  final List<String> tags = [];
   int indexTags = -1;
   List<String> bestwith = [];
 
@@ -453,6 +442,44 @@ class EditPage extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
+                      Consumer<GetMenu>(
+                        builder: (context, getMenu, child) {
+                          getMenu.getMenu();
+                          final listt = getMenu.dishesList;
+                          //  bestwith;
+                          log('dishes list ${listt.toString()}');
+                          return Wrap(
+                            children: List.generate(listt.length, (index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: GestureDetector(
+                                    onTap: () {
+                                      if (!bestwith.contains(listt[index])) {
+                                        if (bestwith.length < 3) {
+                                          bestwith.add("${listt[index]}");
+                                          getMenu.notifyListeners();
+                                          //  log('bestwith me ${bestwith.toString()}');
+                                        }
+                                      } else {
+                                        bestwith.remove(listt[index]);
+                                        getMenu.notifyListeners();
+                                      }
+                                      ref.update();
+                                      log(bestwith
+                                          .contains(listt[index])
+                                          .toString());
+                                    },
+                                    child: Selectable(
+                                      text: listt[index],
+                                      selected: bestwith.contains(listt[index]),
+                                      number:
+                                          bestwith.indexOf(listt[index]) + 1,
+                                    )),
+                              );
+                            }),
+                          );
+                        },
+                      ),
                       Wrap(
                         children: List.generate(
                             tags.length,
@@ -528,7 +555,10 @@ class EditPage extends StatelessWidget {
                         child: PrimaryButton(
                           text: "Update Dish",
                         ),
-                      )
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
                     ],
                   );
                 },

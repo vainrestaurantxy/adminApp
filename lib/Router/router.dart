@@ -105,8 +105,8 @@ final GoRouter router = GoRouter(
                     }),
               ]),
           GoRoute(
-              redirect: (context, state) {
-                return GetIt.instance<Redirect>().redirect(state);
+              redirect: (context, state) async {
+                return await GetIt.instance<Redirect>().redirect(state);
               },
               path: 'register',
               builder: (context, state) {
@@ -114,8 +114,8 @@ final GoRouter router = GoRouter(
               },
               routes: [
                 GoRoute(
-                    redirect: (context, state) {
-                      return GetIt.instance<Redirect>().redirect(state);
+                    redirect: (context, state) async {
+                      return await GetIt.instance<Redirect>().redirect(state);
                     },
                     path: 'setup',
                     builder: (context, state) {
