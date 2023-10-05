@@ -92,7 +92,7 @@ class ProfilePage extends StatelessWidget {
                     SizedBox(
                       width: 396.w,
                       child: Text(
-                        'Your need to contact RestaurantXY help to edit email id.',
+                        'Your need to contact Feast help to edit email id.',
                         style: AppTypography.smallText
                             .copyWith(color: AppColor.disabledColor),
                       ),

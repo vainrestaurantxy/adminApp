@@ -150,8 +150,7 @@ class _ItemState extends State<Item> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: (MediaQuery.of(context).size.width / 428) * 252 -
-                            60,
+                        width: (MediaQuery.of(context).size.width / 428) * 252,
                         child: Text(widget.name,
                             overflow: TextOverflow.fade,
                             style: const TextStyle(
@@ -174,7 +173,7 @@ class _ItemState extends State<Item> {
                     height: 10,
                   ),
                   SizedBox(
-                    width: (MediaQuery.of(context).size.width / 428) * 252 - 60,
+                    width: (MediaQuery.of(context).size.width / 428) * 252,
                     child: Text(widget.desc,
                         style: const TextStyle(
                           fontSize: 12,

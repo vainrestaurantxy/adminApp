@@ -20,7 +20,7 @@ class SecondaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width.w,
-      height: 53.h,
+      //  height: 53.h,
       padding: const EdgeInsets.all(16),
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
@@ -29,17 +29,11 @@ class SecondaryButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            text,
-            style:
-                AppTypography.smallText.copyWith(fontWeight: FontWeight.w600),
-          ),
-        ],
+      child: Center(
+        child: Text(
+          text,
+          style: AppTypography.smallText.copyWith(fontWeight: FontWeight.w600),
+        ),
       ),
     );
   }
