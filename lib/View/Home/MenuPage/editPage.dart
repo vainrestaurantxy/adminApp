@@ -17,6 +17,7 @@ import '../../../Constants/Widgets/selectable.dart';
 import '../../../Data/Providers/cartProvider.dart';
 import '../../../Data/Providers/errorProvider.dart';
 import '../../../Data/Providers/homeProvider.dart';
+import '../../../Data/Providers/imageUpload.dart';
 import '../../../Data/Providers/restaurantProvider.dart';
 import '../../../Model/RestaurantMenu/restaurantMenu.dart';
 import '../../../ViewModel/HomeViewModel/AddPageViewModel.dart';
@@ -152,10 +153,66 @@ class EditPage extends StatelessWidget {
                       GestureDetector(
                           onTap: () async {
                             await viewModel.getImagefromDevice();
+
                             viewModel.uploadImage(context);
+                            // imageError = 'first';
+
+                            ref.notifyListeners();
                           },
-                          child:
-                              SecondaryButton(text: "Upload Item Thumbnail")),
+                          child: SecondaryButton(
+                              text: viewModel.dish?.image == null
+                                  ? "Upload Item Thumbnail"
+                                  : "Uploaded Item Thumbnail")),
+
+                      // const SizedBox(
+                      //   height: 10,
+                      // ),
+                      Consumer<ImageUpload>(
+                        builder: (context, ref, _) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text((ref.uploadTotalBytes == ref.uploadedBytes)
+                                  ? (ref.uploadedBytes == 0)
+                                      ? ""
+                                      : "Uploaded ${viewModel.dishImage?.name}"
+                                  : "Uploading ${viewModel.dishImage?.name}"),
+                              const SizedBox(
+                                height: 26,
+                              ),
+                              SizedBox(
+                                child:
+                                    (ref.uploadTotalBytes == ref.uploadedBytes)
+                                        ? const SizedBox()
+                                        : Column(
+                                            children: [
+                                              LinearProgressIndicator(
+                                                backgroundColor: AppColor.grey,
+                                                color: AppColor.purpleColor,
+                                                value: ref.uploadedBytes /
+                                                    (ref.uploadTotalBytes == 0
+                                                        ? 1
+                                                        : ref.uploadTotalBytes),
+                                              ),
+                                              const SizedBox(
+                                                height: 16,
+                                              ),
+                                              // GestureDetector(
+                                              //   onTap: () {
+                                              //     context.go('/register/setup/logo/upload/preview');
+                                              //   },
+                                              //   child: PrimaryButton(
+                                              //     text: "Proceed",
+                                              //     disabled: ref.uploadedBytes != ref.uploadTotalBytes,
+                                              //   ),
+                                              // )
+                                            ],
+                                          ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                       const SizedBox(
                         height: 8,
                       ),
@@ -543,7 +600,8 @@ class EditPage extends StatelessWidget {
                                     listen: false)
                                 .categoryDividedMenu);
                             print(viewModelmenu.items);
-
+                            viewModel.dishImage = null;
+                            viewModel.dish = null;
                             Navigator.pop(context);
 
                             Toast.success(
