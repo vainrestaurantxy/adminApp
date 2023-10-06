@@ -96,7 +96,7 @@ class AddViewModel {
         merge: true);
   }
 
-  updateDish(
+ Future<void> updateDish(
       {required String name,
       required String category,
       required String desc,

@@ -173,7 +173,8 @@ class EditPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text((ref.uploadTotalBytes == ref.uploadedBytes)
-                                  ? (ref.uploadedBytes == 0)
+                                  ? (ref.uploadedBytes == 0 ||
+                                          viewModel.dishImage?.name == null)
                                       ? ""
                                       : "Uploaded ${viewModel.dishImage?.name}"
                                   : "Uploading ${viewModel.dishImage?.name}"),
@@ -566,7 +567,7 @@ class EditPage extends StatelessWidget {
                         height: 8,
                       ),
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (viewModel.validate(name.text, desc.text,
                               price.text, tax.text, discount.text, context)) {
                             String tag = "";
@@ -577,7 +578,7 @@ class EditPage extends StatelessWidget {
                             } else {
                               tag = "Recommended";
                             }
-                            viewModel.updateDish(
+                            await viewModel.updateDish(
                                 orgName: orgName,
                                 name: name.text,
                                 image: item.image!,
