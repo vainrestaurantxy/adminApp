@@ -642,6 +642,7 @@ class AddPage extends StatelessWidget {
                             price.clear();
                             imageError = 'first';
                             bestwith.clear();
+                            viewModel.dish = null;
                             tag = "";
                             prov.Provider.of<ImageUpload>(context,
                                     listen: false)

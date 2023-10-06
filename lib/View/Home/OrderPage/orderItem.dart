@@ -147,6 +147,7 @@ class OrderItem extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: ShapeDecoration(
+                                
                                 color:
                                     (order["orderStatus"] ==
                                                 "Order Confirmed" ||
