@@ -32,7 +32,7 @@ class AddPage extends StatelessWidget {
   TextEditingController name = TextEditingController();
   TextEditingController desc = TextEditingController();
   TextEditingController price = TextEditingController();
-  TextEditingController tax = TextEditingController();
+  TextEditingController tax = TextEditingController(text: '5');
   TextEditingController discount = TextEditingController();
   String genre = 'first';
   String itemType = 'Dish';
@@ -68,7 +68,6 @@ class AddPage extends StatelessWidget {
     if (data.category.isNotEmpty) {
       category = data.category[0];
     }
-    tax.text = "5";
 
     return Scaffold(
       body: Padding(
@@ -303,6 +302,8 @@ class AddPage extends StatelessWidget {
                                 errorText: error.tax,
                                 readOnly: true,
                                 //  hintText: 'Enter VAT',
+                                enabled: true,
+
                                 keyboardType: TextInputType.number,
                                 label: const Text("VAT(%)"),
                               ),
@@ -632,7 +633,7 @@ class AddPage extends StatelessWidget {
                             // Future.delayed(Duration(seconds: 2));
                             name.clear();
                             desc.clear();
-                            tax.clear();
+                            tax.text = '5';
                             viewModel.dishImage = null;
                             indexTags = -1;
                             discount.clear();
