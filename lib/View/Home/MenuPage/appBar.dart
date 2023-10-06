@@ -8,8 +8,8 @@ createAppBar(BuildContext context) {
     title: Row(
       children: [
         Image.asset(
-          'assets/Smallwith White BG.png',
-          height: 100,
+          'assets/Logo Feast.png',
+          height: 30,
           // width: 200,
         ),
         const Text("Feast",
