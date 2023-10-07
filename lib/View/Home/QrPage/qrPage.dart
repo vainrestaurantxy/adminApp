@@ -86,28 +86,29 @@ class QRPage extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            CustomTextField(
-              readOnly: readOnly,
-              onChanged: (v) {
-                final ref = Provider.of<ErrorProvider>(context, listen: false);
-                if (ref.validateNumberOnly(v) == null) {
-                  Provider.of<HomeProvider>(context, listen: false)
-                      .notifyListeners();
-                }
+            Listener(
+              onPointerDown: (e) {
+                readOnly = false;
+                ref.notifyListeners();
               },
-              controller: tables,
-              keyboardType: TextInputType.number,
-              label: const Text("Number of Tables"),
-              maxLength: 3,
-              hintText: "Enter Tables",
-              suffix: SizedBox(
-                  height: 13,
-                  child: GestureDetector(
-                      onTap: () {
-                        readOnly = false;
-                        ref.notifyListeners();
-                      },
-                      child: IcnBtn(isenabled: readOnly))),
+              child: CustomTextField(
+                readOnly: readOnly,
+                onChanged: (v) {
+                  final ref =
+                      Provider.of<ErrorProvider>(context, listen: false);
+                  if (ref.validateNumberOnly(v) == null) {
+                    Provider.of<HomeProvider>(context, listen: false)
+                        .notifyListeners();
+                  }
+                },
+                controller: tables,
+                keyboardType: TextInputType.number,
+                label: const Text("Number of Tables"),
+                maxLength: 3,
+                hintText: "Enter Tables",
+                suffix:
+                    SizedBox(height: 13, child: IcnBtn(isenabled: readOnly)),
+              ),
             ),
             const SizedBox(
               height: 8,
