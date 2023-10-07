@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:admin_app/Constants/Colors/colors.dart';
+import 'package:admin_app/Constants/Widgets/SecondaryButton.dart';
 import 'package:admin_app/Data/Providers/cartProvider.dart';
 import 'package:admin_app/Model/RestaurantMenu/restaurantMenu.dart';
 import 'package:admin_app/View/Home/OrderPage/CreateOrder/item.dart';
@@ -10,6 +11,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
+import '../../../Constants/Typography/typography.dart';
 
 class OrderItem extends StatelessWidget {
   OrderItem(
@@ -31,7 +34,6 @@ class OrderItem extends StatelessWidget {
 
     final today =
         '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}';
-    print('today $today');
 
     Future<String> getlatestDate() async {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -41,13 +43,9 @@ class OrderItem extends StatelessWidget {
           .get();
 
       if (querySnapshot.docs.isNotEmpty) {
-        // The document.id contains the name of the document
-        print(
-            'todayDoc ${querySnapshot.docs[querySnapshot.docs.length - 1].id}');
         return querySnapshot.docs[querySnapshot.docs.length - 1].id;
       } else {
-        // Return an appropriate value or handle the case where no documents are found
-        return ""; // You can change this to suit your needs
+        return "";
       }
     }
 
@@ -138,84 +136,89 @@ class OrderItem extends StatelessWidget {
                         ),
                       ),
                       // SizedBox(width: 139.w),
-                      Container(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: ShapeDecoration(
-                                
-                                color:
-                                    (order["orderStatus"] ==
-                                                "Order Confirmed" ||
-                                            order["orderStatus"] ==
-                                                "Order Delivered" ||
-                                            order["orderStatus"] ==
-                                                "Order Paid")
-                                        ? AppColor.purpleColor
-                                        : Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  side: const BorderSide(
-                                      width: 0.50, color: Color(0xFF241D43)),
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: ShapeDecoration(
+                              color:
+                                  (order["orderStatus"] == "Order Confirmed" ||
+                                          order["orderStatus"] ==
+                                              "Order Delivered" ||
+                                          order["orderStatus"] == "Order Paid")
+                                      ? AppColor.purpleColor
+                                      : Colors.white,
+                              shape: RoundedRectangleBorder(
+                                side: const BorderSide(
+                                    width: 0.50, color: Color(0xFF241D43)),
+                                borderRadius: BorderRadius.circular(6),
                               ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  GestureDetector(
-                                    onTap:
-                                        (order["orderStatus"] ==
-                                                    "Order Confirmed" ||
-                                                order["orderStatus"] ==
-                                                    "Order Delivered" ||
-                                                order["orderStatus"] ==
-                                                    "Order Paid")
-                                            ? null
-                                            : () async {
-                                                DocumentSnapshot<
-                                                        Map<String,
-                                                            dynamic>>
-                                                    data =
-                                                    await FirebaseFirestore
-                                                        .instance
-                                                        .collection(
-                                                            "Restaurants")
-                                                        .doc(FirebaseAuth
-                                                            .instance
-                                                            .currentUser!
-                                                            .uid)
-                                                        .collection("Orders")
-                                                        .doc(
-                                                            '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
-                                                        .get();
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap:
+                                      (order["orderStatus"] ==
+                                                  "Order Confirmed" ||
+                                              order["orderStatus"] ==
+                                                  "Order Delivered" ||
+                                              order["orderStatus"] ==
+                                                  "Order Paid")
+                                          ? null
+                                          : () async {
+                                              DocumentSnapshot<
+                                                      Map<String, dynamic>>
+                                                  data =
+                                                  await FirebaseFirestore
+                                                      .instance
+                                                      .collection("Restaurants")
+                                                      .doc(FirebaseAuth.instance
+                                                          .currentUser!.uid)
+                                                      .collection("Orders")
+                                                      .doc(
+                                                          '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                                      .get();
 
-                                                Map<String, dynamic>? json =
-                                                    data.data();
+                                              Map<String, dynamic>? json =
+                                                  data.data();
 
-                                                json!["order"][index]
-                                                        ["orderStatus"] =
-                                                    "Order Confirmed";
+                                              json!["order"][index]
+                                                      ["orderStatus"] =
+                                                  "Order Confirmed";
 
-                                                await FirebaseFirestore.instance
-                                                    .collection("Restaurants")
-                                                    .doc(FirebaseAuth.instance
-                                                        .currentUser!.uid)
-                                                    .collection("Orders")
-                                                    .doc(
-                                                        '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
-                                                    .set(json);
-                                              },
-                                    child: Container(
-                                      width: 18.w,
-                                      height: 18.w,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: BoxDecoration(
+                                              await FirebaseFirestore.instance
+                                                  .collection("Restaurants")
+                                                  .doc(FirebaseAuth.instance
+                                                      .currentUser!.uid)
+                                                  .collection("Orders")
+                                                  .doc(
+                                                      '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                                  .set(json);
+                                            },
+                                  child: Container(
+                                    width: 18.w,
+                                    height: 18.w,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          (order["orderStatus"] ==
+                                                      "Order Confirmed" ||
+                                                  order["orderStatus"] ==
+                                                      "Order Delivered" ||
+                                                  order["orderStatus"] ==
+                                                      "Order Paid")
+                                              ? AppColor.purpleColor
+                                              : Colors.white,
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.check,
                                         color:
                                             (order["orderStatus"] ==
                                                         "Order Confirmed" ||
@@ -223,169 +226,152 @@ class OrderItem extends StatelessWidget {
                                                         "Order Delivered" ||
                                                     order["orderStatus"] ==
                                                         "Order Paid")
-                                                ? AppColor.purpleColor
-                                                : Colors.white,
+                                                ? AppColor.white
+                                                : AppColor.purpleColor,
+                                        size: 18,
                                       ),
-                                      child: Center(
-                                        child: Icon(
-                                          Icons.check,
-                                          color:
-                                              (order["orderStatus"] ==
-                                                          "Order Confirmed" ||
-                                                      order["orderStatus"] ==
-                                                          "Order Delivered" ||
-                                                      order["orderStatus"] ==
-                                                          "Order Paid")
-                                                  ? AppColor.white
-                                                  : AppColor.purpleColor,
-                                          size: 18,
-                                        ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 8.w),
+                          GestureDetector(
+                            onTap: (order["orderStatus"] == "Order Delivered" ||
+                                    order["orderStatus"] == "Order Paid")
+                                ? null
+                                : () async {
+                                    DocumentSnapshot<Map<String, dynamic>>
+                                        data = await FirebaseFirestore.instance
+                                            .collection("Restaurants")
+                                            .doc(FirebaseAuth
+                                                .instance.currentUser!.uid)
+                                            .collection("Orders")
+                                            .doc(
+                                                '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                            .get();
+
+                                    Map<String, dynamic>? json = data.data();
+
+                                    json!["order"][index]["orderStatus"] =
+                                        "Order Delivered";
+
+                                    await FirebaseFirestore.instance
+                                        .collection("Restaurants")
+                                        .doc(FirebaseAuth
+                                            .instance.currentUser!.uid)
+                                        .collection("Orders")
+                                        .doc(
+                                            '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                        .set(json);
+                                  },
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: ShapeDecoration(
+                                color: (order["orderStatus"] ==
+                                            "Order Delivered" ||
+                                        order["orderStatus"] == "Order Paid")
+                                    ? AppColor.purpleColor
+                                    : AppColor.white,
+                                shape: RoundedRectangleBorder(
+                                  side: const BorderSide(
+                                      width: 1, color: Color(0xFF241C43)),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 18.w,
+                                    height: 18.w,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: const BoxDecoration(),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.room_service_outlined,
+                                        color: (order["orderStatus"] ==
+                                                    "Order Delivered" ||
+                                                order["orderStatus"] ==
+                                                    "Order Paid")
+                                            ? AppColor.white
+                                            : AppColor.purpleColor,
+                                        size: 18,
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            SizedBox(width: 8.w),
-                            GestureDetector(
-                              onTap: (order["orderStatus"] ==
-                                          "Order Delivered" ||
-                                      order["orderStatus"] == "Order Paid")
-                                  ? null
-                                  : () async {
-                                      DocumentSnapshot<Map<String, dynamic>>
-                                          data = await FirebaseFirestore
-                                              .instance
-                                              .collection("Restaurants")
-                                              .doc(FirebaseAuth
-                                                  .instance.currentUser!.uid)
-                                              .collection("Orders")
-                                              .doc(
-                                                  '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
-                                              .get();
-
-                                      Map<String, dynamic>? json = data.data();
-
-                                      json!["order"][index]["orderStatus"] =
-                                          "Order Delivered";
-
-                                      await FirebaseFirestore.instance
-                                          .collection("Restaurants")
-                                          .doc(FirebaseAuth
-                                              .instance.currentUser!.uid)
-                                          .collection("Orders")
-                                          .doc(
-                                              '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
-                                          .set(json);
-                                    },
-                              child: Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: ShapeDecoration(
-                                  color: (order["orderStatus"] ==
-                                              "Order Delivered" ||
-                                          order["orderStatus"] == "Order Paid")
-                                      ? AppColor.purpleColor
-                                      : AppColor.white,
-                                  shape: RoundedRectangleBorder(
-                                    side: const BorderSide(
-                                        width: 1, color: Color(0xFF241C43)),
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 18.w,
-                                      height: 18.w,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: const BoxDecoration(),
-                                      child: Center(
-                                        child: Icon(
-                                          Icons.room_service_outlined,
-                                          color: (order["orderStatus"] ==
-                                                      "Order Delivered" ||
-                                                  order["orderStatus"] ==
-                                                      "Order Paid")
-                                              ? AppColor.white
-                                              : AppColor.purpleColor,
-                                          size: 18,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                          ),
+                          SizedBox(width: 8.w),
+                          GestureDetector(
+                            onTap: (order["orderStatus"] == "Order Paid")
+                                ? null
+                                : () async {
+                                    DocumentSnapshot<Map<String, dynamic>>
+                                        data = await FirebaseFirestore.instance
+                                            .collection("Restaurants")
+                                            .doc(FirebaseAuth
+                                                .instance.currentUser!.uid)
+                                            .collection("Orders")
+                                            .doc(
+                                                '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                            .get();
+                                    Map<String, dynamic>? json = data.data();
+                                    json!["order"][index]["orderStatus"] =
+                                        "Order Paid";
+                                    //  print(json);
+                                    await FirebaseFirestore.instance
+                                        .collection("Restaurants")
+                                        .doc(FirebaseAuth
+                                            .instance.currentUser!.uid)
+                                        .collection("Orders")
+                                        .doc(
+                                            '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                        .set(json);
+                                  },
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: ShapeDecoration(
+                                color: (order["orderStatus"] == "Order Paid")
+                                    ? AppColor.purpleColor
+                                    : AppColor.white,
+                                shape: RoundedRectangleBorder(
+                                  side: const BorderSide(
+                                      width: 1, color: Color(0xFF241C43)),
+                                  borderRadius: BorderRadius.circular(6),
                                 ),
                               ),
-                            ),
-                            SizedBox(width: 8.w),
-                            GestureDetector(
-                              onTap: (order["orderStatus"] == "Order Paid")
-                                  ? null
-                                  : () async {
-                                      DocumentSnapshot<Map<String, dynamic>>
-                                          data = await FirebaseFirestore
-                                              .instance
-                                              .collection("Restaurants")
-                                              .doc(FirebaseAuth
-                                                  .instance.currentUser!.uid)
-                                              .collection("Orders")
-                                              .doc(
-                                                  '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
-                                              .get();
-                                      Map<String, dynamic>? json = data.data();
-                                      json!["order"][index]["orderStatus"] =
-                                          "Order Paid";
-                                      //  print(json);
-                                      await FirebaseFirestore.instance
-                                          .collection("Restaurants")
-                                          .doc(FirebaseAuth
-                                              .instance.currentUser!.uid)
-                                          .collection("Orders")
-                                          .doc(
-                                              '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
-                                          .set(json);
-                                    },
-                              child: Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: ShapeDecoration(
-                                  color: (order["orderStatus"] == "Order Paid")
-                                      ? AppColor.purpleColor
-                                      : AppColor.white,
-                                  shape: RoundedRectangleBorder(
-                                    side: const BorderSide(
-                                        width: 1, color: Color(0xFF241C43)),
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 18.w,
-                                      height: 18.w,
-                                      clipBehavior: Clip.antiAlias,
-                                      decoration: const BoxDecoration(),
-                                      child: Center(
-                                        child: Icon(
-                                          Icons.attach_money,
-                                          size: 18,
-                                          color: (order["orderStatus"] ==
-                                                  "Order Paid")
-                                              ? AppColor.white
-                                              : AppColor.purpleColor,
-                                        ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 18.w,
+                                    height: 18.w,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: const BoxDecoration(),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.attach_money,
+                                        size: 18,
+                                        color: (order["orderStatus"] ==
+                                                "Order Paid")
+                                            ? AppColor.white
+                                            : AppColor.purpleColor,
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -469,46 +455,40 @@ class OrderItem extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          // width: double.infinity,
-                          child: Column(
-                        children:
-                            List.generate(order["items"]?.length ?? 0, (index) {
-                          RestaurantMenu menu =
-                              RestaurantMenu.fromJson(order["items"]?[index]);
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: SizedBox(
-                              width: 396.w,
-                              child: Item(
-                                quantity: order['quanntity'],
-                                itemButton: false,
-                                name: order["items"]?[index]['name'],
-                                image: order["items"]?[index]['image'],
-                                menu: menu,
-                                price: order["items"]![index]['price'],
-                              ),
-                            ),
-                          );
-                        }),
-                      )),
-                    ],
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    children:
+                        List.generate(order["items"]?.length ?? 0, (index) {
+                      RestaurantMenu menu =
+                          RestaurantMenu.fromJson(order["items"]?[index]);
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: SizedBox(
+                          width: 396.w,
+                          child: Item(
+                            quantity: order['quanntity'],
+                            itemButton: false,
+                            name: order["items"]?[index]['name'],
+                            image: order["items"]?[index]['image'],
+                            menu: menu,
+                            price: order["items"]![index]['price'],
+                          ),
+                        ),
+                      );
+                    }),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
           Container(
             width: double.infinity,
@@ -523,6 +503,27 @@ class OrderItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Container(
+                //   width: 108,
+                //   //  height: 53.h,
+                //   padding: const EdgeInsets.all(16),
+                //   clipBehavior: Clip.antiAlias,
+                //   decoration: ShapeDecoration(
+                //     shape: RoundedRectangleBorder(
+                //       side: BorderSide(width: 1, color: Color(0xffff2416)),
+                //       borderRadius: BorderRadius.circular(12),
+                //     ),
+                //   ),
+                //   child: Center(
+                //     child: Text(
+                //       'Delete Order',
+                //       style: AppTypography.smallText.copyWith(
+                //           fontWeight: FontWeight.w400,
+                //           height: 12,
+                //           color: Color(0xffff2416)),
+                //     ),
+                //   ),
+                // ),
                 Expanded(
                   child: SizedBox(
                     child: Text.rich(
