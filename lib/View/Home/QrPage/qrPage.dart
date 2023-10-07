@@ -129,9 +129,9 @@ class QRPage extends StatelessWidget {
                       ),
                     ),
             ),
-            const SizedBox(
-              height: 8,
-            ),
+            // const SizedBox(
+            //   height: 8,
+            // ),
             // InkWell(
             //   onTap: () async {
             //     final ref = Provider.of<ErrorProvider>(context, listen: false);
