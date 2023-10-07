@@ -7,6 +7,7 @@ import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Providers/restaurantProvider.dart';
 import 'package:admin_app/Model/RestaurantMenu/restaurantMenu.dart';
 import 'package:admin_app/View/Home/OrderPage/CreateOrder/item.dart';
+import 'package:admin_app/View/Home/OrderPage/update_details.dart';
 import 'package:admin_app/ViewModel/HomeViewModel/orderViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,11 +19,21 @@ import '../../../../Model/Order/order.dart';
 
 class EditItem extends StatelessWidget {
   EditItem(
-      {super.key, required this.table, this.name, this.phone, this.orderNo});
+      {super.key,
+      required this.table,
+      this.name,
+      this.phone,
+      this.orderNo,
+      required this.order,
+      required this.docDate,
+      required this.index});
+  Map<String, dynamic> order;
   int table;
+  int index;
   int? orderNo;
   String? name;
   String? phone;
+  String docDate;
 
   @override
   Widget build(BuildContext context) {
@@ -101,97 +112,122 @@ class EditItem extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(
-                                      width: 324.w,
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                width: 203.w,
-                                                child: Text.rich(
-                                                  TextSpan(
-                                                    children: [
-                                                      const TextSpan(
-                                                        text: 'Table Number: ',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xFF3B3F5C),
-                                                          fontSize: 16,
-                                                          fontFamily: 'Poppins',
-                                                          fontWeight:
-                                                              FontWeight.w400,
+                                    Expanded(
+                                      child: SizedBox(
+                                        //  width: 324.w,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              // crossAxisAlignment:
+                                              //     CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  // width: 324.w,
+                                                  child: Text.rich(
+                                                    TextSpan(
+                                                      children: [
+                                                        const TextSpan(
+                                                          text:
+                                                              'Table Number: ',
+                                                          style: TextStyle(
+                                                            color: Color(
+                                                                0xFF3B3F5C),
+                                                            fontSize: 16,
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
                                                         ),
-                                                      ),
-                                                      TextSpan(
-                                                        text: '${table}',
-                                                        style: const TextStyle(
-                                                          color:
-                                                              Color(0xFF53389E),
-                                                          fontSize: 16,
-                                                          fontFamily: 'Poppins',
-                                                          fontWeight:
-                                                              FontWeight.w600,
+                                                        TextSpan(
+                                                          text: '${table}',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Color(
+                                                                0xFF53389E),
+                                                            fontSize: 16,
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                    SizedBox(width: 16.w),
+                                    IconButton(
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(builder:
+                                                  (BuildContext context) {
+                                            return UpdateDetails(
+                                              index: index,
+                                              orders: order,
+                                              docDate: docDate,
+                                              tablenumber: table,
+                                              namee: name ?? '',
+                                              number: phone ?? '',
+                                            );
+                                          }));
+                                        },
+                                        icon: Icon(Icons.edit)),
                                   ],
                                 ),
-                                Text.rich(TextSpan(children: [
-                                  name == null
-                                      ? TextSpan()
-                                      : TextSpan(
-                                          text: 'Customer Name: ',
-                                          style: AppTypography.smallText,
-                                          children: [
+                                name == ''
+                                    ? Container(
+                                        height: 8.h,
+                                      )
+                                    : Text.rich(TextSpan(children: [
+                                        TextSpan(
+                                            text: 'Customer Name: ',
+                                            style: AppTypography.smallText,
+                                            children: [
                                               TextSpan(
                                                 text: name,
                                                 style: AppTypography.smallText
                                                     .copyWith(
                                                         fontWeight:
                                                             FontWeight.w600,
-                                                        color: AppColor
-                                                            .purpleColor),
+                                                        color:
+                                                            Color(0xFF53389E)),
                                               ),
                                             ])
-                                ])),
-                                Text.rich(TextSpan(children: [
-                                  phone == null
-                                      ? TextSpan()
-                                      : TextSpan(
-                                          text: 'Customer Contact:',
-                                          style: AppTypography.smallText,
-                                          children: [
+                                      ])),
+                                phone == ''
+                                    ? Container(
+                                        height: 8.h,
+                                      )
+                                    : Text.rich(TextSpan(children: [
+                                        TextSpan(
+                                            text: 'Customer Contact:',
+                                            style: AppTypography.smallText,
+                                            children: [
                                               TextSpan(
                                                 text: phone,
                                                 style: AppTypography.smallText
                                                     .copyWith(
                                                         fontWeight:
                                                             FontWeight.w600,
-                                                        color: AppColor
-                                                            .purpleColor),
+                                                        color:
+                                                            Color(0xFF53389E)),
                                               ),
                                             ]),
-                                ])),
+                                      ])),
                               ],
                             ),
                           ],

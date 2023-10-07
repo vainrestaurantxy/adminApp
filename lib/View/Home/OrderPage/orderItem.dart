@@ -727,6 +727,9 @@ class OrderItem extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => EditItem(
+                                        docDate: docDate,
+                                        index: index,
+                                        order: order,
                                         table: order["tableNo"],
                                         name: order["customerName"],
                                         phone: order["contactNo"],
