@@ -23,10 +23,36 @@ class OrderItem extends StatelessWidget {
   Map<String, dynamic> order;
   int index;
   String docDate;
-//int orderItemRate
+
   @override
   Widget build(BuildContext context) {
-    // print(order);
+    Future deleteOrder(int orderNo, int tableNo) async {
+      final snapshot = await FirebaseFirestore.instance
+          .collection('Restaurants')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('Orders')
+          .doc(docDate);
+
+      final getdata = await snapshot.get();
+      final data = getdata.data();
+      log('data ${data!['order'][index]['orderNo']}');
+      log('order no $orderNo');
+      print('order list ${data['order']}');
+
+      final List newOrder = data['order'] as List;
+
+      if (data['order'][index]['orderNo'] == orderNo) {
+        log('deleting order');
+        final orderIndex = newOrder.indexWhere((element) =>
+            element['orderNo'] == orderNo && element['tableNo'] == tableNo);
+        newOrder.removeAt(orderIndex);
+        print('new order $newOrder');
+        snapshot.update({'order': newOrder});
+      }
+    }
+
+    // print(order['orderNo']);
+    //log(order.toString());
     double price = order['price'];
     double tax = order['tax'];
     double discount = order['discount'];
@@ -34,20 +60,6 @@ class OrderItem extends StatelessWidget {
 
     final today =
         '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}';
-
-    Future<String> getlatestDate() async {
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection("Restaurants")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection("Orders")
-          .get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        return querySnapshot.docs[querySnapshot.docs.length - 1].id;
-      } else {
-        return "";
-      }
-    }
 
     return Container(
       width: 396.w,
@@ -500,111 +512,115 @@ class OrderItem extends StatelessWidget {
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //  crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Container(
-                //   width: 108,
-                //   //  height: 53.h,
-                //   padding: const EdgeInsets.all(16),
-                //   clipBehavior: Clip.antiAlias,
-                //   decoration: ShapeDecoration(
-                //     shape: RoundedRectangleBorder(
-                //       side: BorderSide(width: 1, color: Color(0xffff2416)),
-                //       borderRadius: BorderRadius.circular(12),
-                //     ),
-                //   ),
-                //   child: Center(
-                //     child: Text(
-                //       'Delete Order',
-                //       style: AppTypography.smallText.copyWith(
-                //           fontWeight: FontWeight.w400,
-                //           height: 12,
-                //           color: Color(0xffff2416)),
-                //     ),
-                //   ),
-                // ),
-                Expanded(
-                  child: SizedBox(
-                    child: Text.rich(
-                      TextSpan(
-                        children: [
-                          const TextSpan(
-                            text: 'Order Total:',
-                            style: TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ' ${price.toStringAsFixed(2)} AED\n',
-                            style: const TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const TextSpan(
-                            text: 'Tax (5%):',
-                            style: TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ' ${tax.toStringAsFixed(2)} AED\n',
-                            style: const TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const TextSpan(
-                            text: 'Discount :',
-                            style: TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ' ${discount.toStringAsFixed(2)} AED\n',
-                            style: const TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const TextSpan(
-                            text: 'Total: ',
-                            style: TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 16,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          TextSpan(
-                            text: '${totalPrice.toStringAsFixed(2)} AED',
-                            style: const TextStyle(
-                              color: Color(0xFF53389E),
-                              fontSize: 16,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                InkWell(
+                  onTap: () async {
+                    deleteOrder(order['orderNo'], order['tableNo']);
+                    //  log(index.toString());
+                  },
+                  child: Container(
+                    width: 108.w,
+                    height: 34.h,
+                    padding: const EdgeInsets.all(8),
+                    clipBehavior: Clip.antiAlias,
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(width: 1, color: Color(0xffff2416)),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      textAlign: TextAlign.right,
                     ),
+                    child: Center(
+                      child: Text(
+                        'Delete Order',
+                        style: AppTypography.smallText.copyWith(
+                          color: Color(0xffff2416),
+                          //height: 12,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        const TextSpan(
+                          text: 'Order Total:',
+                          style: TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' ${price.toStringAsFixed(2)} AED\n',
+                          style: const TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const TextSpan(
+                          text: 'Tax (5%):',
+                          style: TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' ${tax.toStringAsFixed(2)} AED\n',
+                          style: const TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const TextSpan(
+                          text: 'Discount :',
+                          style: TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' ${discount.toStringAsFixed(2)} AED\n',
+                          style: const TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const TextSpan(
+                          text: 'Total: ',
+                          style: TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${totalPrice.toStringAsFixed(2)} AED',
+                          style: const TextStyle(
+                            color: Color(0xFF53389E),
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                    textAlign: TextAlign.right,
                   ),
                 ),
               ],
