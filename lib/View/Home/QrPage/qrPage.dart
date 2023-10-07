@@ -128,27 +128,27 @@ class QRPage extends StatelessWidget {
                       ),
                     ),
             ),
-            const SizedBox(
-              height: 8,
-            ),
-            InkWell(
-              onTap: () async {
-                final ref = Provider.of<ErrorProvider>(context, listen: false);
-                if (tables.text.isNotEmpty &&
-                    ref.validateNumberOnly(tables.text) == null)
-                  // ignore: curly_braces_in_flow_control_structures
-                  for (int index = 0; index < int.parse(tables.text); index++) {
-                    Uint8List? image =
-                        await screenshotController.captureFromLongWidget(
-                      QR(index: index, id: vm.getuserID),
-                    );
-                    saveUint8ListToFile(image, "Qr$index.png");
-                  }
-              },
-              child: PrimaryButton(
-                text: "Download all QRs",
-              ),
-            ),
+            // const SizedBox(
+            //   height: 8,
+            // ),
+            // InkWell(
+            //   onTap: () async {
+            //     final ref = Provider.of<ErrorProvider>(context, listen: false);
+            //     if (tables.text.isNotEmpty &&
+            //         ref.validateNumberOnly(tables.text) == null)
+            //       // ignore: curly_braces_in_flow_control_structures
+            //       for (int index = 0; index < int.parse(tables.text); index++) {
+            //         Uint8List? image =
+            //             await screenshotController.captureFromLongWidget(
+            //           QR(index: index, id: vm.getuserID),
+            //         );
+            //         saveUint8ListToFile(image, "Qr$index.png");
+            //       }
+            //   },
+            //   child: PrimaryButton(
+            //     text: "Download all QRs",
+            //   ),
+            // ),
             const SizedBox(
               height: 24,
             ),
