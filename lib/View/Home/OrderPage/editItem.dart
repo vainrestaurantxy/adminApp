@@ -226,6 +226,12 @@ class EditItem extends StatelessWidget {
                         ),
                         Consumer<CartProvider>(
                           builder: (_, ref, __) {
+                            double orderTotal = ref.getTotal();
+                            double tax = ref.getTotal() * 0.05;
+                            double discount = ref.getDiscount();
+                            double total =
+                                (ref.getTotal() + ref.getTotal() * 0.05) -
+                                    ref.getDiscount();
                             return Column(
                               children: [
                                 ...List.generate(ref.menuCart.length, (index) {
@@ -285,7 +291,7 @@ class EditItem extends StatelessWidget {
                                                         ),
                                                         TextSpan(
                                                           text:
-                                                              ' ${ref.getTotal()} AED\n',
+                                                              ' ${orderTotal.toStringAsFixed(2)} AED\n',
                                                           style:
                                                               const TextStyle(
                                                             color: Color(
@@ -311,7 +317,7 @@ class EditItem extends StatelessWidget {
                                                         ),
                                                         TextSpan(
                                                           text:
-                                                              ' ${ref.getTotal() * 0.05} AED\n',
+                                                              ' ${tax.toStringAsFixed(2)} AED\n',
                                                           style:
                                                               const TextStyle(
                                                             color: Color(
@@ -337,7 +343,7 @@ class EditItem extends StatelessWidget {
                                                         ),
                                                         TextSpan(
                                                           text:
-                                                              ' ${ref.getDiscount()} AED\n',
+                                                              ' ${discount.toStringAsFixed(2)} AED\n',
                                                           style:
                                                               const TextStyle(
                                                             color: Color(
@@ -363,7 +369,7 @@ class EditItem extends StatelessWidget {
                                                         ),
                                                         TextSpan(
                                                           text:
-                                                              '${(ref.getTotal() + ref.getTotal() * 0.05) - ref.getDiscount()} AED',
+                                                              '${total.toStringAsFixed(2)} AED',
                                                           style:
                                                               const TextStyle(
                                                             color: Color(
