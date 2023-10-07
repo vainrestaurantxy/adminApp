@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:admin_app/Constants/staticConstants.dart';
 import 'package:admin_app/Data/Repositories/DatabaseConnection.dart';
 import 'package:admin_app/View/Auth/LandingPage/landingPage.dart';
 import 'package:admin_app/View/Auth/LoginPage/loginPage.dart';
@@ -23,7 +24,8 @@ class Redirect {
   Redirect(this._db);
   IDatabaseService _db;
   FutureOr<String> redirect(GoRouterState state) async {
-    String status = await _db.getStatus();
+     await _db.getStatus();
+     String status = Constants.status;
     print(state.fullPath);
     print(status);
     if (status == "NotLoggedIn") {
