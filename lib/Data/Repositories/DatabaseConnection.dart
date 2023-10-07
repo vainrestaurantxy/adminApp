@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:admin_app/Constants/staticConstants.dart';
 import 'package:admin_app/Data/Providers/imageUpload.dart';
 import 'package:admin_app/Data/Repositories/FirebaseConnection.dart';
 import 'package:admin_app/Model/RestaurantMenu/restaurantMenu.dart';
@@ -46,6 +47,7 @@ class DatabaseService implements IDatabaseService {
   String? userId;
 
   setStatus(String status) async {
+    Constants.status = status;
     await store
         .collection("Status")
         .doc(_auth.getUserId)
@@ -55,6 +57,7 @@ class DatabaseService implements IDatabaseService {
   Future<String> getStatus() async {
     DocumentSnapshot<Map<String, dynamic>> statusJson =
         await store.collection("Status").doc(_auth.getUserId).get();
+    Constants.status = statusJson.data()?["status"] ?? "NotLoggedIn";
     return statusJson.data()?["status"] ?? "NotLoggedIn";
   }
 
