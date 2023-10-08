@@ -7,6 +7,7 @@ import 'package:admin_app/Data/Providers/errorProvider.dart';
 import 'package:admin_app/Data/Providers/restaurantProvider.dart';
 import 'package:admin_app/Model/RestaurantMenu/restaurantMenu.dart';
 import 'package:admin_app/View/Home/OrderPage/CreateOrder/item.dart';
+import 'package:admin_app/View/Home/OrderPage/update_details.dart';
 import 'package:admin_app/ViewModel/HomeViewModel/orderViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,11 +19,21 @@ import '../../../../Model/Order/order.dart';
 
 class EditItem extends StatelessWidget {
   EditItem(
-      {super.key, required this.table, this.name, this.phone, this.orderNo});
+      {super.key,
+      required this.table,
+      this.name,
+      this.phone,
+      this.orderNo,
+      required this.order,
+      required this.docDate,
+      required this.index});
+  Map<String, dynamic> order;
   int table;
+  int index;
   int? orderNo;
   String? name;
   String? phone;
+  String docDate;
 
   @override
   Widget build(BuildContext context) {
@@ -101,25 +112,25 @@ class EditItem extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(
-                                      width: 324.w,
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            child: Row(
+                                    Expanded(
+                                      child: SizedBox(
+                                        //  width: 324.w,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
                                               mainAxisSize: MainAxisSize.min,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                  MainAxisAlignment.start,
+                                              // crossAxisAlignment:
+                                              //     CrossAxisAlignment.start,
                                               children: [
                                                 SizedBox(
-                                                  width: 203.w,
+                                                  // width: 324.w,
                                                   child: Text.rich(
                                                     TextSpan(
                                                       children: [
@@ -155,71 +166,68 @@ class EditItem extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                    SizedBox(width: 16.w),
+                                    IconButton(
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(builder:
+                                                  (BuildContext context) {
+                                            return UpdateDetails(
+                                              index: index,
+                                              orders: order,
+                                              docDate: docDate,
+                                              tablenumber: table,
+                                              namee: name ?? '',
+                                              number: phone ?? '',
+                                            );
+                                          }));
+                                        },
+                                        icon: Icon(Icons.edit)),
                                   ],
                                 ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    SizedBox(
-                                      width: 233.w,
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            width: double.infinity,
-                                            child: Text.rich(
+                                name == ''
+                                    ? Container(
+                                        height: 8.h,
+                                      )
+                                    : Text.rich(TextSpan(children: [
+                                        TextSpan(
+                                            text: 'Customer Name: ',
+                                            style: AppTypography.smallText,
+                                            children: [
                                               TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text: 'Customer Name: ',
-                                                    style:
-                                                        AppTypography.smallText,
-                                                  ),
-                                                  TextSpan(
-                                                    text: '\n',
-                                                    style: AppTypography
-                                                        .smallText
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: AppColor
-                                                                .purpleColor),
-                                                  ),
-                                                  TextSpan(
-                                                    text: 'Customer Contact:',
-                                                    style:
-                                                        AppTypography.smallText,
-                                                  ),
-                                                  TextSpan(
-                                                    text: phone,
-                                                    style: AppTypography
-                                                        .smallText
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: AppColor
-                                                                .purpleColor),
-                                                  ),
-                                                ],
+                                                text: name,
+                                                style: AppTypography.smallText
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color:
+                                                            Color(0xFF53389E)),
                                               ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                            ])
+                                      ])),
+                                phone == ''
+                                    ? Container(
+                                        height: 8.h,
+                                      )
+                                    : Text.rich(TextSpan(children: [
+                                        TextSpan(
+                                            text: 'Customer Contact:',
+                                            style: AppTypography.smallText,
+                                            children: [
+                                              TextSpan(
+                                                text: phone,
+                                                style: AppTypography.smallText
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color:
+                                                            Color(0xFF53389E)),
+                                              ),
+                                            ]),
+                                      ])),
                               ],
                             ),
                           ],
