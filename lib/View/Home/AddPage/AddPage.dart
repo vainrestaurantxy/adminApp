@@ -252,40 +252,40 @@ class AddPage extends StatelessWidget {
                       const SizedBox(
                         height: 16,
                       ),
-                      SizedBox(
-                        height: 50,
-                        width: double.infinity,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: RadioListTile.adaptive(
-                                title: const Text("Inclusive of VAT"),
-                                value: 'Inclusive',
-                                groupValue: radioValue,
-                                activeColor: AppColor.purpleColor,
-                                onChanged: (value) {
-                                  tax.text = "0";
-                                  radioValue = value!;
-                                  ref.update();
-                                },
-                              ),
-                            ),
-                            Expanded(
-                              child: RadioListTile.adaptive(
-                                title: const Text("Exclusive of VAT"),
-                                value: 'Exclusive',
-                                activeColor: AppColor.purpleColor,
-                                groupValue: radioValue,
-                                onChanged: (value) {
-                                  tax.text = "5";
-                                  radioValue = value!;
-                                  ref.update();
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: 50,
+                      //   width: double.infinity,
+                      //   child: Row(
+                      //     children: [
+                      //       Expanded(
+                      //         child: RadioListTile.adaptive(
+                      //           title: const Text("Inclusive of VAT"),
+                      //           value: 'Inclusive',
+                      //           groupValue: radioValue,
+                      //           activeColor: AppColor.purpleColor,
+                      //           onChanged: (value) {
+                      //             tax.text = "0";
+                      //             radioValue = value!;
+                      //             ref.update();
+                      //           },
+                      //         ),
+                      //       ),
+                      //       Expanded(
+                      //         child: RadioListTile.adaptive(
+                      //           title: const Text("Exclusive of VAT"),
+                      //           value: 'Exclusive',
+                      //           activeColor: AppColor.purpleColor,
+                      //           groupValue: radioValue,
+                      //           onChanged: (value) {
+                      //             tax.text = "5";
+                      //             radioValue = value!;
+                      //             ref.update();
+                      //           },
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 16,
                       ),
@@ -581,7 +581,7 @@ class AddPage extends StatelessWidget {
                         height: 16,
                       ),
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (viewModel.dishImage == null) {
                             log('image error $imageError');
                             imageError = 'Image Not Uploaded';
@@ -589,20 +589,17 @@ class AddPage extends StatelessWidget {
                             log('image error $imageError');
                             return;
                           }
-
                           //  log(category);
                           if (category == 'first') {
                             category = '';
                             ref.notifyListeners();
                             return;
                           }
-
                           if (genre == 'first') {
                             genre = '';
                             ref.notifyListeners();
                             return;
                           }
-
                           if (viewModel.validate(name.text, desc.text,
                               price.text, tax.text, discount.text, context)) {
                             String tag = "";
@@ -611,14 +608,12 @@ class AddPage extends StatelessWidget {
                               tag = "Best Seller";
                             } else if (indexTags == 1) {
                               tag = "New";
-                            } else {
+                            } else if (indexTags == 2) {
                               tag = "Recommended";
                             }
 
-                            // log(bestwith.toString());
-                            print('calling uploadDish');
                             copyBestwith = bestwith.map((e) => e).toList();
-                            viewModel.uploadDish(
+                            await viewModel.uploadDish(
                                 name: name.text,
                                 category: category,
                                 desc: desc.text,
