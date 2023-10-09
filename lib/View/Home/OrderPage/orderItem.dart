@@ -147,7 +147,6 @@ class OrderItem extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: ShapeDecoration(
-                                
                                 color:
                                     (order["orderStatus"] ==
                                                 "Order Confirmed" ||
@@ -176,7 +175,38 @@ class OrderItem extends StatelessWidget {
                                                     "Order Delivered" ||
                                                 order["orderStatus"] ==
                                                     "Order Paid")
-                                            ? null
+                                            ? () async {
+                                                DocumentSnapshot<
+                                                        Map<String,
+                                                            dynamic>>
+                                                    data =
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection(
+                                                            "Restaurants")
+                                                        .doc(FirebaseAuth
+                                                            .instance
+                                                            .currentUser!
+                                                            .uid)
+                                                        .collection("Orders")
+                                                        .doc(
+                                                            '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                                        .get();
+                                                Map<String, dynamic>? json =
+                                                    data.data();
+                                                json!["order"][index]
+                                                        ["orderStatus"] =
+                                                    "Order Placed";
+                                                //  print(json);
+                                                await FirebaseFirestore.instance
+                                                    .collection("Restaurants")
+                                                    .doc(FirebaseAuth.instance
+                                                        .currentUser!.uid)
+                                                    .collection("Orders")
+                                                    .doc(
+                                                        '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                                    .set(json);
+                                              }
                                             : () async {
                                                 DocumentSnapshot<
                                                         Map<String,
@@ -251,7 +281,30 @@ class OrderItem extends StatelessWidget {
                               onTap: (order["orderStatus"] ==
                                           "Order Delivered" ||
                                       order["orderStatus"] == "Order Paid")
-                                  ? null
+                                  ? () async {
+                                      DocumentSnapshot<Map<String, dynamic>>
+                                          data = await FirebaseFirestore
+                                              .instance
+                                              .collection("Restaurants")
+                                              .doc(FirebaseAuth
+                                                  .instance.currentUser!.uid)
+                                              .collection("Orders")
+                                              .doc(
+                                                  '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                              .get();
+                                      Map<String, dynamic>? json = data.data();
+                                      json!["order"][index]["orderStatus"] =
+                                          "Order Confirmed";
+                                      //  print(json);
+                                      await FirebaseFirestore.instance
+                                          .collection("Restaurants")
+                                          .doc(FirebaseAuth
+                                              .instance.currentUser!.uid)
+                                          .collection("Orders")
+                                          .doc(
+                                              '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                          .set(json);
+                                    }
                                   : () async {
                                       DocumentSnapshot<Map<String, dynamic>>
                                           data = await FirebaseFirestore
@@ -322,7 +375,30 @@ class OrderItem extends StatelessWidget {
                             SizedBox(width: 8.w),
                             GestureDetector(
                               onTap: (order["orderStatus"] == "Order Paid")
-                                  ? null
+                                  ? () async {
+                                      DocumentSnapshot<Map<String, dynamic>>
+                                          data = await FirebaseFirestore
+                                              .instance
+                                              .collection("Restaurants")
+                                              .doc(FirebaseAuth
+                                                  .instance.currentUser!.uid)
+                                              .collection("Orders")
+                                              .doc(
+                                                  '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                              .get();
+                                      Map<String, dynamic>? json = data.data();
+                                      json!["order"][index]["orderStatus"] =
+                                          "Order Delivered";
+                                      //  print(json);
+                                      await FirebaseFirestore.instance
+                                          .collection("Restaurants")
+                                          .doc(FirebaseAuth
+                                              .instance.currentUser!.uid)
+                                          .collection("Orders")
+                                          .doc(
+                                              '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
+                                          .set(json);
+                                    }
                                   : () async {
                                       DocumentSnapshot<Map<String, dynamic>>
                                           data = await FirebaseFirestore
