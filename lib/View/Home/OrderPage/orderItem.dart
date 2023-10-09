@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:admin_app/Constants/Colors/colors.dart';
+import 'package:admin_app/Constants/Widgets/SecondaryButton.dart';
 import 'package:admin_app/Data/Providers/cartProvider.dart';
 import 'package:admin_app/Model/RestaurantMenu/restaurantMenu.dart';
 import 'package:admin_app/View/Home/OrderPage/CreateOrder/item.dart';
@@ -11,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../../Constants/Typography/typography.dart';
+
 class OrderItem extends StatelessWidget {
   OrderItem(
       {super.key,
@@ -20,10 +23,36 @@ class OrderItem extends StatelessWidget {
   Map<String, dynamic> order;
   int index;
   String docDate;
-//int orderItemRate
+
   @override
   Widget build(BuildContext context) {
-    // print(order);
+    Future deleteOrder(int orderNo, int tableNo) async {
+      final snapshot = await FirebaseFirestore.instance
+          .collection('Restaurants')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('Orders')
+          .doc(docDate);
+
+      final getdata = await snapshot.get();
+      final data = getdata.data();
+      log('data ${data!['order'][index]['orderNo']}');
+      log('order no $orderNo');
+      print('order list ${data['order']}');
+
+      final List newOrder = data['order'] as List;
+
+      if (data['order'][index]['orderNo'] == orderNo) {
+        log('deleting order');
+        final orderIndex = newOrder.indexWhere((element) =>
+            element['orderNo'] == orderNo && element['tableNo'] == tableNo);
+        newOrder.removeAt(orderIndex);
+        print('new order $newOrder');
+        snapshot.update({'order': newOrder});
+      }
+    }
+
+    // print(order['orderNo']);
+    //log(order.toString());
     double price = order['price'];
     double tax = order['tax'];
     double discount = order['discount'];
@@ -31,25 +60,6 @@ class OrderItem extends StatelessWidget {
 
     final today =
         '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}';
-    print('today $today');
-
-    Future<String> getlatestDate() async {
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection("Restaurants")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection("Orders")
-          .get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        // The document.id contains the name of the document
-        print(
-            'todayDoc ${querySnapshot.docs[querySnapshot.docs.length - 1].id}');
-        return querySnapshot.docs[querySnapshot.docs.length - 1].id;
-      } else {
-        // Return an appropriate value or handle the case where no documents are found
-        return ""; // You can change this to suit your needs
-      }
-    }
 
     return Container(
       width: 396.w,
@@ -225,12 +235,12 @@ class OrderItem extends StatelessWidget {
                                                             '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
                                                         .get();
 
-                                                Map<String, dynamic>? json =
-                                                    data.data();
+                                              Map<String, dynamic>? json =
+                                                  data.data();
 
-                                                json!["order"][index]
-                                                        ["orderStatus"] =
-                                                    "Order Confirmed";
+                                              json!["order"][index]
+                                                      ["orderStatus"] =
+                                                  "Order Confirmed";
 
                                                 await FirebaseFirestore.instance
                                                     .collection("Restaurants")
@@ -317,10 +327,10 @@ class OrderItem extends StatelessWidget {
                                                   '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
                                               .get();
 
-                                      Map<String, dynamic>? json = data.data();
+                                    Map<String, dynamic>? json = data.data();
 
-                                      json!["order"][index]["orderStatus"] =
-                                          "Order Delivered";
+                                    json!["order"][index]["orderStatus"] =
+                                        "Order Delivered";
 
                                       await FirebaseFirestore.instance
                                           .collection("Restaurants")
@@ -545,46 +555,40 @@ class OrderItem extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          // width: double.infinity,
-                          child: Column(
-                        children:
-                            List.generate(order["items"]?.length ?? 0, (index) {
-                          RestaurantMenu menu =
-                              RestaurantMenu.fromJson(order["items"]?[index]);
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: SizedBox(
-                              width: 396.w,
-                              child: Item(
-                                quantity: order['quanntity'],
-                                itemButton: false,
-                                name: order["items"]?[index]['name'],
-                                image: order["items"]?[index]['image'],
-                                menu: menu,
-                                price: order["items"]![index]['price'],
-                              ),
-                            ),
-                          );
-                        }),
-                      )),
-                    ],
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    children:
+                        List.generate(order["items"]?.length ?? 0, (index) {
+                      RestaurantMenu menu =
+                          RestaurantMenu.fromJson(order["items"]?[index]);
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: SizedBox(
+                          width: 396.w,
+                          child: Item(
+                            quantity: order['quanntity'],
+                            itemButton: false,
+                            name: order["items"]?[index]['name'],
+                            image: order["items"]?[index]['image'],
+                            menu: menu,
+                            price: order["items"]![index]['price'],
+                          ),
+                        ),
+                      );
+                    }),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
           Container(
             width: double.infinity,
@@ -596,90 +600,115 @@ class OrderItem extends StatelessWidget {
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //  crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: SizedBox(
-                    child: Text.rich(
-                      TextSpan(
-                        children: [
-                          const TextSpan(
-                            text: 'Order Total:',
-                            style: TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ' ${price.toStringAsFixed(2)} AED\n',
-                            style: const TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const TextSpan(
-                            text: 'Tax (5%):',
-                            style: TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ' ${tax.toStringAsFixed(2)} AED\n',
-                            style: const TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const TextSpan(
-                            text: 'Discount :',
-                            style: TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          TextSpan(
-                            text: ' ${discount.toStringAsFixed(2)} AED\n',
-                            style: const TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 12,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const TextSpan(
-                            text: 'Total: ',
-                            style: TextStyle(
-                              color: Color(0xFF3B3F5C),
-                              fontSize: 16,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          TextSpan(
-                            text: '${totalPrice.toStringAsFixed(2)} AED',
-                            style: const TextStyle(
-                              color: Color(0xFF53389E),
-                              fontSize: 16,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                InkWell(
+                  onTap: () async {
+                    deleteOrder(order['orderNo'], order['tableNo']);
+                    //  log(index.toString());
+                  },
+                  child: Container(
+                    width: 108.w,
+                    height: 34.h,
+                    padding: const EdgeInsets.all(8),
+                    clipBehavior: Clip.antiAlias,
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(width: 1, color: Color(0xffff2416)),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      textAlign: TextAlign.right,
                     ),
+                    child: Center(
+                      child: Text(
+                        'Delete Order',
+                        style: AppTypography.smallText.copyWith(
+                          color: Color(0xffff2416),
+                          //height: 12,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        const TextSpan(
+                          text: 'Order Total:',
+                          style: TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' ${price.toStringAsFixed(2)} AED\n',
+                          style: const TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const TextSpan(
+                          text: 'Tax (5%):',
+                          style: TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' ${tax.toStringAsFixed(2)} AED\n',
+                          style: const TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const TextSpan(
+                          text: 'Discount :',
+                          style: TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' ${discount.toStringAsFixed(2)} AED\n',
+                          style: const TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const TextSpan(
+                          text: 'Total: ',
+                          style: TextStyle(
+                            color: Color(0xFF3B3F5C),
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${totalPrice.toStringAsFixed(2)} AED',
+                          style: const TextStyle(
+                            color: Color(0xFF53389E),
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                    textAlign: TextAlign.right,
                   ),
                 ),
               ],
@@ -786,6 +815,9 @@ class OrderItem extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => EditItem(
+                                        docDate: docDate,
+                                        index: index,
+                                        order: order,
                                         table: order["tableNo"],
                                         name: order["customerName"],
                                         phone: order["contactNo"],

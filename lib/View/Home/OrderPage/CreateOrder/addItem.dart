@@ -128,28 +128,35 @@ class AddItemOrder extends StatelessWidget {
                                                 child: Text.rich(
                                                   TextSpan(
                                                     children: [
-                                                      const TextSpan(
-                                                        text: 'Table Number: ',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xFF3B3F5C),
-                                                          fontSize: 16,
-                                                          fontFamily: 'Poppins',
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
                                                       TextSpan(
-                                                        text: '${table}',
-                                                        style: const TextStyle(
-                                                          color:
-                                                              Color(0xFF53389E),
-                                                          fontSize: 16,
-                                                          fontFamily: 'Poppins',
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
+                                                          text:
+                                                              'Table Number: ',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Color(
+                                                                0xFF3B3F5C),
+                                                            fontSize: 16,
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                          children: [
+                                                            TextSpan(
+                                                              text: '${table}',
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: Color(
+                                                                    0xFF53389E),
+                                                                fontSize: 16,
+                                                                fontFamily:
+                                                                    'Poppins',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
+                                                            ),
+                                                          ]),
                                                     ],
                                                   ),
                                                 ),
@@ -162,74 +169,40 @@ class AddItemOrder extends StatelessWidget {
                                     SizedBox(width: 16.w),
                                   ],
                                 ),
-                                Row(
+                                Column(
                                   mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    SizedBox(
-                                      width: 233.w,
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        // crossAxisAlignment:
-                                        //     CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            width: double.infinity,
-                                            child: Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  name != ''
-                                                      ? TextSpan(
-                                                          text:
-                                                              'Customer Name: ',
-                                                          style: AppTypography
-                                                              .smallText,
-                                                        )
-                                                      : TextSpan(),
-                                                  TextSpan(
-                                                    text: name,
-                                                    style: AppTypography
-                                                        .smallText
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: Color(
-                                                                0xFF53389E)),
-                                                  ),
-                                                  phone != ''
-                                                      ? TextSpan(
-                                                          text:
-                                                              'Customer Contact: ',
-                                                          style: AppTypography
-                                                              .smallText
-                                                              .copyWith(
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                  color: AppColor
-                                                                      .purpleColor),
-                                                        )
-                                                      : TextSpan(),
-                                                  TextSpan(
-                                                    text: phone,
-                                                    style: AppTypography
-                                                        .smallText
-                                                        .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: Color(
-                                                                0xFF53389E)),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                    name == ''
+                                        ? Container()
+                                        : Text.rich(TextSpan(
+                                            text: 'Customer Name: ',
+                                            children: [
+                                                TextSpan(
+                                                  text: name,
+                                                  style: AppTypography.smallText
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: const Color(
+                                                              0xFF53389E)),
+                                                ),
+                                              ])),
+                                    phone == ''
+                                        ? Container()
+                                        : Text.rich(TextSpan(
+                                            text: 'Customer Contact: ',
+                                            children: [
+                                                TextSpan(
+                                                  text: phone,
+                                                  style: AppTypography.smallText
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: const Color(
+                                                              0xFF53389E)),
+                                                ),
+                                              ]))
                                   ],
                                 ),
                               ],
