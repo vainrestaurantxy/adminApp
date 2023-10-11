@@ -12,7 +12,9 @@ import '../../View/Home/MenuPage/widgets.dart';
 class MenuPageViewModel extends ChangeNotifier {
   int selectedFilterIndex = -1;
   static List<String> tags = [];
-  static String tag = '';
+
+  static String tag = "";
+  static bool boolTag = false;
   List<Widget> items = [];
   static Map<String, GlobalKey> keys = {};
   reArrangeCategory({required BuildContext context}) {
@@ -39,13 +41,21 @@ class MenuPageViewModel extends ChangeNotifier {
 
   createMenu(Map<String, List<RestaurantMenu>> categoryDividedMenu) {
     List<Widget> items = [];
-    List<String> category = [];
+    // print("object");
+    print("from create menu $tag");
+    print("from create menu $boolTag");
 
-    if (tag == "") {
+    if ((tag == "Veg" ||
+            tag == "Non Veg" ||
+            tag == "" ||
+            tag == "Drinks" ||
+            tag == "Recommended" ||
+            tag == "Bestseller" ||
+            tag == "New") &&
+        boolTag != true) {
       for (var i in categoryDividedMenu.entries) {
         // keys.add(GlobalKey());
         GlobalKey key = GlobalKey();
-        category.add(i.key);
         keys[i.key] = key;
         items.add(
           ExpansionTile(
@@ -75,17 +85,51 @@ class MenuPageViewModel extends ChangeNotifier {
           ),
         );
       }
-    } else {
+    } else if (boolTag == true && tag == "Drinks") {
       for (var i in categoryDividedMenu.entries) {
-        // keys.add(GlobalKey());
-        //  print("filterd");
         GlobalKey key = GlobalKey();
         keys[i.key] = key;
-        category.add(i.key);
         List<RestaurantMenu> filterdItems = i.value
-            .where((element) => (element.tags?[0] ?? "") == tag)
+            .where((element) => (element.tags?[0] ?? "") == "Non Alcoholic")
             .toList();
-        //  print(filterdItems);
+        filterdItems = filterdItems +
+            i.value
+                .where((element) => (element.tags?[0] ?? "") == "Alcoholic")
+                .toList();
+        items.add(
+          ExpansionTile(
+            key: keys[i.key],
+            title: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                i.key,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            childrenPadding: const EdgeInsets.all(8),
+            initiallyExpanded: true,
+            children: List.generate(
+                filterdItems.length,
+                (index) => Item(
+                    item: filterdItems[index],
+                    image: filterdItems[index].image ?? "",
+                    desc: filterdItems[index].description ?? "",
+                    price: filterdItems[index].price ?? 0,
+                    name: filterdItems[index].name ?? "",
+                    code: filterdItems[index].code ?? "",
+                    tags: filterdItems[index].tags ?? [])),
+          ),
+        );
+      }
+    } else if (boolTag == true) {
+      for (var i in categoryDividedMenu.entries) {
+        GlobalKey key = GlobalKey();
+        keys[i.key] = key;
+        List<RestaurantMenu> filterdItems =
+            i.value.where((element) => (element.tags!.contains(tag))).toList();
         items.add(
           ExpansionTile(
             key: keys[i.key],
@@ -116,7 +160,6 @@ class MenuPageViewModel extends ChangeNotifier {
       }
     }
     this.items = items;
-    tags = category;
     notifyListeners();
 
     // List<int> getItemsAndAmount(context){
