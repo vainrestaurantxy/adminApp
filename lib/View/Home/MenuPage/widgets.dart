@@ -6,6 +6,7 @@ import 'package:admin_app/Model/RestaurantMenu/restaurantMenu.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:provider/provider.dart' as prov;
 
@@ -33,12 +34,18 @@ class Item extends StatefulWidget {
 }
 
 class _ItemState extends State<Item> {
+  Map<String, String> icons = {
+    "Veg": "assets/veg.svg",
+    "Non Veg": "assets/non-veg.svg",
+    "Alcoholic": "assets/drinks.svg",
+    "Non Alcoholic": "assets/drinks.svg",
+    "Recommended": "assets/recommend.svg",
+    "Best seller": "assets/bestseller.svg",
+    "New": "assets/new.svg",
+  };
   @override
   Widget build(BuildContext context) {
-    return
-        // padding: const EdgeInsets.all(15.0),
-
-        SizedBox(
+    return SizedBox(
       height: 150,
       width: MediaQuery.of(context).size.width - 35,
       child: Row(
@@ -111,80 +118,84 @@ class _ItemState extends State<Item> {
           const SizedBox(
             width: 12,
           ),
-          SingleChildScrollView(
-            child: SizedBox(
-              width: ((MediaQuery.of(context).size.width - 35) * 0.75) - 12,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 32,
-                    width: (MediaQuery.of(context).size.width / 428) * 252 - 60,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: widget.tags.length,
-                      itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: const Color(0xFF00632E),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 6, vertical: 4),
-                          child: Row(
-                            children: [
-                              Text(widget.tags[index],
-                                  style: const TextStyle(
-                                    fontSize: 8,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ))
-                            ],
-                          ),
-                        ),
-                      ),
+          SizedBox(
+            width: ((MediaQuery.of(context).size.width - 35) * 0.75) - 12,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 32,
+                  width: (MediaQuery.of(context).size.width / 428) * 252 - 60,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.tags.length,
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: (widget.tags[index] == "Veg" ||
+                              widget.tags[index] == "Non Veg")
+                          ? SvgPicture.asset(
+                              icons[widget.tags[index]!]!,
+                              width: 20,
+                              height: 20,
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: const Color(0xff88001f),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                              child: Row(children: [
+                                Text(widget.tags[index],
+                                    style: const TextStyle(
+                                      fontSize: 8,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                    ))
+                              ]),
+                            ),
                     ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: (MediaQuery.of(context).size.width / 428) * 252,
-                        child: Text(widget.name,
-                            overflow: TextOverflow.fade,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            )),
-                      ),
-                      SizedBox(
-                        width: (MediaQuery.of(context).size.width / 428) * 252 -
-                            60,
-                        child: Text("AED ${widget.price}",
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            )),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    width: (MediaQuery.of(context).size.width / 428) * 252,
-                    child: Text(widget.desc,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFF8C8C8C),
-                          fontWeight: FontWeight.w400,
-                        )),
-                  )
-                ],
-              ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width:
+                          (MediaQuery.of(context).size.width / 428) * 252 - 60,
+                      child: Text(widget.name,
+                          overflow: TextOverflow.fade,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          )),
+                    ),
+                    SizedBox(
+                      width:
+                          (MediaQuery.of(context).size.width / 428) * 252 - 60,
+                      child: Text("AED ${widget.price}",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          )),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  width: (MediaQuery.of(context).size.width / 428) * 252 - 60,
+                  child: Text(widget.desc,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Color(0xFF8C8C8C),
+                        fontWeight: FontWeight.w400,
+                      )),
+                )
+              ],
             ),
-          )
+          ),
         ],
       ),
     );
