@@ -55,11 +55,12 @@ class _MenuPageState extends State<MenuPage> {
     final cart = Provider.of<CartProvider>(context, listen: false);
     final viewModelMenu = GetIt.instance<MenuPageViewModel>();
     final prov = Provider.of<RestaurantData>(context);
+    viewModelMenu.reArrangeCategory(context: context);
+        viewModelMenu.createMenu(cart.categoryDividedMenu);
     viewModel.getRestaurant(context);
     return Consumer<RestaurantData>(
       builder: (_, ref, __) {
-        viewModelMenu.reArrangeCategory(context: context);
-        viewModelMenu.createMenu(cart.categoryDividedMenu);
+        
         return Scaffold(
           body: SingleChildScrollView(
             child: Column(

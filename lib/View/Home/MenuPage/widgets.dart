@@ -134,7 +134,7 @@ class _ItemState extends State<Item> {
                       child: (widget.tags[index] == "Veg" ||
                               widget.tags[index] == "Non Veg")
                           ? SvgPicture.asset(
-                              icons[widget.tags[index]!]!,
+                              icons[widget.tags[index]]!,
                               width: 20,
                               height: 20,
                             )
