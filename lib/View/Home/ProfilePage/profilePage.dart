@@ -129,7 +129,7 @@ class ProfilePage extends StatelessWidget {
                       onTap: () async {
                         await addViewModel.getImagefromDevice();
                         // ignore: use_build_context_synchronously
-                        addViewModel.upload(context);
+                        
                       },
                       child: Stack(
                         children: [
@@ -230,6 +230,7 @@ class ProfilePage extends StatelessWidget {
                             phoneno: phone.text,
                             context: context)) {
                           if (ref.restaurant == null) {
+                            
                             ref.restaurant = Restaurant(
                                 name: name.text,
                                 staffKey: staffKey.text,

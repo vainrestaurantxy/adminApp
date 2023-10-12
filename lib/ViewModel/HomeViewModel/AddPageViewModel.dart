@@ -34,7 +34,7 @@ class AddViewModel {
     return dishImage;
   }
 
-  uploadDish(
+  Future<void> uploadDish(
       {required String name,
       required String category,
       required String desc,
