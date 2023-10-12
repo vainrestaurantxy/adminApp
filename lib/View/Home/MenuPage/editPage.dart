@@ -50,7 +50,7 @@ class EditPage extends StatelessWidget {
     name.text = item.name ?? "";
     desc.text = item.description ?? "";
     price.text = item.price.toString();
-    tax.text = item.tax.toString();
+    tax.text = "5";
     discount.text = item.discount.toString();
     category = item.category ?? data.category[0] ?? "";
     itemType = item.itemType ?? "Dish";
@@ -251,39 +251,39 @@ class EditPage extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
-                      SizedBox(
-                        height: 50,
-                        width: double.infinity,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: RadioListTile.adaptive(
-                                title: const Text("Inclusive of Taxes"),
-                                value: 'Inclusive',
-                                groupValue: radioValue,
-                                activeColor: AppColor.purpleColor,
-                                onChanged: (value) {
-                                  radioValue = value!;
-                                  tax.clear();
-                                  ref.update();
-                                },
-                              ),
-                            ),
-                            Expanded(
-                              child: RadioListTile.adaptive(
-                                title: const Text("Exclusive of Taxes"),
-                                value: 'Exclusive',
-                                activeColor: AppColor.purpleColor,
-                                groupValue: radioValue,
-                                onChanged: (value) {
-                                  radioValue = value!;
-                                  ref.update();
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: 50,
+                      //   width: double.infinity,
+                      //   child: Row(
+                      //     children: [
+                      //       Expanded(
+                      //         child: RadioListTile.adaptive(
+                      //           title: const Text("Inclusive of Taxes"),
+                      //           value: 'Inclusive',
+                      //           groupValue: radioValue,
+                      //           activeColor: AppColor.purpleColor,
+                      //           onChanged: (value) {
+                      //             radioValue = value!;
+                      //             tax.clear();
+                      //             ref.update();
+                      //           },
+                      //         ),
+                      //       ),
+                      //       Expanded(
+                      //         child: RadioListTile.adaptive(
+                      //           title: const Text("Exclusive of Taxes"),
+                      //           value: 'Exclusive',
+                      //           activeColor: AppColor.purpleColor,
+                      //           groupValue: radioValue,
+                      //           onChanged: (value) {
+                      //             radioValue = value!;
+                      //             ref.update();
+                      //           },
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 8,
                       ),
@@ -293,12 +293,12 @@ class EditPage extends StatelessWidget {
                           ref.update();
                         },
                         suffix: Text(
-                            "Price With Tax: ${viewModel.calculateTax(tax.text, price.text)} AED"),
+                            "Price With VAT: ${viewModel.calculateTax(tax.text, price.text)} AED"),
                         errorText: error.tax,
-                        readOnly: radioValue == "Inclusive",
-                        hintText: 'Enter Tax',
+                        readOnly: true,
+                        hintText: 'Enter Vat',
                         keyboardType: TextInputType.number,
-                        label: const Text("Tax(%)"),
+                        label: const Text("Vat(%)"),
                       ),
                       const SizedBox(
                         height: 8,
