@@ -12,9 +12,7 @@ import 'package:provider/provider.dart';
 class CreateOrder extends StatelessWidget {
   CreateOrder({super.key});
   TextEditingController tableno = TextEditingController();
-
   TextEditingController name = TextEditingController();
-
   TextEditingController phone = TextEditingController();
 
   @override

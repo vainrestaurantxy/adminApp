@@ -243,12 +243,16 @@ class EditItem extends StatelessWidget {
                             return Column(
                               children: [
                                 ...List.generate(ref.menuCart.length, (index) {
-                                  return Item(
-                                    image: ref.menuCart[index].image,
-                                    quantity: ref.cart,
-                                    name: ref.menuCart[index].name,
-                                    price: ref.menuCart[index].price,
-                                    menu: ref.menuCart[index],
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0),
+                                    child: Item(
+                                      image: ref.menuCart[index].image,
+                                      quantity: ref.cart,
+                                      name: ref.menuCart[index].name,
+                                      price: ref.menuCart[index].price,
+                                      menu: ref.menuCart[index],
+                                    ),
                                   );
                                 }),
                                 const SizedBox(

@@ -235,12 +235,12 @@ class OrderItem extends StatelessWidget {
                                                             '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
                                                         .get();
 
-                                              Map<String, dynamic>? json =
-                                                  data.data();
+                                                Map<String, dynamic>? json =
+                                                    data.data();
 
-                                              json!["order"][index]
-                                                      ["orderStatus"] =
-                                                  "Order Confirmed";
+                                                json!["order"][index]
+                                                        ["orderStatus"] =
+                                                    "Order Confirmed";
 
                                                 await FirebaseFirestore.instance
                                                     .collection("Restaurants")
@@ -327,10 +327,10 @@ class OrderItem extends StatelessWidget {
                                                   '${DateTime.now().toUtc().day}|${DateTime.now().toUtc().month}|${DateTime.now().toUtc().year}')
                                               .get();
 
-                                    Map<String, dynamic>? json = data.data();
+                                      Map<String, dynamic>? json = data.data();
 
-                                    json!["order"][index]["orderStatus"] =
-                                        "Order Delivered";
+                                      json!["order"][index]["orderStatus"] =
+                                          "Order Delivered";
 
                                       await FirebaseFirestore.instance
                                           .collection("Restaurants")
@@ -610,7 +610,7 @@ class OrderItem extends StatelessWidget {
                   },
                   child: Container(
                     width: 108.w,
-                    height: 34.h,
+                    // height: 34.h,
                     padding: const EdgeInsets.all(8),
                     clipBehavior: Clip.antiAlias,
                     decoration: ShapeDecoration(
@@ -624,7 +624,7 @@ class OrderItem extends StatelessWidget {
                         'Delete Order',
                         style: AppTypography.smallText.copyWith(
                           color: Color(0xffff2416),
-                          //height: 12,
+                          fontSize: 12.sp,
                         ),
                       ),
                     ),
@@ -839,7 +839,7 @@ class OrderItem extends StatelessWidget {
                             children: [
                               Container(
                                 width: 18.w,
-                                height: 18.w,
+                                // height: 18.h,
                                 clipBehavior: Clip.antiAlias,
                                 decoration: const BoxDecoration(),
                                 child: const Center(
@@ -848,11 +848,11 @@ class OrderItem extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 4),
-                              const Text(
+                              Text(
                                 'Edit Items',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12,
+                                  fontSize: 12.sp,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w400,
                                 ),
