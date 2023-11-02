@@ -54,14 +54,13 @@ class _MenuPageState extends State<MenuPage> {
     final viewModel = GetIt.instance<HomeViewModel>();
     final cart = Provider.of<CartProvider>(context, listen: false);
     final viewModelMenu = GetIt.instance<MenuPageViewModel>();
-    final prov = Provider.of<RestaurantData>(context);
+    final prov = Provider.of<RestaurantData>(context,listen: false);
     
     viewModelMenu.reArrangeCategory(context: context);
         viewModelMenu.createMenu(cart.categoryDividedMenu);
     viewModel.getRestaurant(context);
     return Consumer<RestaurantData>(
-      builder: (_, ref, __) {
-        
+      builder: (_, ref, __) {        
         return Scaffold(
           body: SingleChildScrollView(
             child: Column(
@@ -225,7 +224,7 @@ class _MenuPageState extends State<MenuPage> {
                                               }
                                             }
                                             break;
-
+          
                                           case 4:
                                             {
                                               if (MenuPageViewModel.boolTag ==
@@ -243,7 +242,7 @@ class _MenuPageState extends State<MenuPage> {
                                               }
                                             }
                                             break;
-
+          
                                           case 5:
                                             {
                                               if (MenuPageViewModel.boolTag ==
@@ -300,7 +299,7 @@ class _MenuPageState extends State<MenuPage> {
                                         //     ref.selectedFilterIndex=-1;
                                         //   }
                                         // }
-
+          
                                         // else if (index == 2) {
                                         //   ref.selectedFilterIndex = 2;
                                         //   MenuPageViewModel.tag =
@@ -415,10 +414,12 @@ class _MenuPageState extends State<MenuPage> {
                     ),
                   ),
                 ),
-                Column(
-                  children: List.generate(viewModelMenu.items.length,
-                      (index) => viewModelMenu.items[index]),
-                ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: viewModelMenu.items.length,
+                  itemBuilder: ((context, index) =>viewModelMenu.items[index] )),
+                
                 //   CustomScrollView(controller: controller, slivers: [
                 //     SliverAppBar(
                 //     automaticallyImplyLeading: false,

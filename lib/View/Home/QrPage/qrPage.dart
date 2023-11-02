@@ -158,17 +158,16 @@ class QRPage extends StatelessWidget {
                 child: Consumer<HomeProvider>(
                   builder: (_, ref, __) {
                     return Container(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: SizedBox(
-                          child: tables.text.isEmpty
-                              ? const SizedBox()
-                              : Wrap(
-                                  spacing: 16,
-                                  direction: Axis.horizontal,
-                                  children: List.generate(
-                                      int.parse(tables.text), (index) {
-                                    return Column(
+                      child: SizedBox(
+                        child: tables.text.isEmpty
+                            ? const SizedBox.shrink()
+                            :Expanded(
+                              child: GridView.builder(
+                                shrinkWrap: true,
+                                itemCount:int.parse(tables.text) ,
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
+                                childAspectRatio: 0.9,
+                                crossAxisSpacing: 16), itemBuilder: (context, index) => Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
@@ -220,9 +219,68 @@ class QRPage extends StatelessWidget {
                                                   color: AppColor.blackText),
                                         )
                                       ],
-                                    );
-                                  })),
-                        ),
+                                    )
+                              ,),
+                            )
+                            // : Wrap(
+                            //     spacing: 16,
+                            //     direction: Axis.horizontal,
+                            //     children: List.generate(
+                            //         int.parse(tables.text), (index) {
+                            //       return Column(
+                            //         crossAxisAlignment:
+                            //             CrossAxisAlignment.start,
+                            //         children: [
+                            //           GestureDetector(
+                            //               onTap: () async {
+                            //                 // _capturePng(index);
+                            //                 Uint8List? image =
+                            //                     await screenshotController
+                            //                         .captureFromLongWidget(
+                            //                   QR(
+                            //                       index: index,
+                            //                       id: vm.getuserID),
+                            //                 );
+                            //                 saveUint8ListToFile(
+                            //                     image, "Qr${index}.png");
+                            //                 // if (path == null) {
+                            //                 //   return;
+                            //                 // }
+                            //                 // final file = await File(path).create();
+                            //                 // file.writeAsBytesSync(image);
+                            //               },
+                            //               child: Stack(
+                            //                 children: [
+                            //                   QR(
+                            //                       index: index,
+                            //                       id: vm.getuserID),
+                            //                   Positioned(
+                            //                       right: 16,
+                            //                       bottom: 16,
+                            //                       child: Container(
+                            //                         height: 25.w,
+                            //                         width: 25.h,
+                            //                         decoration: BoxDecoration(
+                            //                             color: AppColor
+                            //                                 .purpleColor,
+                            //                             borderRadius:
+                            //                                 BorderRadius
+                            //                                     .circular(
+                            //                                         1000)),
+                            //                         child: SvgPicture.asset(
+                            //                             'assets/download.svg'),
+                            //                       ))
+                            //                 ],
+                            //               )),
+                            //           Text(
+                            //             'QR Table #${index + 1}',
+                            //             style: AppTypography.smallText
+                            //                 .copyWith(
+                            //                     color: AppColor.blackText),
+                            //           )
+                            //         ],
+                            //       );
+                            //     })),
                       ),
                     );
                   },
